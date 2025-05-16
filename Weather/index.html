@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Aplication</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #d89df3 0%, #80a9ea 100%);
+            min-height: 100vh;
+        }
+        
+        .weather-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .weather-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.2);
+        }
+        
+        .search-input {
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+        
+        .history-item:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center p-4">
+    <div class="container mx-auto max-w-3xl">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Weather Aplication
+            </h1>
+            <p class="text-gray-600">Search the weather in any city of the world</p>
+        </div>
+        
+        <!-- Search bar -->
+        <div class="weather-card p-6 mb-6">
+            <div class="flex items-center gap-2">
+                <input type="text" id="city-input" placeholder="Enter a city..." 
+                       class="search-input flex-1 px-4 py-3 rounded-full border border-gray-400 focus:outline-blue-700 focus:border-blue-700">
+                <button id="search-btn" class="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded-full transition">
+                    <i class="fas fa-search"></i>
+                </button>
+                <button id="location-btn" title="Use my location" 
+                        class="bg-gray-200 hover:bg-gray-300 text-gray-700 p-3 rounded-full transition">
+                    <i class="fas fa-location-arrow"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Weather now -->
+        <div class="weather-card p-6 mb-6" id="weather-container">
+            <div class="text-center py-8">
+                <i class="fas fa-cloud-sun text-6xl text-blue-400 mb-4"></i>
+                <p class="text-gray-500">Enter a city to see the weather</p>
+            </div>
+        </div>
+        
+        <!-- Forecast extend -->
+        <div class="weather-card p-6 mb-6 hidden" id="forecast-container">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="forecast-items">
+                <!-- Next 5 days forecast -->
+            </div>
+        </div>
+        
+        <!-- Search history -->
+        <div class="weather-card p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-gray-800">Recent searches</h2>
+                <button id="clear-history" class="text-sm text-red-500 hover:text-red-600 flex items-center gap-1">
+                    <i class="fas fa-trash-alt"></i>
+                    <span>Delete history</span>
+                </button>
+            </div>
+            <ul id="search-history" class="divide-y divide-gray-200">
+            </ul>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
