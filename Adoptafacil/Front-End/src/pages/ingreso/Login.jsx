@@ -4,7 +4,6 @@ import ParticlesBackground from '../../components/ParticlesBackground';
 import Logo from '../../../public/Logo.png';
 import DarkModeToggle from '../../components/DarkModeToggle';
 
-
 const Login = () => {
   useEffect(() => {
     document.title = "Adoptafácil - Inicio de sesión";

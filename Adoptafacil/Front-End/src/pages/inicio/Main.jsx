@@ -12,21 +12,21 @@ const Main = () => {
       breed: 'Labrador Mix',
       age: '2 años',
       description: 'Juguetón y cariñoso, ideal para familias con niños.',
-      imageUrl: 'https://images.unsplash.com/photo-1583511655826-05700d52f4d9'
+      imageUrl: '#'
     },
     {
       name: 'Luna',
       breed: 'Siamés',
       age: '1 año',
       description: 'Tranquila y curiosa, perfecta para apartamentos.',
-      imageUrl: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba'
+      imageUrl: '#'
     },
     {
       name: 'Bugs',
       breed: 'Conejo Enano',
       age: '6 meses',
       description: 'Tranquilo y amigable, necesita espacio para saltar.',
-      imageUrl: 'https://images.ecestaticos.com/PZQajd6jDBfqpwv4RpnsydqY4oQ=/0x0:640x361/1440x810/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fb85%2F2e1%2F615%2Fb852e1615cd11fd2c7739c7942383c13.jpg'
+      imageUrl: '#'
     }
   ];
 

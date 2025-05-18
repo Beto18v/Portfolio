@@ -9,8 +9,8 @@ import RegisterPage from './pages/registro/Register';
 import TermsAndConditions from './pages/tyc/tyc';
 import StartLayout from './layouts/StartLayout';
 import Main from './pages/inicio/Main.jsx';
-import Perros from './pages/perros/Perros';
-import Gatos from './pages/gatos/Gatos';
+import Perros from './pages/inicio/Perros.jsx';
+import Gatos from './pages/inicio/Gatos';
 import RegistroOpciones from './pages/registro/RegistroOpciones';
 import ConocerMasPerros from './pages/conocer-mas/ConocerMasPerros';
 import ConocerMasGatos from './pages/conocer-mas/ConocerMasGatos';
@@ -45,6 +45,8 @@ function App() {
           <Route path="start" element={<StartLayout />}>
             {/* Ruta hija para la raíz */}
             <Route index element={<Main />} />
+            <Route index element={<Perros />} />
+            <Route index element={<Gatos />} />
           </Route>
           <Route path="error404" element={<Error404 />} />
           <Route path="error500" element={<Error500 />} />

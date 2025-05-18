@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import ParticlesBackground from '../../components/ParticlesBackground';
-import PetCard from '../inicio/PetCard';
+import PetCard from './PetCard';
 
 const Gatos = () => {
   useEffect(() => {

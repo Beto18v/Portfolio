@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import PetCard from '../inicio/PetCard';
+import PetCard from './PetCard';
 
 const Perros = () => {
   useEffect(() => {
@@ -16,42 +16,42 @@ const Perros = () => {
       breed: 'Labrador Retriever',
       age: '2 años',
       description: 'Juguetón y cariñoso, ideal para familias con niños.',
-      imageUrl: 'https://images.unsplash.com/photo-1583511655826-05700d52f4d9'
+      imageUrl: '#'
     },
     {
       name: 'Rocky',
       breed: 'Pastor Alemán',
       age: '3 años',
       description: 'Leal y protector, excelente como perro guardián.',
-      imageUrl: 'https://images.unsplash.com/photo-1589941013453-ec89f33b5e95'
+      imageUrl: '#'
     },
     {
       name: 'Luna',
       breed: 'Golden Retriever',
       age: '1 año',
       description: 'Dulce y sociable, perfecta para familias activas.',
-      imageUrl: 'https://images.unsplash.com/photo-1552053831-71594a27632d'
+      imageUrl: '#'
     },
     {
       name: 'Toby',
       breed: 'Beagle',
       age: '2 años',
       description: 'Curioso y enérgico, le encanta explorar.',
-      imageUrl: 'https://images.unsplash.com/photo-1505628346881-b72b27e84530'
+      imageUrl: '#'
     },
     {
       name: 'Bella',
       breed: 'Bulldog Francés',
       age: '4 años',
       description: 'Tranquila y cariñosa, perfecta para apartamentos.',
-      imageUrl: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee'
+      imageUrl: '#'
     },
     {
       name: 'Coco',
       breed: 'Chihuahua',
       age: '3 años',
       description: 'Pequeña pero con gran personalidad, muy leal.',
-      imageUrl: 'https://images.unsplash.com/photo-1605897472359-85e4b94c703a'
+      imageUrl: '#'
     }
   ];
 
