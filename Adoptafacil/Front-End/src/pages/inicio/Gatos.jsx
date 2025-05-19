@@ -55,7 +55,7 @@ const Gatos = () => {
     }
   ];
 
-  // Filtrar gatos según la búsqueda y el filtro seleccionado
+  // Filtrar gatos
   const gatosFiltrados = gatos.filter(gato => {
     const coincideBusqueda = gato.name.toLowerCase().includes(busqueda.toLowerCase()) || 
                             gato.breed.toLowerCase().includes(busqueda.toLowerCase());
@@ -119,7 +119,7 @@ const Gatos = () => {
           </button>
         </div>
 
-        {/* Grid de tarjetas de gatos */}
+        {/* Grid de tarjetas */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 fade-in">
           {gatosFiltrados.length > 0 ? (
             gatosFiltrados.map((gato, index) => (

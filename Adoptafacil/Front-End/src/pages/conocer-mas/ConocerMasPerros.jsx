@@ -8,7 +8,7 @@ const ConocerMasPerros = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-800 transition-colors duration-200">
-      {/* Sección de cabecera con fondo de partículas */}
+      {/* Header */}
       <section className="relative bg-gradient-to-r from-green-400 to-blue-500 text-white py-20 dark:from-green-600 dark:to-blue-700">
         <div className="container mx-auto text-center relative px-4 z-10">
           <h1 className="text-4xl font-bold mb-6">Todo sobre Perros</h1>

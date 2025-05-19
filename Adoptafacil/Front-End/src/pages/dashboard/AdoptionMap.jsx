@@ -1,10 +1,6 @@
 import React from 'react';
 
 export default function AdoptionMap() {
-  // En un entorno real, aquí se integraría una biblioteca de mapas como Google Maps, Leaflet, etc.
-  // Para este ejemplo, mostraremos una representación visual simplificada
-  
-  // Datos de ejemplo para ubicaciones de mascotas disponibles
   const locations = [
     { id: 1, city: 'Bogotá', count: 45, lat: 4.6097, lng: -74.0817 },
     { id: 2, city: 'Medellín', count: 32, lat: 6.2476, lng: -75.5658 },

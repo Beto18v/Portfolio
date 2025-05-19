@@ -9,12 +9,6 @@ const Login = () => {
     document.title = "Adoptafácil - Inicio de sesión";
   }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Lógica para manejar el envío del formulario
-    console.log("Formulario enviado");
-  };
-
   return (
     <div className="flex items-center justify-center h-screen overflow-hidden relative bg-gradient-to-r from-green-400 to-blue-500 dark:from-green-600 dark:to-blue-700">
       <ParticlesBackground />
@@ -30,7 +24,7 @@ const Login = () => {
 
 
         {/* Formulario */}
-        <form onSubmit={handleSubmit} className="flex flex-col">
+        <form className="flex flex-col">
           {/* Correo */}
           <input
             type="text"

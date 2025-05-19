@@ -7,7 +7,7 @@ const RegistroOpciones = () => {
     document.title = "Opciones de Registro | AdoptaFácil";
   }, []);
 
-  // Estado para controlar la tarjeta activa/seleccionada
+  // Estado para controlar la tarjeta activa
   const [tarjetaActiva, setTarjetaActiva] = useState(null);
 
   // Opciones de registro disponibles
@@ -67,7 +67,7 @@ const RegistroOpciones = () => {
               onMouseEnter={() => setTarjetaActiva(opcion.id)}
               onMouseLeave={() => setTarjetaActiva(null)}
             >
-              {/* Cabecera de la tarjeta con gradiente */}
+              {/* Cabecera de la tarjeta */}
               <div className={`bg-gradient-to-r ${opcion.color} p-6 flex justify-center items-center`}>
                 <span className="text-5xl">{opcion.icono}</span>
               </div>

@@ -22,7 +22,7 @@ const Contacto = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Simulación de envío exitoso
+    // Simulación envío exitoso
     setEnviado(true);
     setFormData({
       nombre: '',
@@ -30,7 +30,6 @@ const Contacto = () => {
       asunto: '',
       mensaje: ''
     });
-    // En un caso real, aquí iría la lógica para enviar el formulario a un backend
   };
 
   return (
