@@ -10,9 +10,8 @@ import TermsAndConditions from "./pages/tyc/tyc";
 import StartLayout from "./layouts/StartLayout";
 import Main from "./pages/inicio/Main.jsx";
 import Perros from "./pages/inicio/Perros.jsx";
-import Gatos from "./pages/inicio/Gatos";
 import RegistroOpciones from "./pages/registro/RegistroOpciones";
-import ConocerMasPerros from "./pages/conocer-mas/ConocerMasPerros";
+import ConocerMas from "./pages/conocer-mas/ConocerMas.jsx";
 import PerfilUsuario from "./pages/perfil/PerfilUsuario";
 import DetalleMascota from "./pages/mascotas/DetalleMascota";
 import AdminPanel from "./pages/admin/AdminPanel";
@@ -32,8 +31,7 @@ function App() {
         <Routes>
           {/* Ruta que usa el layout */}
           <Route path="dashboard" element={<DashboardLayout />}>
-            {/* Rutas anidadas para componentes del dashboard */}
-            <Route path="Home" element={<Dash />} />
+            <Route index element={<Dash />} />
             <Route path="favoritos" element={<FavoritePets />} />
             <Route path="solicitudes" element={<PendingRequests />} />
             <Route path="notificaciones" element={<NotificationsPanel />} />
@@ -42,22 +40,16 @@ function App() {
             <Route path="donaciones" element={<DonationsSummary />} />
           </Route>
           {/* Ruta que usa el Inicio */}
-          <Route path="start" element={<StartLayout />}>
+          <Route path="/" element={<StartLayout />}>
             <Route index element={<Main />} />
-            <Route index element={<Perros />} />
-            <Route index element={<Gatos />} />
+            <Route path="perros" element={<Perros />} />
           </Route>
           <Route path="error404" element={<Error404 />} />
           <Route path="error500" element={<Error500 />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<RegisterPage />} />
           <Route path="registro-opciones" element={<RegistroOpciones />} />
-          <Route path="perros" element={<Perros />} />
-          <Route path="gatos" element={<Gatos />} />
-          <Route
-            path="conocer-mas-perros"
-            element={<ConocerMasPerros />}
-          />{" "}
+          <Route path="conocer-mas" element={<ConocerMas />} />{" "}
           <Route path="tyc" element={<TermsAndConditions />} />
           <Route path="mascota/:id" element={<DetalleMascota />} />
           <Route path="admin" element={<AdminPanel />} />
