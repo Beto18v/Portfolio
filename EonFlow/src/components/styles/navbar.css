@@ -1,0 +1,7 @@
+.logo:hover {
+  text-shadow: 0 0 10px #00ffff;
+}
+
+.nav a:hover {
+  text-shadow: 0 0 5px #7caaaa;
+}
