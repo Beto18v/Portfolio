@@ -20,15 +20,19 @@ class Wallpaper extends Model
         'file_size',
         'resolution',
         'downloads_count',
+        'views_count',
         'is_featured',
         'is_active',
+        'is_premium',
         'user_id',
     ];
 
     protected $casts = [
         'is_featured' => 'boolean',
         'is_active' => 'boolean',
+        'is_premium' => 'boolean',
         'downloads_count' => 'integer',
+        'views_count' => 'integer',
         'file_size' => 'integer',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
@@ -51,6 +55,30 @@ class Wallpaper extends Model
     }
 
     /**
+     * Relación con Downloads
+     */
+    public function downloads()
+    {
+        return $this->hasMany(Download::class);
+    }
+
+    /**
+     * Relación con Favorites
+     */
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    /**
+     * Usuarios que han marcado como favorito
+     */
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
+    }
+
+    /**
      * Scope para wallpapers activos
      */
     public function scopeActive($query)
@@ -67,11 +95,23 @@ class Wallpaper extends Model
     }
 
     /**
-     * Scope para buscar por tags
+     * Scope para wallpapers premium
      */
-    public function scopeWithTag($query, $tag)
+    public function scopePremium($query)
     {
-        return $query->where('tags', 'LIKE', "%{$tag}%");
+        return $query->where('is_premium', true);
+    }
+
+    /**
+     * Scope para búsqueda completa
+     */
+    public function scopeSearch($query, $term)
+    {
+        return $query->where(function ($q) use ($term) {
+            $q->where('title', 'LIKE', "%{$term}%")
+                ->orWhere('description', 'LIKE', "%{$term}%")
+                ->orWhere('tags', 'LIKE', "%{$term}%");
+        });
     }
 
     /**

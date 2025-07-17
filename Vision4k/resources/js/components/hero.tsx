@@ -1,3 +1,4 @@
+import { Link } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 
 export default function Hero() {
@@ -82,13 +83,22 @@ export default function Hero() {
 
                     {/* Call to Action Buttons */}
                     <div className="flex translate-y-0 transform animate-[fadeInUp_1s_ease-out_0.9s_both] flex-col justify-center gap-4 sm:flex-row">
-                        <button className="group relative overflow-hidden rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-4 text-lg font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25">
+                        <button
+                            onClick={() => {
+                                const wallpapersSection = document.getElementById('wallpapers-section');
+                                wallpapersSection?.scrollIntoView({ behavior: 'smooth' });
+                            }}
+                            className="group relative overflow-hidden rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-4 text-lg font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/25"
+                        >
                             <span className="relative z-10">Explorar Wallpapers</span>
                             <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
                         </button>
-                        <button className="rounded-full border-2 border-white/30 px-8 py-4 text-lg font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:border-white/50 hover:bg-white/10">
+                        <Link
+                            href={route('wallpapers.trending')}
+                            className="rounded-full border-2 border-white/30 px-8 py-4 text-lg font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:border-white/50 hover:bg-white/10"
+                        >
                             Ver Trending
-                        </button>
+                        </Link>
                     </div>
 
                     {/* Scroll Indicator */}

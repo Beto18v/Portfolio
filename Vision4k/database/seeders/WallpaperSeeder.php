@@ -77,7 +77,7 @@ class WallpaperSeeder extends Seeder
             [
                 'title' => 'Aurora Boreal 4K',
                 'description' => 'Increíble aurora boreal capturada en las montañas de Noruega',
-                'file_path' => 'wallpapers/aurora-boreal-4k.jpg',
+                'file_path' => 'https://picsum.photos/3840/2160?random=1',
                 'category_id' => 1, // Naturaleza
                 'tags' => 'aurora,boreal,naturaleza,noche,montañas,luces',
                 'resolution' => '3840x2160',
@@ -88,7 +88,7 @@ class WallpaperSeeder extends Seeder
             [
                 'title' => 'Waves Abstract Purple',
                 'description' => 'Ondas abstractas en tonos púrpura y rosa vibrantes',
-                'file_path' => 'wallpapers/waves-abstract-purple.jpg',
+                'file_path' => 'https://picsum.photos/3840/2160?random=2',
                 'category_id' => 2, // Abstracto
                 'tags' => 'abstracto,ondas,púrpura,rosa,colores,vibrante',
                 'resolution' => '2560x1440',
@@ -99,7 +99,7 @@ class WallpaperSeeder extends Seeder
             [
                 'title' => 'Space Nebula HD',
                 'description' => 'Nebulosa colorida en el espacio profundo con estrellas brillantes',
-                'file_path' => 'wallpapers/space-nebula-hd.jpg',
+                'file_path' => 'https://picsum.photos/1920/1080?random=3',
                 'category_id' => 4, // Espacio
                 'tags' => 'espacio,nebulosa,estrellas,cosmos,colorido,profundo',
                 'resolution' => '1920x1080',
@@ -110,7 +110,7 @@ class WallpaperSeeder extends Seeder
             [
                 'title' => 'Clean Minimal Desktop',
                 'description' => 'Diseño minimalista perfecto para productividad',
-                'file_path' => 'wallpapers/clean-minimal-desktop.jpg',
+                'file_path' => 'https://picsum.photos/2560/1440?random=4',
                 'category_id' => 5, // Minimalista
                 'tags' => 'minimalista,limpio,simple,productividad,elegante',
                 'resolution' => '2560x1440',
@@ -121,7 +121,7 @@ class WallpaperSeeder extends Seeder
             [
                 'title' => 'Cyber City 2077',
                 'description' => 'Ciudad futurista con luces de neón y rascacielos',
-                'file_path' => 'wallpapers/cyber-city-2077.jpg',
+                'file_path' => 'https://picsum.photos/3840/2160?random=5',
                 'category_id' => 3, // Tecnología
                 'tags' => 'futurista,ciudad,neón,rascacielos,cyber,tecnología',
                 'resolution' => '3840x2160',
@@ -132,7 +132,7 @@ class WallpaperSeeder extends Seeder
             [
                 'title' => 'Gaming Setup RGB',
                 'description' => 'Setup gaming épico con iluminación RGB',
-                'file_path' => 'wallpapers/gaming-setup-rgb.jpg',
+                'file_path' => 'https://picsum.photos/1920/1080?random=6',
                 'category_id' => 6, // Gaming
                 'tags' => 'gaming,setup,rgb,iluminación,épico,videojuegos',
                 'resolution' => '1920x1080',

@@ -1,9 +1,12 @@
-import CategoryCard from '@/components/category-card';
+import FloatingCategoryMenu from '@/components/floating-category-menu';
 import Footer from '@/components/footer';
+import Header from '@/components/header';
 import Hero from '@/components/hero';
+import SearchBar from '@/components/search-bar';
+import ViewModeToggle from '@/components/view-mode-toggle';
 import WallpaperModal from '@/components/wallpaper-modal';
 import { type SharedData } from '@/types';
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
 // Definimos la estructura de un Wallpaper
@@ -13,6 +16,8 @@ interface Wallpaper {
     description: string;
     category: string;
     tags: string[];
+    downloads_count?: number;
+    is_premium?: boolean;
 }
 
 // Definimos las categorías
@@ -20,9 +25,15 @@ interface Category {
     id: number;
     name: string;
     image: string;
+    wallpaper_count?: number;
 }
 
-export default function Welcome() {
+interface WelcomeProps {
+    wallpapers: Wallpaper[];
+    categories: Category[];
+}
+
+export default function Welcome({ wallpapers, categories }: WelcomeProps) {
     const { auth } = usePage<SharedData>().props;
     const [selectedWallpaper, setSelectedWallpaper] = useState<Wallpaper | null>(null);
     const [selectedCategory, setSelectedCategory] = useState<string>('all');
@@ -31,120 +42,9 @@ export default function Welcome() {
     const [sortBy, setSortBy] = useState<'newest' | 'popular' | 'name'>('newest');
     const [isLoading, setIsLoading] = useState(false);
 
-    // Datos de ejemplo para wallpapers (en una app real, estos vendrían del backend)
-    const wallpapers: Wallpaper[] = [
-        {
-            id: 1,
-            url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
-            description: 'Montañas al amanecer en 4K',
-            category: 'naturaleza',
-            tags: ['mountains', 'sunrise', 'landscape', 'nature'],
-        },
-        {
-            id: 2,
-            url: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
-            description: 'Océano cristalino',
-            category: 'naturaleza',
-            tags: ['ocean', 'beach', 'water', 'blue'],
-        },
-        {
-            id: 3,
-            url: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
-            description: 'Ciudad nocturna futurista',
-            category: 'urbano',
-            tags: ['city', 'night', 'lights', 'urban'],
-        },
-        {
-            id: 4,
-            url: 'https://images.unsplash.com/photo-1511593358241-7eea1f3c84e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
-            description: 'Galaxia espacial',
-            category: 'espacio',
-            tags: ['space', 'galaxy', 'stars', 'cosmic'],
-        },
-        {
-            id: 5,
-            url: 'https://images.unsplash.com/photo-1551085254-c51a29bfbcd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
-            description: 'Patrón geométrico abstracto',
-            category: 'abstracto',
-            tags: ['geometric', 'pattern', 'modern', 'abstract'],
-        },
-        {
-            id: 6,
-            url: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
-            description: 'Bosque misterioso',
-            category: 'naturaleza',
-            tags: ['forest', 'trees', 'mysterious', 'green'],
-        },
-        {
-            id: 7,
-            url: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
-            description: 'Aurora Boreal',
-            category: 'naturaleza',
-            tags: ['aurora', 'northern-lights', 'sky', 'nature'],
-        },
-        {
-            id: 8,
-            url: 'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
-            description: 'Nebulosa colorida',
-            category: 'espacio',
-            tags: ['nebula', 'space', 'colors', 'cosmic'],
-        },
-        {
-            id: 9,
-            url: 'https://images.unsplash.com/photo-1545987796-200677ee1011?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
-            description: 'Rascacielos modernos',
-            category: 'urbano',
-            tags: ['skyscrapers', 'modern', 'architecture', 'urban'],
-        },
-        {
-            id: 10,
-            url: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
-            description: 'Formas fluidas abstractas',
-            category: 'abstracto',
-            tags: ['fluid', 'abstract', 'colorful', 'modern'],
-        },
-        {
-            id: 11,
-            url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
-            description: 'Desierto dorado',
-            category: 'naturaleza',
-            tags: ['desert', 'sand', 'golden', 'landscape'],
-        },
-        {
-            id: 12,
-            url: 'https://images.unsplash.com/photo-1446776877081-d282a0f896e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80',
-            description: 'Planeta distante',
-            category: 'espacio',
-            tags: ['planet', 'space', 'science-fiction', 'cosmic'],
-        },
-    ];
-
-    const categories: Category[] = [
-        {
-            id: 1,
-            name: 'Naturaleza',
-            image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-        },
-        {
-            id: 2,
-            name: 'Urbano',
-            image: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-        },
-        {
-            id: 3,
-            name: 'Espacio',
-            image: 'https://images.unsplash.com/photo-1511593358241-7eea1f3c84e5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-        },
-        {
-            id: 4,
-            name: 'Abstracto',
-            image: 'https://images.unsplash.com/photo-1551085254-c51a29bfbcd1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80',
-        },
-    ];
-
     // Filtrar wallpapers basado en categoría y búsqueda
     const filteredWallpapers = wallpapers.filter((wallpaper) => {
-        const matchesCategory = selectedCategory === 'all' || wallpaper.category === selectedCategory;
+        const matchesCategory = selectedCategory === 'all' || wallpaper.category.toLowerCase().includes(selectedCategory.toLowerCase());
         const matchesSearch =
             wallpaper.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
             wallpaper.tags.some((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase()));
@@ -168,98 +68,10 @@ export default function Welcome() {
 
             {/* Header moderno con glassmorphism */}
             <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-                {/* Animated background particles */}
-                <div className="absolute inset-0 overflow-hidden">
-                    <div className="absolute top-20 left-20 h-72 w-72 animate-pulse rounded-full bg-purple-600/10 blur-3xl"></div>
-                    <div className="absolute right-20 bottom-40 h-96 w-96 animate-pulse rounded-full bg-pink-600/10 blur-3xl delay-1000"></div>
-                    <div className="absolute top-60 right-40 h-80 w-80 animate-pulse rounded-full bg-blue-600/10 blur-3xl delay-2000"></div>
-                </div>
+                <Header currentPage="home" />
 
-                <header className="sticky top-0 z-20 border-b border-white/10 bg-black/20 backdrop-blur-md">
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <div className="flex h-20 items-center justify-between">
-                            <div className="flex items-center space-x-6">
-                                {/* Logo mejorado */}
-                                <div className="flex items-center space-x-3">
-                                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-r from-purple-600 to-pink-600">
-                                        <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                                            />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <div className="text-2xl font-black text-white">Vision4K</div>
-                                        <div className="-mt-1 hidden text-xs text-gray-300 md:block">Ultra HD Wallpapers</div>
-                                    </div>
-                                </div>
-
-                                {/* Navigation links */}
-                                <nav className="hidden items-center space-x-8 lg:flex">
-                                    <a href="#" className="group relative text-gray-300 transition-colors duration-300 hover:text-white">
-                                        Inicio
-                                        <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-300 group-hover:w-full"></span>
-                                    </a>
-                                    <a href="#" className="group relative text-gray-300 transition-colors duration-300 hover:text-white">
-                                        Categorías
-                                        <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-300 group-hover:w-full"></span>
-                                    </a>
-                                    <a href="#" className="group relative text-gray-300 transition-colors duration-300 hover:text-white">
-                                        Trending
-                                        <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-300 group-hover:w-full"></span>
-                                    </a>
-                                    <a href="#" className="group relative text-gray-300 transition-colors duration-300 hover:text-white">
-                                        Premium
-                                        <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-purple-500 to-pink-500 transition-all duration-300 group-hover:w-full"></span>
-                                    </a>
-                                </nav>
-                            </div>
-
-                            <div className="flex items-center space-x-4">
-                                {auth.user ? (
-                                    <div className="flex items-center space-x-4">
-                                        <div className="hidden items-center space-x-2 text-gray-300 md:flex">
-                                            <span className="text-sm">Hola,</span>
-                                            <span className="font-medium text-white">{auth.user.name}</span>
-                                        </div>
-                                        <Link
-                                            href={route('dashboard')}
-                                            className="rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-purple-700 hover:to-pink-700 hover:shadow-purple-500/25"
-                                        >
-                                            Dashboard
-                                        </Link>
-                                    </div>
-                                ) : (
-                                    <div className="flex items-center space-x-3">
-                                        <Link
-                                            href={route('login')}
-                                            className="px-4 py-2 font-medium text-white transition-colors duration-300 hover:text-purple-300"
-                                        >
-                                            Iniciar Sesión
-                                        </Link>
-                                        <Link
-                                            href={route('register')}
-                                            className="rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-purple-700 hover:to-pink-700 hover:shadow-purple-500/25"
-                                        >
-                                            Registrarse
-                                        </Link>
-                                    </div>
-                                )}
-
-                                {/* Mobile menu button */}
-                                <button className="rounded-lg p-2 text-white transition-colors hover:bg-white/10 lg:hidden">
-                                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </header>
+                {/* Floating Category Menu */}
+                <FloatingCategoryMenu categories={categories} selectedCategory={selectedCategory} onCategorySelect={setSelectedCategory} />
 
                 {/* Hero Section mejorado */}
                 <div className="relative">
@@ -267,56 +79,7 @@ export default function Welcome() {
 
                     {/* Barra de búsqueda moderna con efectos avanzados */}
                     <div className="relative mx-auto mt-12 max-w-2xl px-4">
-                        <div className="group relative">
-                            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-600/20 via-pink-600/20 to-blue-600/20 blur-xl transition-all duration-500 group-focus-within:blur-2xl"></div>
-                            <div className="relative">
-                                <input
-                                    type="text"
-                                    placeholder="Buscar wallpapers increíbles..."
-                                    value={searchTerm}
-                                    onChange={(e) => setSearchTerm(e.target.value)}
-                                    className="w-full rounded-2xl border border-white/20 bg-white/10 px-6 py-5 text-lg text-white placeholder-gray-300 backdrop-blur-md transition-all duration-300 focus:border-purple-500/50 focus:ring-2 focus:ring-purple-500/50 focus:outline-none"
-                                />
-                                <div className="absolute top-1/2 right-6 flex -translate-y-1/2 transform items-center space-x-3">
-                                    {searchTerm && (
-                                        <button onClick={() => setSearchTerm('')} className="rounded-full p-1 transition-colors hover:bg-white/20">
-                                            <svg className="h-5 w-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
-                                        </button>
-                                    )}
-                                    <div className="h-6 w-px bg-white/20"></div>
-                                    <svg className="h-6 w-6 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                                        />
-                                    </svg>
-                                </div>
-                            </div>
-
-                            {/* Search suggestions */}
-                            {searchTerm && (
-                                <div className="absolute top-full right-0 left-0 z-30 mt-2 overflow-hidden rounded-xl border border-white/10 bg-black/80 backdrop-blur-md">
-                                    <div className="p-3">
-                                        <div className="mb-2 text-xs text-gray-400">Sugerencias populares:</div>
-                                        <div className="flex flex-wrap gap-2">
-                                            {['nature', 'space', 'abstract', 'city', 'ocean'].map((tag) => (
-                                                <button
-                                                    key={tag}
-                                                    onClick={() => setSearchTerm(tag)}
-                                                    className="rounded-full bg-purple-600/20 px-3 py-1 text-sm text-gray-300 transition-colors hover:bg-purple-600/40 hover:text-white"
-                                                >
-                                                    {tag}
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
+                        <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} placeholder="Buscar wallpapers increíbles..." />
                     </div>
 
                     {/* Estadísticas en tiempo real */}
@@ -388,40 +151,15 @@ export default function Welcome() {
                 {/* Filtros de categorías mejorados */}
                 <div className="mx-auto mt-12 max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="mb-8 flex flex-col lg:flex-row lg:items-center lg:justify-between">
-                        <h2 className="mb-4 text-2xl font-bold text-white lg:mb-0">Explorar por categorías</h2>
+                        <h2 className="mb-4 text-2xl font-bold text-white lg:mb-0">
+                            {selectedCategory === 'all'
+                                ? 'Explorar por categorías'
+                                : `Categoría: ${selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)}`}
+                        </h2>
 
                         {/* Controles de vista y ordenamiento */}
                         <div className="flex items-center space-x-4">
-                            {/* Selector de vista */}
-                            <div className="flex items-center rounded-xl bg-white/10 p-1 backdrop-blur-sm">
-                                <button
-                                    onClick={() => setViewMode('grid')}
-                                    className={`rounded-lg p-2 transition-all duration-300 ${
-                                        viewMode === 'grid' ? 'bg-purple-600 text-white' : 'text-gray-300 hover:bg-white/10 hover:text-white'
-                                    }`}
-                                    title="Vista de cuadrícula"
-                                >
-                                    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            strokeWidth={2}
-                                            d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-                                        />
-                                    </svg>
-                                </button>
-                                <button
-                                    onClick={() => setViewMode('masonry')}
-                                    className={`rounded-lg p-2 transition-all duration-300 ${
-                                        viewMode === 'masonry' ? 'bg-purple-600 text-white' : 'text-gray-300 hover:bg-white/10 hover:text-white'
-                                    }`}
-                                    title="Vista de mosaico"
-                                >
-                                    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
-                                    </svg>
-                                </button>
-                            </div>
+                            <ViewModeToggle viewMode={viewMode} onViewModeChange={setViewMode} />
 
                             {/* Selector de ordenamiento */}
                             <select
@@ -441,44 +179,10 @@ export default function Welcome() {
                             </select>
                         </div>
                     </div>
-
-                    <div className="mb-8 grid grid-cols-2 gap-4 md:grid-cols-4">
-                        <button
-                            onClick={() => setSelectedCategory('all')}
-                            className={`rounded-xl p-4 text-center transition-all duration-300 ${
-                                selectedCategory === 'all'
-                                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
-                                    : 'bg-white/10 text-gray-300 hover:scale-105 hover:bg-white/20'
-                            }`}
-                        >
-                            <div className="flex flex-col items-center space-y-2">
-                                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                                    />
-                                </svg>
-                                <span className="font-medium">Todos</span>
-                            </div>
-                        </button>
-                        {categories.map((category) => (
-                            <button
-                                key={category.id}
-                                onClick={() => setSelectedCategory(category.name.toLowerCase())}
-                                className={`relative overflow-hidden rounded-xl transition-all duration-300 ${
-                                    selectedCategory === category.name.toLowerCase() ? 'scale-105 ring-2 ring-purple-500' : 'hover:scale-105'
-                                }`}
-                            >
-                                <CategoryCard category={category} />
-                            </button>
-                        ))}
-                    </div>
                 </div>
 
                 {/* Grid de wallpapers mejorado */}
-                <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
+                <div id="wallpapers-section" className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
                     <div className="mb-6 flex flex-col justify-between sm:flex-row sm:items-center">
                         <h2 className="mb-2 text-2xl font-bold text-white sm:mb-0">
                             {selectedCategory === 'all' ? 'Todos los wallpapers' : `Categoría: ${selectedCategory}`}

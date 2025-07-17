@@ -1,6 +1,8 @@
+import DashboardHeader from '@/components/dashboard/dashboard-header';
+import DashboardNavigation from '@/components/dashboard/dashboard-navigation';
 import Footer from '@/components/footer';
-import { Head, Link, useForm } from '@inertiajs/react';
-import { BarChart3, Edit, Eye, Filter, FolderOpen, Image, Plus, Search, Trash2, Upload } from 'lucide-react';
+import { Head, useForm } from '@inertiajs/react';
+import { Edit, Eye, Filter, FolderOpen, Plus, Search, Trash2, Upload } from 'lucide-react';
 import { useState } from 'react';
 
 interface DashboardProps {
@@ -147,68 +149,10 @@ export default function Dashboard({ auth, wallpapers = [], categories = [], stat
             </Head>
 
             <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-                {/* Header */}
-                <header className="sticky top-0 z-20 border-b border-white/10 bg-black/20 backdrop-blur-md">
-                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <div className="flex h-16 items-center justify-between">
-                            <div className="flex items-center space-x-6">
-                                <Link href={route('welcome')} className="flex items-center space-x-3">
-                                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-r from-purple-600 to-pink-600">
-                                        <svg className="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        </svg>
-                                    </div>
-                                    <span className="text-xl font-bold text-white">Vision4K</span>
-                                </Link>
-                                <span className="text-sm text-gray-400">Dashboard</span>
-                            </div>
-
-                            <div className="flex items-center space-x-4">
-                                <div className="hidden text-right md:block">
-                                    <div className="text-sm text-white">{auth.user.name}</div>
-                                    <div className="text-xs text-gray-400">Administrador</div>
-                                </div>
-                                <Link
-                                    href={route('logout')}
-                                    method="post"
-                                    className="rounded-lg border border-red-600/30 bg-red-600/20 px-4 py-2 text-sm text-red-400 transition-colors hover:bg-red-600/30"
-                                >
-                                    Cerrar Sesión
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
-                </header>
+                <DashboardHeader userName={auth.user.name} />
 
                 <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-                    {/* Navigation Tabs */}
-                    <div className="mb-8">
-                        <nav className="flex space-x-1 rounded-xl bg-black/20 p-1 backdrop-blur-sm">
-                            {[
-                                { key: 'overview', label: 'Resumen', icon: BarChart3 },
-                                { key: 'wallpapers', label: 'Wallpapers', icon: Image },
-                                { key: 'upload', label: 'Subir Contenido', icon: Upload },
-                                { key: 'categories', label: 'Categorías', icon: FolderOpen },
-                                { key: 'analytics', label: 'Analíticas', icon: BarChart3 },
-                            ].map((tab) => {
-                                const Icon = tab.icon;
-                                return (
-                                    <button
-                                        key={tab.key}
-                                        onClick={() => setActiveTab(tab.key as any)}
-                                        className={`flex items-center space-x-2 rounded-lg px-4 py-3 text-sm font-medium transition-all ${
-                                            activeTab === tab.key
-                                                ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg'
-                                                : 'text-gray-300 hover:bg-white/10 hover:text-white'
-                                        }`}
-                                    >
-                                        <Icon size={18} />
-                                        <span className="hidden sm:block">{tab.label}</span>
-                                    </button>
-                                );
-                            })}
-                        </nav>
-                    </div>
+                    <DashboardNavigation activeTab={activeTab} onTabChange={setActiveTab} />
 
                     {/* Overview Tab */}
                     {activeTab === 'overview' && (
@@ -223,7 +167,7 @@ export default function Dashboard({ auth, wallpapers = [], categories = [], stat
                                             <p className="mt-1 text-xs text-green-400">+12 este mes</p>
                                         </div>
                                         <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-purple-600/20">
-                                            <Image className="h-6 w-6 text-purple-400" />
+                                            <FolderOpen className="h-6 w-6 text-purple-400" />
                                         </div>
                                     </div>
                                 </div>
