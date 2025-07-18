@@ -50,20 +50,23 @@ export default function WallpaperModal({ wallpaper, onClose }: WallpaperModalPro
         if (!wallpaper) return;
 
         setIsDownloading(true);
+
         try {
-            const response = await fetch(wallpaper.url);
-            const blob = await response.blob();
-            const url = window.URL.createObjectURL(blob);
+            // Crear un enlace temporal para descargar
             const link = document.createElement('a');
-            link.href = url;
-            link.download = `vision4k-${wallpaper.id}.jpg`;
+            link.href = `/wallpapers/${wallpaper.id}/download`;
+            link.download = `${wallpaper.description}.jpg`;
+            link.target = '_blank';
             document.body.appendChild(link);
             link.click();
-            window.URL.revokeObjectURL(url);
             document.body.removeChild(link);
+
+            // Mostrar mensaje de éxito
+            setTimeout(() => {
+                setIsDownloading(false);
+            }, 2000);
         } catch (error) {
-            console.error('Error downloading image:', error);
-        } finally {
+            console.error('Error al descargar:', error);
             setIsDownloading(false);
         }
     };

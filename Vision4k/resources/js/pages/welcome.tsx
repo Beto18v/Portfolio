@@ -184,9 +184,6 @@ export default function Welcome({ wallpapers, categories }: WelcomeProps) {
                 {/* Grid de wallpapers mejorado */}
                 <div id="wallpapers-section" className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
                     <div className="mb-6 flex flex-col justify-between sm:flex-row sm:items-center">
-                        <h2 className="mb-2 text-2xl font-bold text-white sm:mb-0">
-                            {selectedCategory === 'all' ? 'Todos los wallpapers' : `Categoría: ${selectedCategory}`}
-                        </h2>
                         <div className="flex items-center space-x-4 text-gray-300">
                             <span className="text-sm">{filteredWallpapers.length} wallpapers encontrados</span>
                             {isLoading && <div className="h-4 w-4 animate-spin rounded-full border-2 border-purple-500/30 border-t-purple-500"></div>}
@@ -292,7 +289,13 @@ export default function Welcome({ wallpapers, categories }: WelcomeProps) {
                                         title="Descargar"
                                         onClick={(e) => {
                                             e.stopPropagation();
-                                            // Función de descarga aquí
+                                            // Crear enlace de descarga
+                                            const link = document.createElement('a');
+                                            link.href = `/wallpapers/${wallpaper.id}/download`;
+                                            link.target = '_blank';
+                                            document.body.appendChild(link);
+                                            link.click();
+                                            document.body.removeChild(link);
                                         }}
                                     >
                                         <svg

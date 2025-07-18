@@ -53,8 +53,16 @@ class WallpaperController extends Controller
                 'id' => $wallpaper->id,
                 'title' => $wallpaper->title,
                 'description' => $wallpaper->description,
-                'url' => Storage::url($wallpaper->file_path),
-                'thumbnail' => Storage::url($wallpaper->thumbnail_path ?? $wallpaper->file_path),
+                'url' => str_starts_with($wallpaper->file_path, 'http')
+                    ? $wallpaper->file_path
+                    : Storage::url($wallpaper->file_path),
+                'thumbnail' => $wallpaper->thumbnail_path
+                    ? (str_starts_with($wallpaper->thumbnail_path, 'http')
+                        ? $wallpaper->thumbnail_path
+                        : Storage::url($wallpaper->thumbnail_path))
+                    : (str_starts_with($wallpaper->file_path, 'http')
+                        ? $wallpaper->file_path
+                        : Storage::url($wallpaper->file_path)),
                 'category' => $wallpaper->category->name ?? 'General',
                 'tags' => $wallpaper->tags ? explode(',', trim($wallpaper->tags)) : [],
                 'downloads_count' => $wallpaper->downloads_count,
@@ -217,16 +225,28 @@ class WallpaperController extends Controller
         // Incrementar contador de descargas
         $wallpaper->increment('downloads_count');
 
-        // TODO: Implementar lógica de límites de descarga para usuarios no premium
-        // TODO: Registrar descarga en tabla downloads
+        // Registrar descarga si el usuario está autenticado
+        if (auth()->check()) {
+            $wallpaper->downloads()->create([
+                'user_id' => auth()->id(),
+                'ip_address' => request()->ip(),
+                'user_agent' => request()->userAgent(),
+            ]);
+        }
 
+        $filename = $wallpaper->title . '_' . $wallpaper->resolution . '.' . pathinfo($wallpaper->file_path, PATHINFO_EXTENSION);
+
+        // Si es una URL externa, redirigir
+        if (str_starts_with($wallpaper->file_path, 'http')) {
+            return redirect($wallpaper->file_path);
+        }
+
+        // Si es un archivo local
         $filePath = storage_path('app/public/' . $wallpaper->file_path);
 
         if (!file_exists($filePath)) {
             abort(404, 'File not found');
         }
-
-        $filename = $wallpaper->title . '_' . $wallpaper->resolution . '.' . pathinfo($wallpaper->file_path, PATHINFO_EXTENSION);
 
         return response()->download($filePath, $filename);
     }

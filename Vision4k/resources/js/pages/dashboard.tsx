@@ -1,7 +1,8 @@
 import DashboardHeader from '@/components/dashboard/dashboard-header';
 import DashboardNavigation from '@/components/dashboard/dashboard-navigation';
+import FlashMessages from '@/components/flash-messages';
 import Footer from '@/components/footer';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, router, useForm } from '@inertiajs/react';
 import { Edit, Eye, Filter, FolderOpen, Plus, Search, Trash2, Upload } from 'lucide-react';
 import { useState } from 'react';
 
@@ -39,7 +40,12 @@ interface DashboardProps {
 export default function Dashboard({ auth, wallpapers = [], categories = [], stats }: DashboardProps) {
     const [activeTab, setActiveTab] = useState<'overview' | 'wallpapers' | 'upload' | 'categories' | 'analytics'>('overview');
     const [searchTerm, setSearchTerm] = useState('');
-    const { data, setData, post, processing, errors } = useForm({
+    const [selectedWallpaper, setSelectedWallpaper] = useState<number | null>(null);
+    const [uploadFiles, setUploadFiles] = useState<FileList | null>(null);
+    const [dragActive, setDragActive] = useState(false);
+    const [isProcessing, setIsProcessing] = useState(false);
+
+    const { data, setData, post, processing, errors, reset } = useForm({
         title: '',
         description: '',
         category_id: '',
@@ -48,97 +54,130 @@ export default function Dashboard({ auth, wallpapers = [], categories = [], stat
         is_active: true as boolean,
     });
 
-    const [uploadFiles, setUploadFiles] = useState<FileList | null>(null);
-
-    // Datos de ejemplo si no vienen del backend
-    const defaultStats = stats || {
-        total_wallpapers: 156,
-        total_downloads: 12543,
-        total_categories: 8,
-        recent_uploads: 12,
+    // Usar datos reales o datos por defecto
+    const displayStats = stats || {
+        total_wallpapers: wallpapers.length,
+        total_downloads: wallpapers.reduce((sum, w) => sum + w.downloads_count, 0),
+        total_categories: categories.length,
+        recent_uploads: wallpapers.filter((w) => new Date(w.created_at) > new Date(Date.now() - 24 * 60 * 60 * 1000)).length,
     };
 
-    const defaultCategories =
+    const displayCategories =
         categories.length > 0
             ? categories
             : [
-                  { id: 1, name: 'Naturaleza', wallpaper_count: 45 },
-                  { id: 2, name: 'Abstracto', wallpaper_count: 32 },
-                  { id: 3, name: 'Tecnología', wallpaper_count: 28 },
-                  { id: 4, name: 'Espacio', wallpaper_count: 24 },
-                  { id: 5, name: 'Minimalista', wallpaper_count: 18 },
-                  { id: 6, name: 'Gaming', wallpaper_count: 9 },
+                  { id: 1, name: 'Naturaleza', wallpaper_count: 0 },
+                  { id: 2, name: 'Abstracto', wallpaper_count: 0 },
+                  { id: 3, name: 'Tecnología', wallpaper_count: 0 },
+                  { id: 4, name: 'Espacio', wallpaper_count: 0 },
+                  { id: 5, name: 'Minimalista', wallpaper_count: 0 },
+                  { id: 6, name: 'Gaming', wallpaper_count: 0 },
               ];
 
-    const defaultWallpapers =
-        wallpapers.length > 0
-            ? wallpapers
-            : [
-                  {
-                      id: 1,
-                      title: 'Aurora Boreal 4K',
-                      description: 'Increíble aurora boreal en Noruega',
-                      file_path: '/api/placeholder/400/250',
-                      category: 'Naturaleza',
-                      tags: ['aurora', 'naturaleza', 'noche'],
-                      downloads_count: 1243,
-                      created_at: '2024-01-15',
-                  },
-                  {
-                      id: 2,
-                      title: 'Waves Abstract',
-                      description: 'Ondas abstractas en colores vibrantes',
-                      file_path: '/api/placeholder/400/250',
-                      category: 'Abstracto',
-                      tags: ['ondas', 'colores', 'abstracto'],
-                      downloads_count: 987,
-                      created_at: '2024-01-14',
-                  },
-                  {
-                      id: 3,
-                      title: 'Space Nebula',
-                      description: 'Nebulosa colorida en el espacio profundo',
-                      file_path: '/api/placeholder/400/250',
-                      category: 'Espacio',
-                      tags: ['espacio', 'nebulosa', 'estrellas'],
-                      downloads_count: 756,
-                      created_at: '2024-01-13',
-                  },
-                  {
-                      id: 4,
-                      title: 'Clean Desktop',
-                      description: 'Diseño minimalista para escritorio',
-                      file_path: '/api/placeholder/400/250',
-                      category: 'Minimalista',
-                      tags: ['minimalista', 'limpio', 'simple'],
-                      downloads_count: 654,
-                      created_at: '2024-01-12',
-                  },
-                  {
-                      id: 5,
-                      title: 'Cyber City',
-                      description: 'Ciudad futurista con luces de neón',
-                      file_path: '/api/placeholder/400/250',
-                      category: 'Tecnología',
-                      tags: ['futurista', 'ciudad', 'neón'],
-                      downloads_count: 543,
-                      created_at: '2024-01-11',
-                  },
-                  {
-                      id: 6,
-                      title: 'Game Console',
-                      description: 'Setup gaming con RGB',
-                      file_path: '/api/placeholder/400/250',
-                      category: 'Gaming',
-                      tags: ['gaming', 'rgb', 'setup'],
-                      downloads_count: 432,
-                      created_at: '2024-01-10',
-                  },
-              ];
+    const displayWallpapers = wallpapers.length > 0 ? wallpapers : [];
+
+    // Drag and drop handlers
+    const handleDrag = (e: React.DragEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (e.type === 'dragenter' || e.type === 'dragover') {
+            setDragActive(true);
+        } else if (e.type === 'dragleave') {
+            setDragActive(false);
+        }
+    };
+
+    const handleDrop = (e: React.DragEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setDragActive(false);
+
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            setUploadFiles(e.dataTransfer.files);
+        }
+    };
+
+    const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length > 0) {
+            setUploadFiles(e.target.files);
+        }
+    };
+
+    const handleDeleteWallpaper = (wallpaperId: number) => {
+        if (confirm('¿Estás seguro de que quieres eliminar este wallpaper?')) {
+            router.delete(route('dashboard.wallpapers.destroy', wallpaperId), {
+                onSuccess: () => {
+                    // Recargar datos o actualizar estado local
+                },
+                onError: (errors) => {
+                    console.error('Error al eliminar:', errors);
+                },
+            });
+        }
+    };
+
+    const handleEditWallpaper = (wallpaperId: number) => {
+        // Implementar lógica de edición
+        console.log('Editar wallpaper:', wallpaperId);
+    };
+
+    const handleViewWallpaper = (wallpaperId: number) => {
+        // Implementar lógica de vista
+        console.log('Ver wallpaper:', wallpaperId);
+    };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        post(route('dashboard.store'));
+
+        if (!uploadFiles || uploadFiles.length === 0) {
+            alert('Por favor selecciona al menos un archivo');
+            return;
+        }
+
+        setIsProcessing(true);
+
+        const formData = new FormData();
+        formData.append('title', data.title);
+        formData.append('description', data.description);
+        formData.append('category_id', data.category_id);
+        formData.append('tags', data.tags);
+        formData.append('is_featured', data.is_featured ? '1' : '0');
+        formData.append('is_active', data.is_active ? '1' : '0');
+
+        // Añadir archivos
+        Array.from(uploadFiles).forEach((file, index) => {
+            formData.append(`files[${index}]`, file);
+        });
+
+        // Enviar usando router.post directamente
+        router.post(route('dashboard.store'), formData, {
+            onSuccess: () => {
+                setIsProcessing(false);
+                // Limpiar formulario
+                setData({
+                    title: '',
+                    description: '',
+                    category_id: '',
+                    tags: '',
+                    is_featured: false,
+                    is_active: true,
+                });
+                setUploadFiles(null);
+
+                // Limpiar input de archivo
+                const fileInput = document.getElementById('file-upload') as HTMLInputElement;
+                if (fileInput) {
+                    fileInput.value = '';
+                }
+
+                alert('Wallpaper(s) subido(s) exitosamente');
+            },
+            onError: (errors) => {
+                setIsProcessing(false);
+                console.error('Error:', errors);
+                alert('Error al subir los wallpapers: ' + JSON.stringify(errors));
+            },
+        });
     };
 
     return (
@@ -149,6 +188,7 @@ export default function Dashboard({ auth, wallpapers = [], categories = [], stat
             </Head>
 
             <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+                <FlashMessages />
                 <DashboardHeader userName={auth.user.name} />
 
                 <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
@@ -163,7 +203,7 @@ export default function Dashboard({ auth, wallpapers = [], categories = [], stat
                                     <div className="flex items-center justify-between">
                                         <div>
                                             <p className="text-sm text-gray-400">Total Wallpapers</p>
-                                            <p className="text-2xl font-bold text-white">{defaultStats.total_wallpapers}</p>
+                                            <p className="text-2xl font-bold text-white">{displayStats.total_wallpapers}</p>
                                             <p className="mt-1 text-xs text-green-400">+12 este mes</p>
                                         </div>
                                         <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-purple-600/20">
@@ -176,7 +216,7 @@ export default function Dashboard({ auth, wallpapers = [], categories = [], stat
                                     <div className="flex items-center justify-between">
                                         <div>
                                             <p className="text-sm text-gray-400">Total Descargas</p>
-                                            <p className="text-2xl font-bold text-white">{defaultStats.total_downloads.toLocaleString()}</p>
+                                            <p className="text-2xl font-bold text-white">{displayStats.total_downloads.toLocaleString()}</p>
                                             <p className="mt-1 text-xs text-green-400">+2.1k esta semana</p>
                                         </div>
                                         <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-green-600/20">
@@ -189,7 +229,7 @@ export default function Dashboard({ auth, wallpapers = [], categories = [], stat
                                     <div className="flex items-center justify-between">
                                         <div>
                                             <p className="text-sm text-gray-400">Categorías</p>
-                                            <p className="text-2xl font-bold text-white">{defaultStats.total_categories}</p>
+                                            <p className="text-2xl font-bold text-white">{displayStats.total_categories}</p>
                                             <p className="mt-1 text-xs text-blue-400">Todas activas</p>
                                         </div>
                                         <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-600/20">
@@ -202,7 +242,7 @@ export default function Dashboard({ auth, wallpapers = [], categories = [], stat
                                     <div className="flex items-center justify-between">
                                         <div>
                                             <p className="text-sm text-gray-400">Subidos Hoy</p>
-                                            <p className="text-2xl font-bold text-white">{defaultStats.recent_uploads}</p>
+                                            <p className="text-2xl font-bold text-white">{displayStats.recent_uploads}</p>
                                             <p className="mt-1 text-xs text-orange-400">Últimas 24h</p>
                                         </div>
                                         <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-orange-600/20">
@@ -221,7 +261,7 @@ export default function Dashboard({ auth, wallpapers = [], categories = [], stat
                                     </button>
                                 </div>
                                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-                                    {defaultCategories.slice(0, 6).map((category) => (
+                                    {displayCategories.slice(0, 6).map((category) => (
                                         <div
                                             key={category.id}
                                             className="flex items-center justify-between rounded-lg border border-white/10 bg-white/5 p-4 transition-colors hover:bg-white/10"
@@ -245,7 +285,7 @@ export default function Dashboard({ auth, wallpapers = [], categories = [], stat
                                     </button>
                                 </div>
                                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-                                    {defaultWallpapers.slice(0, 6).map((wallpaper) => (
+                                    {displayWallpapers.slice(0, 6).map((wallpaper) => (
                                         <div
                                             key={wallpaper.id}
                                             className="group relative overflow-hidden rounded-lg border border-white/10 bg-white/5 transition-all hover:border-purple-500/30"
@@ -284,9 +324,17 @@ export default function Dashboard({ auth, wallpapers = [], categories = [], stat
 
                                 <form onSubmit={handleSubmit} className="space-y-6">
                                     {/* File Upload Area */}
-                                    <div className="rounded-xl border-2 border-dashed border-white/20 p-8 text-center transition-colors hover:border-purple-500/50">
+                                    <div
+                                        className={`rounded-xl border-2 border-dashed p-8 text-center transition-colors ${
+                                            dragActive ? 'border-purple-500 bg-purple-500/10' : 'border-white/20 hover:border-purple-500/50'
+                                        }`}
+                                        onDragEnter={handleDrag}
+                                        onDragLeave={handleDrag}
+                                        onDragOver={handleDrag}
+                                        onDrop={handleDrop}
+                                    >
                                         <Upload className="mx-auto mb-4 h-12 w-12 text-gray-400" />
-                                        <p className="mb-2 text-white">Arrastra y suelta tu imagen aquí</p>
+                                        <p className="mb-2 text-white">Arrastra y suelta tus imágenes aquí</p>
                                         <p className="mb-4 text-sm text-gray-400">O haz clic para seleccionar archivos</p>
                                         <input
                                             type="file"
@@ -294,7 +342,7 @@ export default function Dashboard({ auth, wallpapers = [], categories = [], stat
                                             multiple
                                             className="hidden"
                                             id="file-upload"
-                                            onChange={(e) => setUploadFiles(e.target.files)}
+                                            onChange={handleFileSelect}
                                         />
                                         <label
                                             htmlFor="file-upload"
@@ -302,9 +350,18 @@ export default function Dashboard({ auth, wallpapers = [], categories = [], stat
                                         >
                                             Seleccionar Archivos
                                         </label>
-                                        <p className="mt-2 text-xs text-gray-500">Formatos soportados: JPG, PNG, WebP (máx. 10MB, mín. 1920x1080)</p>
+                                        <p className="mt-2 text-xs text-gray-500">Formatos soportados: JPG, PNG, WebP (máx. 10MB)</p>
                                         {uploadFiles && uploadFiles.length > 0 && (
-                                            <p className="mt-2 text-sm text-green-400">{uploadFiles.length} archivo(s) seleccionado(s)</p>
+                                            <div className="mt-4">
+                                                <p className="text-sm text-green-400">{uploadFiles.length} archivo(s) seleccionado(s)</p>
+                                                <div className="mt-2 flex flex-wrap gap-2">
+                                                    {Array.from(uploadFiles).map((file, index) => (
+                                                        <span key={index} className="rounded bg-white/10 px-2 py-1 text-xs text-white">
+                                                            {file.name}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
                                         )}
                                     </div>
 
@@ -330,7 +387,7 @@ export default function Dashboard({ auth, wallpapers = [], categories = [], stat
                                                 className="w-full rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-white focus:ring-2 focus:ring-purple-500/50 focus:outline-none"
                                             >
                                                 <option value="">Seleccionar categoría</option>
-                                                {defaultCategories.map((category) => (
+                                                {displayCategories.map((category) => (
                                                     <option key={category.id} value={category.id} className="bg-gray-800">
                                                         {category.name}
                                                     </option>
@@ -387,10 +444,10 @@ export default function Dashboard({ auth, wallpapers = [], categories = [], stat
 
                                     <button
                                         type="submit"
-                                        disabled={processing}
+                                        disabled={isProcessing}
                                         className="w-full rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 py-3 font-semibold text-white transition-colors hover:from-purple-700 hover:to-pink-700 disabled:cursor-not-allowed disabled:opacity-50"
                                     >
-                                        {processing ? 'Subiendo...' : 'Subir Wallpaper'}
+                                        {isProcessing ? 'Subiendo...' : 'Subir Wallpaper'}
                                     </button>
                                 </form>
                             </div>
@@ -420,7 +477,7 @@ export default function Dashboard({ auth, wallpapers = [], categories = [], stat
 
                             {/* Wallpapers Grid */}
                             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                                {defaultWallpapers
+                                {displayWallpapers
                                     .filter(
                                         (w) =>
                                             w.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -434,13 +491,25 @@ export default function Dashboard({ auth, wallpapers = [], categories = [], stat
                                             <div className="relative">
                                                 <img src={wallpaper.file_path} alt={wallpaper.title} className="h-48 w-full object-cover" />
                                                 <div className="absolute top-2 right-2 flex space-x-1">
-                                                    <button className="rounded-lg bg-black/60 p-2 text-white backdrop-blur-sm transition-colors hover:bg-black/80">
+                                                    <button
+                                                        onClick={() => handleViewWallpaper(wallpaper.id)}
+                                                        className="rounded-lg bg-black/60 p-2 text-white backdrop-blur-sm transition-colors hover:bg-black/80"
+                                                        title="Ver wallpaper"
+                                                    >
                                                         <Eye size={14} />
                                                     </button>
-                                                    <button className="rounded-lg bg-black/60 p-2 text-white backdrop-blur-sm transition-colors hover:bg-black/80">
+                                                    <button
+                                                        onClick={() => handleEditWallpaper(wallpaper.id)}
+                                                        className="rounded-lg bg-black/60 p-2 text-white backdrop-blur-sm transition-colors hover:bg-black/80"
+                                                        title="Editar wallpaper"
+                                                    >
                                                         <Edit size={14} />
                                                     </button>
-                                                    <button className="rounded-lg bg-black/60 p-2 text-red-400 backdrop-blur-sm transition-colors hover:bg-red-600/80">
+                                                    <button
+                                                        onClick={() => handleDeleteWallpaper(wallpaper.id)}
+                                                        className="rounded-lg bg-black/60 p-2 text-red-400 backdrop-blur-sm transition-colors hover:bg-red-600/80"
+                                                        title="Eliminar wallpaper"
+                                                    >
                                                         <Trash2 size={14} />
                                                     </button>
                                                 </div>
@@ -481,7 +550,7 @@ export default function Dashboard({ auth, wallpapers = [], categories = [], stat
                             </div>
 
                             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                                {defaultCategories.map((category) => (
+                                {displayCategories.map((category) => (
                                     <div
                                         key={category.id}
                                         className="rounded-xl border border-white/10 bg-black/20 p-6 backdrop-blur-sm transition-all hover:border-purple-500/30"
@@ -509,7 +578,7 @@ export default function Dashboard({ auth, wallpapers = [], categories = [], stat
                                             <div
                                                 className="h-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600"
                                                 style={{
-                                                    width: `${(category.wallpaper_count / Math.max(...defaultCategories.map((c) => c.wallpaper_count))) * 100}%`,
+                                                    width: `${displayCategories.length > 0 ? (category.wallpaper_count / Math.max(...displayCategories.map((c) => c.wallpaper_count))) * 100 : 0}%`,
                                                 }}
                                             />
                                         </div>
@@ -528,7 +597,7 @@ export default function Dashboard({ auth, wallpapers = [], categories = [], stat
                                 <div className="rounded-xl border border-white/10 bg-black/20 p-6 backdrop-blur-sm">
                                     <h3 className="mb-4 text-lg font-semibold text-white">Descargas por Categoría</h3>
                                     <div className="space-y-3">
-                                        {defaultCategories.map((category) => (
+                                        {displayCategories.map((category) => (
                                             <div key={category.id} className="flex items-center justify-between">
                                                 <span className="text-gray-300">{category.name}</span>
                                                 <div className="flex items-center space-x-3">
@@ -536,7 +605,7 @@ export default function Dashboard({ auth, wallpapers = [], categories = [], stat
                                                         <div
                                                             className="h-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600"
                                                             style={{
-                                                                width: `${(category.wallpaper_count / Math.max(...defaultCategories.map((c) => c.wallpaper_count))) * 100}%`,
+                                                                width: `${displayCategories.length > 0 ? (category.wallpaper_count / Math.max(...displayCategories.map((c) => c.wallpaper_count))) * 100 : 0}%`,
                                                             }}
                                                         />
                                                     </div>
@@ -550,7 +619,7 @@ export default function Dashboard({ auth, wallpapers = [], categories = [], stat
                                 <div className="rounded-xl border border-white/10 bg-black/20 p-6 backdrop-blur-sm">
                                     <h3 className="mb-4 text-lg font-semibold text-white">Wallpapers Más Populares</h3>
                                     <div className="space-y-3">
-                                        {defaultWallpapers
+                                        {displayWallpapers
                                             .sort((a, b) => b.downloads_count - a.downloads_count)
                                             .slice(0, 5)
                                             .map((wallpaper) => (

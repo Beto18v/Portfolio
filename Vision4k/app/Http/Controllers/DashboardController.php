@@ -36,11 +36,17 @@ class DashboardController extends Controller
                     'id' => $wallpaper->id,
                     'title' => $wallpaper->title,
                     'description' => $wallpaper->description,
-                    'file_path' => Storage::url($wallpaper->file_path),
-                    'category' => $wallpaper->category->name,
-                    'tags' => $wallpaper->tags ? explode(',', $wallpaper->tags) : [],
+                    'file_path' => str_starts_with($wallpaper->file_path, 'http')
+                        ? $wallpaper->file_path
+                        : Storage::url($wallpaper->file_path),
+                    'category' => $wallpaper->category->name ?? 'Sin categoría',
+                    'tags' => $wallpaper->tags ? explode(',', trim($wallpaper->tags)) : [],
                     'downloads_count' => $wallpaper->downloads_count,
+                    'views_count' => $wallpaper->views_count ?? 0,
                     'created_at' => $wallpaper->created_at->format('Y-m-d'),
+                    'is_featured' => $wallpaper->is_featured,
+                    'is_active' => $wallpaper->is_active,
+                    'is_premium' => $wallpaper->is_premium,
                 ];
             });
 
@@ -75,6 +81,7 @@ class DashboardController extends Controller
             'tags' => 'nullable|string',
             'is_featured' => 'boolean',
             'is_active' => 'boolean',
+            'files' => 'required|array|min:1',
             'files.*' => 'required|image|mimes:jpeg,png,jpg,webp|max:10240', // 10MB máximo
         ]);
 
@@ -82,43 +89,42 @@ class DashboardController extends Controller
 
         if ($request->hasFile('files')) {
             foreach ($request->file('files') as $file) {
-                // Validar resolución mínima
-                $imageSize = getimagesize($file->path());
-                if ($imageSize[0] < 1920 || $imageSize[1] < 1080) {
-                    return back()->withErrors(['files' => 'Las imágenes deben tener una resolución mínima de 1920x1080.']);
+                try {
+                    // Obtener dimensiones de la imagen
+                    $imageSize = getimagesize($file->path());
+                    if (!$imageSize) {
+                        return back()->withErrors(['files' => 'No se pudo leer la información de la imagen.']);
+                    }
+
+                    // Generar nombre único
+                    $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
+                    $thumbnailName = 'thumb_' . pathinfo($filename, PATHINFO_FILENAME) . '.jpg';
+
+                    // Guardar imagen original
+                    $path = $file->storeAs('wallpapers', $filename, 'public');
+
+                    // Por ahora, usar la imagen original como thumbnail
+                    $thumbnailPath = $path;
+
+                    // Crear registro en BD
+                    $wallpaper = Wallpaper::create([
+                        'title' => $request->title,
+                        'description' => $request->description,
+                        'file_path' => $path,
+                        'thumbnail_path' => $path, // Usar imagen original como thumbnail temporalmente
+                        'category_id' => $request->category_id,
+                        'tags' => $request->tags,
+                        'file_size' => $file->getSize(),
+                        'resolution' => $imageSize[0] . 'x' . $imageSize[1],
+                        'is_featured' => $request->boolean('is_featured'),
+                        'is_active' => $request->boolean('is_active'),
+                        'user_id' => Auth::id(),
+                    ]);
+
+                    $uploadedFiles[] = $wallpaper;
+                } catch (\Exception $e) {
+                    return back()->withErrors(['files' => 'Error al procesar la imagen: ' . $e->getMessage()]);
                 }
-
-                // Generar nombre único
-                $filename = Str::uuid() . '.' . $file->getClientOriginalExtension();
-                $thumbnailName = 'thumb_' . $filename;
-
-                // Guardar imagen original
-                $path = $file->storeAs('wallpapers', $filename, 'public');
-
-                // Crear thumbnail optimizado
-                $manager = new ImageManager(new Driver());
-                $thumbnail = $manager->read($file)
-                    ->cover(400, 250)
-                    ->toWebp(80);
-
-                Storage::disk('public')->put('wallpapers/thumbnails/' . $thumbnailName, $thumbnail);
-
-                // Crear registro en BD
-                $wallpaper = Wallpaper::create([
-                    'title' => $request->title,
-                    'description' => $request->description,
-                    'file_path' => $path,
-                    'thumbnail_path' => 'wallpapers/thumbnails/' . $thumbnailName,
-                    'category_id' => $request->category_id,
-                    'tags' => $request->tags,
-                    'file_size' => $file->getSize(),
-                    'resolution' => $imageSize[0] . 'x' . $imageSize[1],
-                    'is_featured' => $request->boolean('is_featured'),
-                    'is_active' => $request->boolean('is_active'),
-                    'user_id' => Auth::id(),
-                ]);
-
-                $uploadedFiles[] = $wallpaper;
             }
         }
 
