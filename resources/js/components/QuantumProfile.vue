@@ -30,9 +30,9 @@ const props = withDefaults(defineProps<Props>(), {
 // Animation and particle system
 const particleCanvas = ref<HTMLCanvasElement>();
 const profileData = ref({
-    name: 'Tu Nombre',
+    name: 'Nicolas A. Valenzuela',
     title: 'Full Stack Developer',
-    location: 'Tu Ubicación',
+    location: 'Bogota, Colombia',
     availability: 'Available',
     passion: 'Creating digital experiences',
     currentFocus: 'Modern web technologies',

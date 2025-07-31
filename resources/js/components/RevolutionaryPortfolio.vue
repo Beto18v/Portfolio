@@ -30,7 +30,7 @@ const isTransitioning = ref(false);
 // Portfolio data - customize these values for your personal information
 const portfolioData: PortfolioData = {
     // Personal information
-    name: 'Tu Nombre', // Replace with your actual name
+    name: 'Nicolas A. Valenzuela', // Replace with your actual name
     profileImage: '', // Add your profile image URL here
 
     // Hero section customization
@@ -177,10 +177,6 @@ const interfaceClasses = computed(() => ({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" :content="`${portfolioData.name} - Revolutionary Portfolio`" />
         <meta name="twitter:description" content="Experience the future of portfolio presentation" />
-
-        <!-- Favicon and theme -->
-        <meta name="theme-color" content="#00D4FF" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     </Head>
 
     <!-- Main revolutionary interface -->
