@@ -5,7 +5,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\ContactController;
 
 Route::get('/', function () {
-    return Inertia::render('Dashboard'); // Changed to show portfolio on home page
+    return Inertia::render('Welcome'); // Changed to show portfolio on home page
 })->name('home');
 
 Route::get('dashboard', function () {
