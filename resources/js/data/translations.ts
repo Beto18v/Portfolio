@@ -69,6 +69,114 @@ export const portfolioTranslations: TranslationData = {
         // Footer
         'footer.rights': 'All rights reserved.',
         'footer.built': 'Built with Vue.js, Laravel, and Tailwind CSS',
+
+        // Revolutionary Interface
+        'interface.mode': 'Interface Mode',
+        'interface.holo': 'HOLO',
+        'interface.space': 'SPACE',
+        'interface.classic': 'CLASSIC',
+        'interface.quickAccess': 'Quick Access',
+        'interface.terminal': 'Terminal',
+        'interface.profile': 'Profile',
+        'interface.skills': 'Skills Matrix',
+        'interface.projects': 'Projects',
+        'interface.contact': 'Contact',
+
+        // Holo Terminal
+        'holo.welcome': 'Welcome to Holographic Terminal',
+        'holo.initializing': 'Initializing neural interface...',
+        'holo.ready': 'System ready. Enter command:',
+        'holo.help': 'Available commands: profile, skills, projects, contact, clear',
+        'holo.command.profile': 'Loading personal profile...',
+        'holo.command.skills': 'Displaying skills matrix...',
+        'holo.command.projects': 'Accessing project database...',
+        'holo.command.contact': 'Opening communication channel...',
+
+        // Skills Matrix
+        'skills.matrix': 'Skills Matrix',
+        'skills.level': 'Level',
+        'skills.experience': 'Experience',
+        'skills.category.frontend': 'Frontend',
+        'skills.category.backend': 'Backend',
+        'skills.category.database': 'Database',
+        'skills.category.tools': 'Tools',
+        'skills.proficiency': 'Proficiency Level',
+        'skills.controls': 'Controls',
+        'skills.drag': 'Drag to rotate',
+        'skills.click': 'Click skills for details',
+        'skills.hover': 'Hover for quick info',
+
+        // Personal Information
+        'personal.name': 'Full Stack Developer',
+        'personal.title': 'Innovative Digital Solutions Creator',
+        'personal.bio': 'Passionate developer with expertise in modern web technologies, creating efficient and scalable applications.',
+        'personal.location': 'Location',
+        'personal.email': 'Email',
+        'personal.phone': 'Phone',
+        'personal.website': 'Website',
+        'personal.github': 'GitHub',
+        'personal.linkedin': 'LinkedIn',
+
+        // Projects
+        'projects.featured': 'Featured Projects',
+        'projects.all': 'All Projects',
+        'projects.technology': 'Technology',
+        'projects.technologies': 'Technologies',
+        'projects.repository': 'Repository',
+        'projects.demo': 'Live Demo',
+        'projects.details': 'Project Details',
+        'projects.description': 'Description',
+        'projects.features': 'Key Features',
+        'projects.challenge': 'Challenge',
+        'projects.solution': 'Solution',
+
+        // Revolutionary Interface Specific
+        'revolutionary.welcome': 'Welcome to the Future',
+        'revolutionary.subtitle': 'Experience Next-Generation Portfolio',
+        'revolutionary.chooseMode': 'Choose Your Experience Mode',
+        'revolutionary.holoDescription': 'Immersive holographic interface with 3D interactions',
+        'revolutionary.spaceDescription': 'Explore in a cosmic environment with floating modules',
+        'revolutionary.classicDescription': 'Elegant and professional traditional layout',
+
+        // Navigation
+        'nav.quantum': 'Quantum Access',
+        'nav.matrix': 'Neural Matrix',
+        'nav.terminal': 'Holo Terminal',
+        'nav.modules': 'Space Modules',
+        'nav.profile': 'Digital Profile',
+
+        // Experience & Education
+        'experience.title': 'Professional Experience',
+        'experience.education': 'Education',
+        'experience.certifications': 'Certifications',
+        'experience.years': 'years',
+        'experience.current': 'Current',
+        'experience.present': 'Present',
+
+        // Achievements
+        'achievements.title': 'Achievements',
+        'achievements.projects': 'Projects Completed',
+        'achievements.clients': 'Happy Clients',
+        'achievements.technologies': 'Technologies Mastered',
+        'achievements.years': 'Years Experience',
+
+        // Project Specific Translations
+        'projects.ecommerce.title': 'E-Commerce Platform',
+        'projects.ecommerce.description': 'Modern e-commerce platform with real-time inventory management',
+        'projects.taskmanager.title': 'Task Management App',
+        'projects.taskmanager.description': 'Collaborative task management application with real-time updates',
+        'projects.weather.title': 'Mobile Weather App',
+        'projects.weather.description': 'Cross-platform weather application with location-based forecasts',
+
+        // Experience Specific
+        'experience.senior.title': 'Senior Full Stack Developer',
+        'experience.senior.description': 'Lead development of enterprise web applications using modern technologies',
+        'experience.fullstack.title': 'Full Stack Developer',
+        'experience.fullstack.description': 'Developed custom web solutions for clients across various industries',
+
+        // Education
+        'education.computer.degree': 'Computer Science Degree',
+        'education.computer.description': 'Specialized in software engineering and web technologies',
     },
 
     es: {
@@ -135,6 +243,114 @@ export const portfolioTranslations: TranslationData = {
         // Footer
         'footer.rights': 'Todos los derechos reservados.',
         'footer.built': 'Construido con Vue.js, Laravel y Tailwind CSS',
+
+        // Revolutionary Interface
+        'interface.mode': 'Modo de Interfaz',
+        'interface.holo': 'HOLO',
+        'interface.space': 'ESPACIO',
+        'interface.classic': 'CLÁSICO',
+        'interface.quickAccess': 'Acceso Rápido',
+        'interface.terminal': 'Terminal',
+        'interface.profile': 'Perfil',
+        'interface.skills': 'Matriz de Habilidades',
+        'interface.projects': 'Proyectos',
+        'interface.contact': 'Contacto',
+
+        // Holo Terminal
+        'holo.welcome': 'Bienvenido al Terminal Holográfico',
+        'holo.initializing': 'Inicializando interfaz neural...',
+        'holo.ready': 'Sistema listo. Ingresa comando:',
+        'holo.help': 'Comandos disponibles: profile, skills, projects, contact, clear',
+        'holo.command.profile': 'Cargando perfil personal...',
+        'holo.command.skills': 'Mostrando matriz de habilidades...',
+        'holo.command.projects': 'Accediendo a base de datos de proyectos...',
+        'holo.command.contact': 'Abriendo canal de comunicación...',
+
+        // Skills Matrix
+        'skills.matrix': 'Matriz de Habilidades',
+        'skills.level': 'Nivel',
+        'skills.experience': 'Experiencia',
+        'skills.category.frontend': 'Frontend',
+        'skills.category.backend': 'Backend',
+        'skills.category.database': 'Base de Datos',
+        'skills.category.tools': 'Herramientas',
+        'skills.proficiency': 'Nivel de Competencia',
+        'skills.controls': 'Controles',
+        'skills.drag': 'Arrastra para rotar',
+        'skills.click': 'Haz clic en habilidades para detalles',
+        'skills.hover': 'Pasa el cursor para información rápida',
+
+        // Personal Information
+        'personal.name': 'Desarrollador Full Stack',
+        'personal.title': 'Creador de Soluciones Digitales Innovadoras',
+        'personal.bio': 'Desarrollador apasionado con experiencia en tecnologías web modernas, creando aplicaciones eficientes y escalables.',
+        'personal.location': 'Ubicación',
+        'personal.email': 'Email',
+        'personal.phone': 'Teléfono',
+        'personal.website': 'Sitio Web',
+        'personal.github': 'GitHub',
+        'personal.linkedin': 'LinkedIn',
+
+        // Projects
+        'projects.featured': 'Proyectos Destacados',
+        'projects.all': 'Todos los Proyectos',
+        'projects.technology': 'Tecnología',
+        'projects.technologies': 'Tecnologías',
+        'projects.repository': 'Repositorio',
+        'projects.demo': 'Demo en Vivo',
+        'projects.details': 'Detalles del Proyecto',
+        'projects.description': 'Descripción',
+        'projects.features': 'Características Principales',
+        'projects.challenge': 'Desafío',
+        'projects.solution': 'Solución',
+
+        // Revolutionary Interface Specific
+        'revolutionary.welcome': 'Bienvenido al Futuro',
+        'revolutionary.subtitle': 'Experimenta el Portfolio de Nueva Generación',
+        'revolutionary.chooseMode': 'Elige tu Modo de Experiencia',
+        'revolutionary.holoDescription': 'Interfaz holográfica inmersiva con interacciones 3D',
+        'revolutionary.spaceDescription': 'Explora en un entorno cósmico con módulos flotantes',
+        'revolutionary.classicDescription': 'Diseño tradicional elegante y profesional',
+
+        // Navigation
+        'nav.quantum': 'Acceso Cuántico',
+        'nav.matrix': 'Matriz Neural',
+        'nav.terminal': 'Terminal Holo',
+        'nav.modules': 'Módulos Espaciales',
+        'nav.profile': 'Perfil Digital',
+
+        // Experience & Education
+        'experience.title': 'Experiencia Profesional',
+        'experience.education': 'Educación',
+        'experience.certifications': 'Certificaciones',
+        'experience.years': 'años',
+        'experience.current': 'Actual',
+        'experience.present': 'Presente',
+
+        // Achievements
+        'achievements.title': 'Logros',
+        'achievements.projects': 'Proyectos Completados',
+        'achievements.clients': 'Clientes Satisfechos',
+        'achievements.technologies': 'Tecnologías Dominadas',
+        'achievements.years': 'Años de Experiencia',
+
+        // Project Specific Translations
+        'projects.ecommerce.title': 'Plataforma E-Commerce',
+        'projects.ecommerce.description': 'Plataforma de comercio electrónico moderna con gestión de inventario en tiempo real',
+        'projects.taskmanager.title': 'App de Gestión de Tareas',
+        'projects.taskmanager.description': 'Aplicación colaborativa de gestión de tareas con actualizaciones en tiempo real',
+        'projects.weather.title': 'App Móvil del Clima',
+        'projects.weather.description': 'Aplicación meteorológica multiplataforma con pronósticos basados en ubicación',
+
+        // Experience Specific
+        'experience.senior.title': 'Desarrollador Full Stack Senior',
+        'experience.senior.description': 'Lidero el desarrollo de aplicaciones web empresariales usando tecnologías modernas',
+        'experience.fullstack.title': 'Desarrollador Full Stack',
+        'experience.fullstack.description': 'Desarrollé soluciones web personalizadas para clientes de diversas industrias',
+
+        // Education
+        'education.computer.degree': 'Licenciatura en Ciencias de la Computación',
+        'education.computer.description': 'Especializado en ingeniería de software y tecnologías web',
     },
 
     zh: {
@@ -200,5 +416,113 @@ export const portfolioTranslations: TranslationData = {
         // Footer
         'footer.rights': '版权所有。',
         'footer.built': '使用 Vue.js、Laravel 和 Tailwind CSS 构建',
+
+        // Revolutionary Interface
+        'interface.mode': '界面模式',
+        'interface.holo': '全息',
+        'interface.space': '空间',
+        'interface.classic': '经典',
+        'interface.quickAccess': '快速访问',
+        'interface.terminal': '终端',
+        'interface.profile': '个人资料',
+        'interface.skills': '技能矩阵',
+        'interface.projects': '项目',
+        'interface.contact': '联系',
+
+        // Holo Terminal
+        'holo.welcome': '欢迎使用全息终端',
+        'holo.initializing': '正在初始化神经接口...',
+        'holo.ready': '系统就绪。请输入命令：',
+        'holo.help': '可用命令：profile、skills、projects、contact、clear',
+        'holo.command.profile': '正在加载个人资料...',
+        'holo.command.skills': '正在显示技能矩阵...',
+        'holo.command.projects': '正在访问项目数据库...',
+        'holo.command.contact': '正在打开通信频道...',
+
+        // Skills Matrix
+        'skills.matrix': '技能矩阵',
+        'skills.level': '级别',
+        'skills.experience': '经验',
+        'skills.category.frontend': '前端',
+        'skills.category.backend': '后端',
+        'skills.category.database': '数据库',
+        'skills.category.tools': '工具',
+        'skills.proficiency': '熟练程度',
+        'skills.controls': '控制',
+        'skills.drag': '拖拽旋转',
+        'skills.click': '点击技能查看详情',
+        'skills.hover': '悬停查看快速信息',
+
+        // Personal Information
+        'personal.name': '全栈开发者',
+        'personal.title': '创新数字解决方案创造者',
+        'personal.bio': '热衷于现代网络技术的开发者，创建高效可扩展的应用程序。',
+        'personal.location': '位置',
+        'personal.email': '邮箱',
+        'personal.phone': '电话',
+        'personal.website': '网站',
+        'personal.github': 'GitHub',
+        'personal.linkedin': 'LinkedIn',
+
+        // Projects
+        'projects.featured': '精选项目',
+        'projects.all': '所有项目',
+        'projects.technology': '技术',
+        'projects.technologies': '技术栈',
+        'projects.repository': '代码仓库',
+        'projects.demo': '在线演示',
+        'projects.details': '项目详情',
+        'projects.description': '描述',
+        'projects.features': '主要特性',
+        'projects.challenge': '挑战',
+        'projects.solution': '解决方案',
+
+        // Revolutionary Interface Specific
+        'revolutionary.welcome': '欢迎来到未来',
+        'revolutionary.subtitle': '体验下一代作品集',
+        'revolutionary.chooseMode': '选择您的体验模式',
+        'revolutionary.holoDescription': '具有3D交互的沉浸式全息界面',
+        'revolutionary.spaceDescription': '在宇宙环境中探索浮动模块',
+        'revolutionary.classicDescription': '优雅专业的传统布局',
+
+        // Navigation
+        'nav.quantum': '量子访问',
+        'nav.matrix': '神经矩阵',
+        'nav.terminal': '全息终端',
+        'nav.modules': '太空模块',
+        'nav.profile': '数字档案',
+
+        // Experience & Education
+        'experience.title': '专业经验',
+        'experience.education': '教育背景',
+        'experience.certifications': '认证证书',
+        'experience.years': '年',
+        'experience.current': '当前',
+        'experience.present': '至今',
+
+        // Achievements
+        'achievements.title': '成就',
+        'achievements.projects': '完成项目',
+        'achievements.clients': '满意客户',
+        'achievements.technologies': '掌握技术',
+        'achievements.years': '年经验',
+
+        // Project Specific Translations
+        'projects.ecommerce.title': '电商平台',
+        'projects.ecommerce.description': '现代电商平台，具有实时库存管理功能',
+        'projects.taskmanager.title': '任务管理应用',
+        'projects.taskmanager.description': '协作任务管理应用，具有实时更新功能',
+        'projects.weather.title': '移动天气应用',
+        'projects.weather.description': '基于位置的跨平台天气预报应用',
+
+        // Experience Specific
+        'experience.senior.title': '高级全栈开发工程师',
+        'experience.senior.description': '领导使用现代技术开发企业级Web应用程序',
+        'experience.fullstack.title': '全栈开发工程师',
+        'experience.fullstack.description': '为各行业客户开发定制Web解决方案',
+
+        // Education
+        'education.computer.degree': '计算机科学学位',
+        'education.computer.description': '专注于软件工程和Web技术',
     },
 };

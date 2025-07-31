@@ -295,16 +295,6 @@ const getTraitVisualization = (trait: any, index: number) => {
         <!-- Main content -->
         <div class="relative z-10 flex min-h-screen items-center">
             <div class="container mx-auto px-6 py-20">
-                <!-- Header section -->
-                <div class="mb-16 text-center">
-                    <div class="inline-block">
-                        <h1 class="mb-4 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-6xl font-bold text-transparent">
-                            QUANTUM PROFILE
-                        </h1>
-                        <div class="h-1 rounded-full bg-gradient-to-r from-cyan-400 to-purple-600"></div>
-                    </div>
-                </div>
-
                 <!-- Profile content grid -->
                 <div class="grid items-center gap-16 lg:grid-cols-2">
                     <!-- Left side - Profile image and data -->

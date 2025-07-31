@@ -8,13 +8,10 @@ import { computed, onMounted, ref } from 'vue';
 // Import revolutionary components
 import ClassicPortfolio from '@/components/ClassicPortfolio.vue';
 import ContactSection from '@/components/ContactSection.vue';
-import HoloTerminal from '@/components/HoloTerminal.vue';
-import HolographicSkills from '@/components/HolographicSkills.vue';
+import HolographicSkillsFixed from '@/components/HolographicSkillsFixed.vue';
+import LanguageSelector from '@/components/LanguageSelector.vue';
 import QuantumProfile from '@/components/QuantumProfile.vue';
 import SpaceModulesStatic from '@/components/SpaceModulesStatic.vue';
-
-// Import traditional components for fallback
-import Navigation from '@/components/Navigation.vue';
 
 /**
  * Revolutionary Portfolio Layout
@@ -27,7 +24,7 @@ const { loadTranslations, initializeLanguage, t } = useTranslation();
 
 // Interface modes
 const interfaceMode = ref<'holo' | 'space' | 'traditional'>('holo');
-const currentSection = ref<'terminal' | 'profile' | 'skills' | 'projects' | 'contact'>('terminal');
+const currentSection = ref<'profile' | 'skills' | 'projects' | 'contact'>('profile');
 const isTransitioning = ref(false);
 
 // Portfolio data - customize these values for your personal information
@@ -130,43 +127,6 @@ const portfolioData: PortfolioData = {
             featured: false,
             date: '2023-08-10',
         },
-        {
-            id: '4',
-            title: 'Portfolio Personal',
-            description: 'Sitio web de portfolio personal construido con tecnologías modernas, diseño responsivo y optimizado para rendimiento.',
-            image: '/api/placeholder/600/400', // Replace with actual project image
-            technologies: ['Vue.js', 'Tailwind CSS', 'Vite', 'TypeScript', 'Inertia.js'],
-            liveUrl: 'https://tu-portfolio.com', // Replace with actual URL
-            githubUrl: 'https://github.com/tu-usuario/portfolio', // Replace with actual GitHub URL
-            category: 'Frontend',
-            featured: true,
-            date: '2023-12-05',
-        },
-        {
-            id: '5',
-            title: 'Blog CMS',
-            description:
-                'Sistema de gestión de contenido para blog con editor WYSIWYG, categorías, etiquetas, comentarios y panel de administración.',
-            image: '/api/placeholder/600/400', // Replace with actual project image
-            technologies: ['Laravel', 'Vue.js', 'TinyMCE', 'MySQL', 'Bootstrap'],
-            liveUrl: 'https://tu-blog.com', // Replace with actual URL
-            githubUrl: 'https://github.com/tu-usuario/blog-cms', // Replace with actual GitHub URL
-            category: 'Full Stack',
-            featured: false,
-            date: '2023-06-15',
-        },
-        {
-            id: '6',
-            title: 'Real Estate Platform',
-            description: 'Plataforma inmobiliaria con búsqueda avanzada, mapas interactivos, calculadora de hipotecas y sistema de citas.',
-            image: '/api/placeholder/600/400', // Replace with actual project image
-            technologies: ['React', 'Laravel', 'Google Maps API', 'PostgreSQL', 'Material-UI'],
-            liveUrl: 'https://tu-inmobiliaria.com', // Replace with actual URL
-            githubUrl: 'https://github.com/tu-usuario/real-estate', // Replace with actual GitHub URL
-            category: 'Full Stack',
-            featured: true,
-            date: '2023-03-22',
-        },
     ],
 };
 
@@ -184,34 +144,10 @@ const switchSection = (section: typeof currentSection.value) => {
     currentSection.value = section;
 };
 
-// Listen for application launch events from terminal
+// Listen for application launch events
 onMounted(() => {
     loadTranslations(portfolioTranslations);
     initializeLanguage();
-
-    // Listen for app launch events from HoloTerminal
-    window.addEventListener('portfolio-app-launch', (event: any) => {
-        const { appId } = event.detail;
-
-        switch (appId) {
-            case 'profile':
-                switchInterface('traditional');
-                setTimeout(() => switchSection('profile'), 600);
-                break;
-            case 'skills':
-                switchInterface('holo');
-                setTimeout(() => switchSection('skills'), 600);
-                break;
-            case 'projects':
-                switchInterface('space');
-                setTimeout(() => switchSection('projects'), 600);
-                break;
-            case 'contact':
-                switchInterface('traditional');
-                setTimeout(() => switchSection('contact'), 600);
-                break;
-        }
-    });
 });
 
 // Computed interface classes
@@ -249,31 +185,36 @@ const interfaceClasses = computed(() => ({
 
     <!-- Main revolutionary interface -->
     <div class="revolutionary-portfolio" :class="interfaceClasses">
-        <!-- Interface mode selector -->
-        <div class="fixed top-4 left-4 z-50">
+        <!-- Language Selector - Top right, always visible -->
+        <div class="fixed top-4 right-4 z-50">
+            <LanguageSelector />
+        </div>
+
+        <!-- Interface mode selector - Visible in all modes -->
+        <div class="fixed top-4 left-4 z-[60]">
             <div class="interface-selector rounded-xl border border-cyan-400/30 bg-black/50 p-2 backdrop-blur-sm">
-                <div class="mb-2 px-2 text-xs text-cyan-400">Interface Mode:</div>
+                <div class="mb-2 px-2 text-xs text-cyan-400">{{ t('interface.mode') }}:</div>
                 <div class="flex gap-1">
                     <button
                         @click="switchInterface('holo')"
                         class="rounded px-3 py-1 text-xs transition-all"
                         :class="interfaceMode === 'holo' ? 'bg-cyan-400 text-black' : 'text-cyan-400 hover:bg-cyan-400/20'"
                     >
-                        HOLO
+                        {{ t('interface.holo') }}
                     </button>
                     <button
                         @click="switchInterface('space')"
                         class="rounded px-3 py-1 text-xs transition-all"
                         :class="interfaceMode === 'space' ? 'bg-purple-400 text-black' : 'text-purple-400 hover:bg-purple-400/20'"
                     >
-                        SPACE
+                        {{ t('interface.space') }}
                     </button>
                     <button
                         @click="switchInterface('traditional')"
                         class="rounded px-3 py-1 text-xs transition-all"
                         :class="interfaceMode === 'traditional' ? 'bg-gray-400 text-black' : 'text-gray-400 hover:bg-gray-400/20'"
                     >
-                        CLASSIC
+                        {{ t('interface.classic') }}
                     </button>
                 </div>
             </div>
@@ -295,21 +236,13 @@ const interfaceClasses = computed(() => ({
 
         <!-- HOLOGRAPHIC INTERFACE MODE -->
         <div v-if="interfaceMode === 'holo'" class="holo-interface">
-            <!-- Terminal Interface -->
-            <div v-if="currentSection === 'terminal'">
-                <HoloTerminal />
-            </div>
-
             <!-- Holographic Skills -->
-            <div v-else-if="currentSection === 'skills'">
-                <HolographicSkills :skills="portfolioData.skills" />
+            <div v-if="currentSection === 'skills'">
+                <HolographicSkillsFixed :skills="portfolioData.skills" />
             </div>
 
             <!-- Traditional sections in holo mode -->
             <div v-else class="traditional-in-holo min-h-screen bg-black">
-                <!-- Navigation for holo mode -->
-                <Navigation />
-
                 <!-- Traditional components with holographic styling -->
                 <div class="holo-wrapper">
                     <QuantumProfile
@@ -320,6 +253,174 @@ const interfaceClasses = computed(() => ({
                         :projects-completed="portfolioData.about.projectsCompleted"
                         :technologies-mastered="portfolioData.about.technologiesMastered"
                     />
+
+                    <!-- Projects Section -->
+                    <section v-else-if="currentSection === 'projects'" class="quantum-projects relative min-h-screen overflow-hidden bg-black">
+                        <!-- Quantum grid overlay -->
+                        <div class="absolute inset-0 opacity-10">
+                            <div class="quantum-grid"></div>
+                        </div>
+
+                        <!-- Scanning effects -->
+                        <div class="pointer-events-none absolute inset-0">
+                            <div class="animate-scan-horizontal absolute top-0 left-0 h-px w-full bg-cyan-400 opacity-30"></div>
+                            <div class="animate-scan-vertical absolute top-0 left-0 h-full w-px bg-purple-400 opacity-30"></div>
+                        </div>
+
+                        <!-- Main content -->
+                        <div class="relative z-10 flex min-h-screen items-center">
+                            <div class="container mx-auto px-6 py-20">
+                                <!-- Header Section -->
+                                <div class="mb-16 text-center">
+                                    <div class="relative inline-block">
+                                        <!-- Rotating gradient background -->
+                                        <div
+                                            class="absolute -inset-8 animate-pulse rounded-full bg-gradient-to-r from-cyan-400/20 via-purple-600/20 to-cyan-400/20 blur-xl"
+                                        ></div>
+
+                                        <h2 class="relative mb-6 text-5xl font-bold text-white">
+                                            <span class="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                                                Projects Portfolio
+                                            </span>
+                                        </h2>
+                                    </div>
+
+                                    <p class="mx-auto max-w-2xl text-lg leading-relaxed text-gray-300">
+                                        {{ portfolioData.projects.length }} innovative projects showcasing modern web development and creative
+                                        solutions
+                                    </p>
+
+                                    <!-- Status indicator -->
+                                    <div class="mt-6 flex items-center justify-center gap-6 text-sm">
+                                        <div class="flex items-center gap-2">
+                                            <div class="h-2 w-2 animate-pulse rounded-full bg-green-400"></div>
+                                            <span class="text-green-400">All Systems Online</span>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <div class="h-2 w-2 animate-pulse rounded-full bg-cyan-400"></div>
+                                            <span class="text-cyan-400">Portfolio Active</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Projects Grid -->
+                                <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+                                    <div
+                                        v-for="(project, index) in portfolioData.projects"
+                                        :key="project.id"
+                                        class="quantum-project-card group relative rounded-xl border border-gray-700 bg-black/50 backdrop-blur-sm transition-all duration-500 hover:border-cyan-400/50"
+                                        :style="{ animationDelay: `${index * 0.15}s` }"
+                                    >
+                                        <!-- Quantum border effect -->
+                                        <div class="absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                                            <div class="quantum-border absolute inset-0 rounded-xl"></div>
+                                        </div>
+
+                                        <!-- Glow effect -->
+                                        <div
+                                            class="absolute inset-0 rounded-xl bg-gradient-to-br from-cyan-400/10 via-transparent to-purple-600/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                                        ></div>
+
+                                        <div class="relative z-10 p-8">
+                                            <!-- Project Header -->
+                                            <div class="mb-6 flex items-start justify-between">
+                                                <div class="flex items-center gap-3">
+                                                    <div class="h-3 w-3 rounded-full bg-gradient-to-r from-cyan-400 to-purple-400"></div>
+                                                    <span class="font-mono text-xs text-cyan-400/70">PROJECT {{ project.id.padStart(3, '0') }}</span>
+                                                </div>
+                                                <div class="rounded-lg border border-gray-600 bg-gray-800/50 px-3 py-1 text-xs text-gray-400">
+                                                    {{ project.category }}
+                                                </div>
+                                            </div>
+
+                                            <!-- Project Title -->
+                                            <h3 class="mb-4 text-2xl font-bold text-white transition-all duration-300 group-hover:text-cyan-400">
+                                                {{ project.title }}
+                                            </h3>
+
+                                            <!-- Description -->
+                                            <p class="mb-6 leading-relaxed text-gray-300 transition-all duration-300 group-hover:text-gray-200">
+                                                {{ project.description }}
+                                            </p>
+
+                                            <!-- Technology Stack -->
+                                            <div class="mb-8">
+                                                <h4 class="mb-3 text-sm font-semibold text-cyan-400">Technology Stack</h4>
+                                                <div class="flex flex-wrap gap-2">
+                                                    <span
+                                                        v-for="(tech, techIndex) in project.technologies"
+                                                        :key="tech"
+                                                        class="quantum-tech-tag rounded-lg border border-gray-600 bg-gray-800/50 px-3 py-1 text-xs text-gray-300 transition-all duration-300 hover:border-cyan-400/50 hover:bg-cyan-400/10 hover:text-cyan-400"
+                                                        :style="{ animationDelay: `${index * 0.15 + techIndex * 0.05}s` }"
+                                                    >
+                                                        {{ tech }}
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <!-- Action Buttons -->
+                                            <div class="flex gap-4">
+                                                <a
+                                                    :href="project.liveUrl"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="quantum-btn-primary group/btn flex-1 rounded-lg border border-cyan-400/50 bg-cyan-400/10 px-6 py-3 text-center text-sm font-medium text-cyan-400 transition-all duration-300 hover:bg-cyan-400/20 hover:shadow-lg hover:shadow-cyan-400/25"
+                                                >
+                                                    <span class="relative z-10">Live Demo</span>
+                                                </a>
+                                                <a
+                                                    :href="project.githubUrl"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    class="quantum-btn-secondary group/btn flex-1 rounded-lg border border-gray-600 bg-transparent px-6 py-3 text-center text-sm font-medium text-gray-300 transition-all duration-300 hover:border-purple-400/50 hover:bg-purple-400/10 hover:text-purple-400"
+                                                >
+                                                    <span class="relative z-10">Source Code</span>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <!-- Project status indicator -->
+                                        <div
+                                            class="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-green-400 text-xs font-bold text-black opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                                        >
+                                            ✓
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Portfolio Summary -->
+                                <div class="mt-16 text-center">
+                                    <div
+                                        class="quantum-summary relative mx-auto max-w-2xl rounded-xl border border-cyan-400/30 bg-gradient-to-r from-cyan-400/10 to-purple-600/10 p-8 backdrop-blur-sm"
+                                    >
+                                        <div class="absolute inset-0 animate-pulse rounded-xl bg-gradient-to-r from-cyan-400/5 to-purple-600/5"></div>
+                                        <div class="relative z-10">
+                                            <h3 class="mb-4 text-2xl font-bold text-cyan-400">Portfolio Overview</h3>
+                                            <p class="leading-relaxed text-gray-300">
+                                                Each project represents a unique challenge solved with modern web technologies. From full-stack
+                                                applications to innovative frontend solutions, these projects showcase my commitment to quality code
+                                                and exceptional user experiences.
+                                            </p>
+                                            <div class="mt-6 flex items-center justify-center gap-8 text-sm">
+                                                <div class="text-center">
+                                                    <div class="text-2xl font-bold text-cyan-400">{{ portfolioData.projects.length }}</div>
+                                                    <div class="text-gray-400">Projects</div>
+                                                </div>
+                                                <div class="text-center">
+                                                    <div class="text-2xl font-bold text-purple-400">100%</div>
+                                                    <div class="text-gray-400">Completion</div>
+                                                </div>
+                                                <div class="text-center">
+                                                    <div class="text-2xl font-bold text-green-400">Live</div>
+                                                    <div class="text-gray-400">Status</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
 
                     <ContactSection v-else-if="currentSection === 'contact'" />
                 </div>
@@ -333,24 +434,29 @@ const interfaceClasses = computed(() => ({
 
         <!-- TRADITIONAL INTERFACE MODE -->
         <div v-else class="traditional-interface">
-            <ClassicPortfolio :projects="portfolioData.projects" :skills="portfolioData.skills" :profile-data="portfolioData" />
+            <ClassicPortfolio
+                :projects="portfolioData.projects"
+                :skills="portfolioData.skills"
+                :profile-data="portfolioData"
+                @switch-interface="switchInterface"
+            />
         </div>
 
-        <!-- Quick section switcher for holo mode - Bottom Left -->
-        <div v-if="interfaceMode === 'holo'" class="quantum-menu fixed bottom-6 left-6 z-50">
+        <!-- Quick section switcher for holo mode - Bottom Right -->
+        <div v-if="interfaceMode === 'holo'" class="quantum-menu fixed right-6 bottom-6 z-50">
             <div class="section-selector rounded-2xl border border-cyan-400/40 bg-black/70 p-3 shadow-lg shadow-cyan-400/20 backdrop-blur-lg">
                 <div class="mb-3 px-2 font-mono text-xs tracking-wider text-cyan-400"><span class="animate-pulse">●</span> QUANTUM ACCESS</div>
                 <div class="flex flex-col gap-2">
                     <button
-                        @click="switchSection('terminal')"
+                        @click="switchSection('profile')"
                         class="group relative overflow-hidden rounded-lg px-4 py-2 text-left font-mono text-sm transition-all"
                         :class="
-                            currentSection === 'terminal'
+                            currentSection === 'profile'
                                 ? 'bg-cyan-400 text-black shadow-lg shadow-cyan-400/30'
                                 : 'text-cyan-400 hover:scale-105 hover:bg-cyan-400/20'
                         "
                     >
-                        <span class="relative z-10">⚡ Terminal</span>
+                        <span class="relative z-10">👤 Profile</span>
                         <div
                             class="absolute inset-0 -translate-x-full bg-gradient-to-r from-cyan-400/0 via-cyan-400/20 to-cyan-400/0 transition-transform duration-500 group-hover:translate-x-full"
                         ></div>
@@ -370,15 +476,15 @@ const interfaceClasses = computed(() => ({
                         ></div>
                     </button>
                     <button
-                        @click="switchSection('profile')"
+                        @click="switchSection('projects')"
                         class="group relative overflow-hidden rounded-lg px-4 py-2 text-left font-mono text-sm transition-all"
                         :class="
-                            currentSection === 'profile'
+                            currentSection === 'projects'
                                 ? 'bg-cyan-400 text-black shadow-lg shadow-cyan-400/30'
                                 : 'text-cyan-400 hover:scale-105 hover:bg-cyan-400/20'
                         "
                     >
-                        <span class="relative z-10">👤 Profile</span>
+                        <span class="relative z-10">� Projects</span>
                         <div
                             class="absolute inset-0 -translate-x-full bg-gradient-to-r from-cyan-400/0 via-cyan-400/20 to-cyan-400/0 transition-transform duration-500 group-hover:translate-x-full"
                         ></div>
@@ -656,5 +762,141 @@ html {
 .space-interface,
 .traditional-interface {
     animation: interface-boot 1s ease-out;
+}
+
+/* Projects Section Holographic Styles */
+/* Quantum Projects Section Styles */
+.quantum-projects {
+    background:
+        radial-gradient(circle at 25% 25%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(128, 0, 255, 0.1) 0%, transparent 50%), linear-gradient(135deg, #000000 0%, #0a0a1a 100%);
+}
+
+.quantum-grid {
+    background-image:
+        linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: grid-flow 20s linear infinite;
+}
+
+@keyframes grid-flow {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(50px, 50px);
+    }
+}
+
+.quantum-project-card {
+    animation: fade-in-up 0.6s ease-out forwards;
+    animation-fill-mode: both;
+}
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.quantum-border {
+    background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.5), transparent);
+    background-size: 400% 400%;
+    animation: border-flow 3s linear infinite;
+    padding: 1px;
+    border-radius: 12px;
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+}
+
+@keyframes border-flow {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.quantum-tech-tag {
+    animation: fade-in-up 0.4s ease-out forwards;
+    animation-fill-mode: both;
+}
+
+.quantum-btn-primary,
+.quantum-btn-secondary {
+    position: relative;
+    overflow: hidden;
+}
+
+.quantum-btn-primary::before,
+.quantum-btn-secondary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 8px;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 0;
+}
+
+.quantum-btn-primary:hover::before,
+.quantum-btn-secondary:hover::before {
+    opacity: 1;
+}
+
+@keyframes scan-horizontal {
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(100vh);
+        opacity: 0.3;
+    }
+}
+
+@keyframes scan-vertical {
+    0%,
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(100vw);
+        opacity: 0.3;
+    }
+}
+
+.animate-scan-horizontal {
+    animation: scan-horizontal 8s ease-in-out infinite;
+}
+
+.animate-scan-vertical {
+    animation: scan-vertical 12s ease-in-out infinite;
+    animation-delay: 2s;
+}
+
+.quantum-summary::before {
+    animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%,
+    100% {
+        opacity: 0.1;
+    }
+    50% {
+        opacity: 0.3;
+    }
 }
 </style>

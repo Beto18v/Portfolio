@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useTranslation } from '@/composables/useTranslation';
 import { Briefcase, Code, ExternalLink, Github, Mail, MapPin, User } from 'lucide-vue-next';
 import { onMounted, ref } from 'vue';
 
@@ -8,8 +7,6 @@ import { onMounted, ref } from 'vue';
  * Clean, elegant, and professional portfolio layout
  * Minimal design with focus on content and readability
  */
-
-const { t } = useTranslation();
 
 // Define interfaces
 interface Project {
@@ -76,14 +73,6 @@ const scrollToSection = (sectionId: string) => {
         activeSection.value = sectionId;
         isMenuOpen.value = false;
     }
-};
-
-// Format date
-const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-    });
 };
 
 // Handle scroll to update active section

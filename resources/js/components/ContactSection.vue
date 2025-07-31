@@ -184,186 +184,200 @@ const buttonText = computed(() => {
 </script>
 
 <template>
-    <section id="contact" class="bg-gray-50 py-16 transition-colors duration-300 lg:py-24 dark:bg-gray-800">
-        <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <!-- Section header -->
-            <div class="mb-16 text-center">
-                <h2 class="mb-4 text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl dark:text-white">
-                    {{ t('contact.title') }}
-                </h2>
-                <p class="mx-auto mb-6 max-w-2xl text-xl text-gray-600 dark:text-gray-300">
-                    {{ t('contact.subtitle') }}
-                </p>
-                <div class="mx-auto h-1 w-24 rounded-full bg-gradient-to-r from-blue-500 to-purple-500"></div>
+    <section id="contact" class="holo-contact relative min-h-screen overflow-hidden bg-black">
+        <!-- Holographic grid background -->
+        <div class="absolute inset-0 opacity-20">
+            <div class="grid h-full w-full grid-cols-12 grid-rows-12 gap-1">
+                <div
+                    v-for="i in 144"
+                    :key="i"
+                    class="animate-pulse border border-cyan-500/30"
+                    :style="{ animationDelay: `${Math.random() * 3}s` }"
+                ></div>
             </div>
+        </div>
 
-            <!-- Contact form -->
-            <div class="rounded-2xl border border-gray-200 bg-white p-8 shadow-xl dark:border-gray-700 dark:bg-gray-900">
-                <!-- Success message -->
-                <div
-                    v-if="showSuccess"
-                    class="animate-fade-in mb-6 flex items-center gap-3 rounded-lg border border-green-200 bg-green-50 p-4 dark:border-green-800 dark:bg-green-900/20"
-                >
-                    <Check :size="20" class="flex-shrink-0 text-green-600 dark:text-green-400" />
-                    <p class="font-medium text-green-700 dark:text-green-300">
-                        {{ t('contact.success') }}
-                    </p>
-                </div>
+        <!-- Floating geometric shapes -->
+        <div class="pointer-events-none absolute inset-0 overflow-hidden">
+            <div class="absolute top-20 left-10 h-4 w-4 rotate-45 animate-spin border border-cyan-400" style="animation-duration: 10s"></div>
+            <div class="absolute top-40 right-20 h-6 w-6 animate-pulse border border-purple-400"></div>
+            <div class="absolute bottom-32 left-1/4 h-8 w-8 animate-bounce rounded-full border border-pink-400" style="animation-duration: 3s"></div>
+        </div>
 
-                <!-- Error message -->
-                <div
-                    v-if="showError"
-                    class="animate-fade-in mb-6 flex items-center gap-3 rounded-lg border border-red-200 bg-red-50 p-4 dark:border-red-800 dark:bg-red-900/20"
-                >
-                    <AlertCircle :size="20" class="flex-shrink-0 text-red-600 dark:text-red-400" />
-                    <p class="font-medium text-red-700 dark:text-red-300">
-                        {{ errorMessage || t('contact.error') }}
-                    </p>
-                </div>
+        <div class="relative z-10 flex min-h-screen items-center">
+            <div class="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8">
+                <!-- Contact form with holographic styling -->
+                <div class="relative">
+                    <!-- Holographic frame -->
+                    <div class="absolute inset-0 rounded-xl border border-cyan-400/30 bg-black/40 backdrop-blur-sm"></div>
 
-                <form @submit.prevent="handleSubmit" class="space-y-6">
-                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                        <!-- Name field -->
-                        <div>
-                            <label for="name" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                                {{ t('contact.name') }}
-                            </label>
-                            <div class="relative">
-                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <User :size="18" class="text-gray-400" />
+                    <div class="relative z-10 p-8">
+                        <!-- Communication interface header -->
+                        <div class="mb-8 text-center">
+                            <div class="inline-flex items-center gap-3 text-cyan-400">
+                                <div class="h-2 w-2 animate-pulse rounded-full bg-cyan-400"></div>
+                                <span class="font-mono text-sm">{{ t('holo.command.contact', 'COMMUNICATION CHANNEL ACTIVE') }}</span>
+                                <div class="h-2 w-2 animate-pulse rounded-full bg-cyan-400"></div>
+                            </div>
+                        </div>
+                        <!-- Communication form -->
+                        <form @submit.prevent="handleSubmit" class="space-y-6">
+                            <!-- Success message -->
+                            <div
+                                v-if="showSuccess"
+                                class="animate-fade-in mb-6 flex items-center gap-3 rounded-lg border border-green-400/30 bg-green-400/10 p-4 backdrop-blur-sm"
+                            >
+                                <Check :size="20" class="flex-shrink-0 text-green-400" />
+                                <p class="font-medium text-green-400">
+                                    {{ t('contact.success') }}
+                                </p>
+                            </div>
+
+                            <!-- Error message -->
+                            <div
+                                v-if="showError"
+                                class="animate-fade-in mb-6 flex items-center gap-3 rounded-lg border border-red-400/30 bg-red-400/10 p-4 backdrop-blur-sm"
+                            >
+                                <AlertCircle :size="20" class="flex-shrink-0 text-red-400" />
+                                <p class="font-medium text-red-400">
+                                    {{ errorMessage || t('contact.error') }}
+                                </p>
+                            </div>
+
+                            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                                <!-- Name field -->
+                                <div class="holo-field">
+                                    <label for="name" class="mb-2 block font-mono text-sm font-medium text-cyan-400">
+                                        <User :size="16" class="mr-2 inline" />
+                                        {{ t('contact.name') }}
+                                    </label>
+                                    <input
+                                        id="name"
+                                        v-model="form.name"
+                                        type="text"
+                                        :placeholder="t('contact.name')"
+                                        class="w-full rounded-lg border border-cyan-400/30 bg-black/50 px-4 py-3 text-cyan-400 placeholder-cyan-400/50 backdrop-blur-sm transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none"
+                                        :class="{ 'border-red-400 focus:border-red-400 focus:ring-red-400/20': errors.name }"
+                                    />
+                                    <p v-if="errors.name" class="mt-1 font-mono text-sm text-red-400">{{ errors.name }}</p>
                                 </div>
+
+                                <!-- Email field -->
+                                <div class="holo-field">
+                                    <label for="email" class="mb-2 block font-mono text-sm font-medium text-cyan-400">
+                                        <Mail :size="16" class="mr-2 inline" />
+                                        {{ t('contact.email') }}
+                                    </label>
+                                    <input
+                                        id="email"
+                                        v-model="form.email"
+                                        type="email"
+                                        :placeholder="t('contact.email')"
+                                        class="w-full rounded-lg border border-cyan-400/30 bg-black/50 px-4 py-3 text-cyan-400 placeholder-cyan-400/50 backdrop-blur-sm transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none"
+                                        :class="{ 'border-red-400 focus:border-red-400 focus:ring-red-400/20': errors.email }"
+                                    />
+                                    <p v-if="errors.email" class="mt-1 font-mono text-sm text-red-400">{{ errors.email }}</p>
+                                </div>
+                            </div>
+
+                            <!-- Subject field -->
+                            <div class="holo-field">
+                                <label for="subject" class="mb-2 block font-mono text-sm font-medium text-cyan-400">
+                                    <MessageSquare :size="16" class="mr-2 inline" />
+                                    {{ t('contact.subject') }}
+                                </label>
                                 <input
-                                    id="name"
-                                    v-model="form.name"
+                                    id="subject"
+                                    v-model="form.subject"
                                     type="text"
-                                    class="w-full rounded-lg border border-gray-300 py-3 pr-4 pl-10 transition-colors duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-                                    :class="{
-                                        'border-red-500 focus:border-red-500 focus:ring-red-500': errors.name,
-                                    }"
-                                    :placeholder="t('contact.name')"
-                                    :disabled="isLoading"
+                                    :placeholder="t('contact.subject')"
+                                    class="w-full rounded-lg border border-cyan-400/30 bg-black/50 px-4 py-3 text-cyan-400 placeholder-cyan-400/50 backdrop-blur-sm transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none"
+                                    :class="{ 'border-red-400 focus:border-red-400 focus:ring-red-400/20': errors.subject }"
                                 />
+                                <p v-if="errors.subject" class="mt-1 font-mono text-sm text-red-400">{{ errors.subject }}</p>
                             </div>
-                            <p v-if="errors.name" class="mt-1 text-sm text-red-600 dark:text-red-400">
-                                {{ errors.name }}
-                            </p>
-                        </div>
 
-                        <!-- Email field -->
-                        <div>
-                            <label for="email" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                                {{ t('contact.email') }}
-                            </label>
-                            <div class="relative">
-                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <Mail :size="18" class="text-gray-400" />
-                                </div>
-                                <input
-                                    id="email"
-                                    v-model="form.email"
-                                    type="email"
-                                    class="w-full rounded-lg border border-gray-300 py-3 pr-4 pl-10 transition-colors duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-                                    :class="{
-                                        'border-red-500 focus:border-red-500 focus:ring-red-500': errors.email,
-                                    }"
-                                    :placeholder="t('contact.email')"
-                                    :disabled="isLoading"
-                                />
+                            <!-- Message field -->
+                            <div class="holo-field">
+                                <label for="message" class="mb-2 block font-mono text-sm font-medium text-cyan-400">
+                                    <MessageSquare :size="16" class="mr-2 inline" />
+                                    {{ t('contact.message') }}
+                                </label>
+                                <textarea
+                                    id="message"
+                                    v-model="form.message"
+                                    rows="6"
+                                    :placeholder="t('contact.message')"
+                                    class="w-full resize-none rounded-lg border border-cyan-400/30 bg-black/50 px-4 py-3 text-cyan-400 placeholder-cyan-400/50 backdrop-blur-sm transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none"
+                                    :class="{ 'border-red-400 focus:border-red-400 focus:ring-red-400/20': errors.message }"
+                                ></textarea>
+                                <p v-if="errors.message" class="mt-1 font-mono text-sm text-red-400">{{ errors.message }}</p>
                             </div>
-                            <p v-if="errors.email" class="mt-1 text-sm text-red-600 dark:text-red-400">
-                                {{ errors.email }}
-                            </p>
-                        </div>
-                    </div>
 
-                    <!-- Subject field -->
-                    <div>
-                        <label for="subject" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                            {{ t('contact.subject') }}
-                        </label>
-                        <input
-                            id="subject"
-                            v-model="form.subject"
-                            type="text"
-                            class="w-full rounded-lg border border-gray-300 px-4 py-3 transition-colors duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-                            :class="{
-                                'border-red-500 focus:border-red-500 focus:ring-red-500': errors.subject,
-                            }"
-                            :placeholder="t('contact.subject')"
-                            :disabled="isLoading"
-                        />
-                        <p v-if="errors.subject" class="mt-1 text-sm text-red-600 dark:text-red-400">
-                            {{ errors.subject }}
-                        </p>
-                    </div>
-
-                    <!-- Message field -->
-                    <div>
-                        <label for="message" class="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">
-                            {{ t('contact.message') }}
-                        </label>
-                        <div class="relative">
-                            <div class="pointer-events-none absolute top-3 left-3">
-                                <MessageSquare :size="18" class="text-gray-400" />
+                            <!-- Submit button -->
+                            <div class="text-center">
+                                <button
+                                    type="submit"
+                                    :disabled="!isFormValid || isLoading"
+                                    class="inline-flex items-center gap-3 rounded-lg border border-cyan-400 bg-cyan-400/10 px-8 py-3 font-mono font-medium text-cyan-400 backdrop-blur-sm transition-all duration-300 hover:bg-cyan-400/20 hover:shadow-lg hover:shadow-cyan-400/20 focus:ring-2 focus:ring-cyan-400/50 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+                                >
+                                    <component :is="isLoading ? Loader2 : Send" :size="20" :class="{ 'animate-spin': isLoading }" />
+                                    {{ buttonText }}
+                                </button>
                             </div>
-                            <textarea
-                                id="message"
-                                v-model="form.message"
-                                rows="6"
-                                class="w-full resize-none rounded-lg border border-gray-300 py-3 pr-4 pl-10 transition-colors duration-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white"
-                                :class="{
-                                    'border-red-500 focus:border-red-500 focus:ring-red-500': errors.message,
-                                }"
-                                :placeholder="t('contact.message')"
-                                :disabled="isLoading"
-                            ></textarea>
-                        </div>
-                        <p v-if="errors.message" class="mt-1 text-sm text-red-600 dark:text-red-400">
-                            {{ errors.message }}
-                        </p>
+                        </form>
                     </div>
-
-                    <!-- Submit button -->
-                    <div class="text-center">
-                        <button
-                            type="submit"
-                            :disabled="!isFormValid || isLoading"
-                            class="inline-flex transform items-center gap-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 px-8 py-4 font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:from-blue-600 hover:to-purple-600 hover:shadow-xl focus:ring-4 focus:ring-blue-300 focus:outline-none disabled:cursor-not-allowed disabled:from-gray-400 disabled:to-gray-500 disabled:shadow-none disabled:hover:scale-100"
-                        >
-                            <!-- Loading spinner -->
-                            <Loader2 v-if="isLoading" :size="20" class="animate-spin" />
-                            <!-- Send icon -->
-                            <Send v-else :size="20" class="transition-transform duration-300 group-hover:translate-x-1" />
-
-                            <!-- Button text -->
-                            <span>{{ buttonText }}</span>
-                        </button>
-                    </div>
-                </form>
+                </div>
             </div>
+        </div>
 
-            <!-- Additional contact info -->
-            <div class="mt-12 text-center">
-                <p class="mb-4 text-gray-600 dark:text-gray-400">
-                    {{ t('contact.alternative', 'Or reach out directly via email') }}
-                </p>
-                <a
-                    href="mailto:your-email@example.com"
-                    class="inline-flex items-center gap-2 font-medium text-blue-600 transition-colors duration-200 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
-                >
-                    <Mail :size="16" />
-                    your-email@example.com
-                </a>
-            </div>
+        <!-- Holographic effects -->
+        <div class="pointer-events-none absolute inset-0">
+            <div
+                class="absolute top-0 left-0 h-1 w-full animate-pulse bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-50"
+            ></div>
+            <div
+                class="absolute bottom-0 left-0 h-1 w-full animate-pulse bg-gradient-to-r from-transparent via-purple-400 to-transparent opacity-50"
+                style="animation-delay: 1s"
+            ></div>
         </div>
     </section>
 </template>
 
 <style scoped>
+.holo-contact {
+    background:
+        radial-gradient(circle at 20% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 0, 128, 0.1) 0%, transparent 50%), linear-gradient(135deg, #000000 0%, #0a0a0a 100%);
+}
+
+.holo-field {
+    position: relative;
+}
+
+.holo-field::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+    border-radius: 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.holo-field:hover::before {
+    opacity: 1;
+}
+
+/* Custom animations */
 @keyframes fade-in {
     from {
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateY(10px);
     }
     to {
         opacity: 1;
@@ -372,19 +386,12 @@ const buttonText = computed(() => {
 }
 
 .animate-fade-in {
-    animation: fade-in 0.3s ease-out;
+    animation: fade-in 0.5s ease;
 }
 
-/* Custom focus styles for better accessibility */
+/* Input glow effects */
 input:focus,
 textarea:focus {
-    outline: none;
-}
-
-/* Smooth transitions for all form elements */
-input,
-textarea,
-button {
-    transition: all 0.2s ease;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
 }
 </style>

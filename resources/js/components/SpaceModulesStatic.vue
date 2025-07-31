@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useTranslation } from '@/composables/useTranslation';
 import { Brain, Database, Eye, Github, Mail, Monitor, Rocket, Satellite, User, Zap } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
 
@@ -7,8 +6,6 @@ import { computed, ref } from 'vue';
  * SpaceModules Component - Static Scrollable Space Interface
  * All portfolio sections displayed as space modules with scroll navigation
  */
-
-const { t } = useTranslation();
 
 // Define interfaces
 interface Project {
@@ -114,14 +111,6 @@ const scrollToModule = (moduleId: string) => {
         element.scrollIntoView({ behavior: 'smooth' });
         activeModule.value = moduleId;
     }
-};
-
-// Format date
-const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-    });
 };
 </script>
 
