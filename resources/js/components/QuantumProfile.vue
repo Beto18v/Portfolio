@@ -264,10 +264,6 @@ const startCounterAnimations = () => {
 /**
  * Handle profile image error
  */
-const handleImageError = (event: Event) => {
-    const target = event.target as HTMLImageElement;
-    target.style.display = 'none';
-};
 
 /**
  * Get trait visualization

@@ -245,6 +245,17 @@ const interfaceClasses = computed(() => ({
                                                 {{ project.title }}
                                             </h3>
 
+                                            <!-- Project Image -->
+                                            <div class="mb-6 flex justify-center">
+                                                <div class="flex h-60 w-110 items-center justify-center rounded-2xl border-2 border-cyan-400/40">
+                                                    <img
+                                                        :src="project.image"
+                                                        :alt="project.title"
+                                                        class="h-full w-full rounded-2xl transition-transform duration-500 hover:scale-105"
+                                                    />
+                                                </div>
+                                            </div>
+
                                             <!-- Description -->
                                             <p class="mb-6 leading-relaxed text-gray-300 transition-all duration-300 group-hover:text-gray-200">
                                                 {{ project.description }}

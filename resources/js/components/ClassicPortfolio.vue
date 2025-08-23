@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { skills } from '@/types/skills';
+// import { skills } from '@/types/skills';
 import { Briefcase, Code, ExternalLink, Github, Mail, MapPin, User } from 'lucide-vue-next';
 import { onMounted, ref } from 'vue';
 
@@ -31,7 +31,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
     projects: () => [],
-    skills: () => [],
+    // skills: () => [], // Eliminar duplicado
 });
 
 // Navigation state
@@ -47,7 +47,7 @@ const skillCategoryNames: Record<string, string> = {
 };
 
 const skillCategories = Object.entries(
-    skills.reduce<Record<string, string[]>>((acc, skill) => {
+    (props.skills ?? []).reduce<Record<string, string[]>>((acc: Record<string, string[]>, skill: any) => {
         if (!acc[skill.category]) acc[skill.category] = [];
         acc[skill.category].push(skill.name);
         return acc;
@@ -262,44 +262,50 @@ onMounted(() => {
                         :key="project.id"
                         class="overflow-hidden rounded-xl border border-gray-200 bg-white transition-shadow hover:shadow-lg dark:border-gray-300 dark:bg-gray-50"
                     >
-                        <div class="flex h-48 items-center justify-center bg-gray-200 dark:bg-gray-300">
-                            <Briefcase class="h-12 w-12 text-gray-600 dark:text-gray-700" />
+                        <div
+                            class="flex h-48 w-full items-center justify-center overflow-hidden rounded-xl border-2 border-gray-200 bg-gray-200 dark:bg-gray-300"
+                        >
+                            <img v-if="project.image" :src="project.image" :alt="project.title" class="h-full w-full rounded-xl" />
+                            <Briefcase v-else class="h-12 w-12 text-gray-600 dark:text-gray-700" />
                         </div>
                         <div class="p-6">
                             <div class="mb-2 flex items-center justify-between">
                                 <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-800">{{ project.title }}</h3>
-                                <span class="rounded bg-gray-100 px-2 py-1 text-xs text-gray-600 dark:bg-white dark:text-gray-700">
+                                <span class="rounded bg-gray-100 px-2 py-1 text-xs text-gray-600">
                                     {{ project.category }}
                                 </span>
                             </div>
                             <p class="mb-4 text-sm leading-relaxed text-gray-600 dark:text-gray-700">{{ project.description }}</p>
                             <div class="mb-4 flex flex-wrap gap-2">
                                 <span
-                                    v-for="tech in project.technologies.slice(0, 3)"
+                                    v-for="tech in project.technologies.slice(0, 15)"
                                     :key="tech"
                                     class="rounded bg-gray-100 px-2 py-1 text-xs text-gray-600 dark:bg-white dark:text-gray-700"
                                 >
                                     {{ tech }}
                                 </span>
-                                <span v-if="project.technologies.length > 3" class="text-xs text-gray-500 dark:text-gray-600">
-                                    +{{ project.technologies.length - 3 }} more
-                                </span>
                             </div>
                             <div class="flex gap-3">
-                                <button
+                                <a
                                     v-if="project.liveUrl"
+                                    :href="project.liveUrl"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     class="flex items-center gap-2 rounded-lg bg-gray-900 px-4 py-2 text-sm text-white transition-colors hover:bg-gray-800 dark:bg-gray-800 dark:hover:bg-gray-700"
                                 >
                                     <ExternalLink :size="14" />
                                     Live Demo
-                                </button>
-                                <button
+                                </a>
+                                <a
                                     v-if="project.githubUrl"
+                                    :href="project.githubUrl"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     class="flex items-center gap-2 rounded-lg border border-gray-300 px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50 dark:border-gray-400 dark:text-gray-800 dark:hover:bg-gray-100"
                                 >
                                     <Github :size="14" />
                                     Source
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>

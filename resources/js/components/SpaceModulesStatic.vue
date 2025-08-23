@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { skills } from '@/types/skills';
+// import { skills } from '@/types/skills';
 import { Brain, Database, Eye, Github, Mail, Monitor, Rocket, Satellite, User, Zap } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
 
@@ -40,7 +40,7 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
     projects: () => [],
-    skills: () => [],
+    // skills: () => [], // Eliminar duplicado
 });
 
 // Space modules configuration
@@ -100,7 +100,7 @@ const skillCategoryNames: Record<string, string> = {
 };
 
 const skillCategories = Object.entries(
-    skills.reduce<Record<string, string[]>>((acc, skill) => {
+    (props.skills ?? []).reduce<Record<string, string[]>>((acc: Record<string, string[]>, skill: any) => {
         if (!acc[skill.category]) acc[skill.category] = [];
         acc[skill.category].push(skill.name);
         return acc;
@@ -260,8 +260,16 @@ const scrollToModule = (moduleId: string) => {
                                 :key="project.id"
                                 class="overflow-hidden rounded-xl border border-pink-400/20 bg-black/40 transition-all duration-300 hover:scale-105 hover:border-pink-400/40"
                             >
-                                <div class="flex h-48 items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900">
-                                    <Monitor class="text-pink-400" :size="48" />
+                                <div
+                                    class="flex h-48 w-full items-center justify-center overflow-hidden rounded-xl border-2 border-pink-400/30 bg-gradient-to-br from-gray-800 to-gray-900"
+                                >
+                                    <img
+                                        v-if="project.image"
+                                        :src="project.image"
+                                        :alt="project.title"
+                                        class="h-full w-full rounded-xl"
+                                        loading="lazy"
+                                    />
                                 </div>
                                 <div class="p-6">
                                     <div class="mb-2 flex items-center justify-between">
@@ -273,31 +281,34 @@ const scrollToModule = (moduleId: string) => {
                                     <p class="mb-4 text-sm text-gray-300">{{ project.description }}</p>
                                     <div class="mb-4 flex flex-wrap gap-1">
                                         <span
-                                            v-for="tech in project.technologies.slice(0, 3)"
+                                            v-for="tech in project.technologies.slice(0, 15)"
                                             :key="tech"
                                             class="rounded bg-gray-700 px-2 py-1 text-xs text-gray-300"
                                         >
                                             {{ tech }}
                                         </span>
-                                        <span v-if="project.technologies.length > 3" class="text-xs text-gray-500">
-                                            +{{ project.technologies.length - 3 }}
-                                        </span>
                                     </div>
                                     <div class="flex gap-3">
-                                        <button
+                                        <a
                                             v-if="project.liveUrl"
+                                            :href="project.liveUrl"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             class="flex items-center gap-1 rounded-lg bg-pink-500 px-3 py-2 text-sm text-white transition-colors hover:bg-pink-600"
                                         >
                                             <Eye :size="14" />
                                             View
-                                        </button>
-                                        <button
+                                        </a>
+                                        <a
                                             v-if="project.githubUrl"
+                                            :href="project.githubUrl"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             class="flex items-center gap-1 rounded-lg bg-gray-700 px-3 py-2 text-sm text-white transition-colors hover:bg-gray-600"
                                         >
                                             <Github :size="14" />
                                             Code
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

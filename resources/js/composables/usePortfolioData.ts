@@ -29,7 +29,7 @@ export function usePortfolioData() {
             title: 'AdoptaFácil',
             description:
                 'AdoptaFácil is a complete digital ecosystem designed to revolutionize the pet adoption process in Colombia. The platform combines modern technologies with a focus on animal welfare, creating a comprehensive experience that connects adopters, pet owners, shelters, and business partners in one place.',
-            image: 'public/Adoptafacil.jpg',
+            image: './Adoptafacil.jpg',
             technologies: ['Laravel', 'React.js', 'MySQL', 'Typescript', 'Python', 'Tailwind CSS'],
             liveUrl: 'https://adoptafacil.up.railway.app/',
             githubUrl: 'https://github.com/Beto18v/AdoptaFacil.git',
