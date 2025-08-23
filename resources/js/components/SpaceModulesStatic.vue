@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { skills } from '@/types/skills';
 import { Brain, Database, Eye, Github, Mail, Monitor, Rocket, Satellite, User, Zap } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
 
@@ -83,23 +84,32 @@ const spaceModules = computed((): SpaceModule[] => [
 ]);
 
 // Skills data structure
-const skillCategories = [
-    {
-        name: 'Frontend Development',
-        icon: Monitor,
-        skills: ['Vue.js', 'React', 'TypeScript', 'Tailwind CSS', 'HTML5', 'CSS3', 'JavaScript'],
-    },
-    {
-        name: 'Backend Development',
-        icon: Database,
-        skills: ['Laravel', 'Node.js', 'PHP', 'MySQL', 'PostgreSQL', 'MongoDB', 'Redis'],
-    },
-    {
-        name: 'DevOps & Tools',
-        icon: Zap,
-        skills: ['Git', 'Docker', 'Linux', 'AWS', 'Vite', 'Webpack', 'NPM'],
-    },
-];
+// Agrupar skills por categoría usando los datos importados
+const skillCategoryIcons: Record<string, any> = {
+    frontend: Monitor,
+    backend: Database,
+    database: Eye,
+    tools: Zap,
+};
+
+const skillCategoryNames: Record<string, string> = {
+    frontend: 'Frontend Development',
+    backend: 'Backend Development',
+    database: 'Database',
+    tools: 'DevOps & Tools',
+};
+
+const skillCategories = Object.entries(
+    skills.reduce<Record<string, string[]>>((acc, skill) => {
+        if (!acc[skill.category]) acc[skill.category] = [];
+        acc[skill.category].push(skill.name);
+        return acc;
+    }, {}),
+).map(([category, skillNames]) => ({
+    name: skillCategoryNames[category] || category,
+    icon: skillCategoryIcons[category] || Monitor,
+    skills: skillNames,
+}));
 
 // Current active module
 const activeModule = ref<string>('profile-module');

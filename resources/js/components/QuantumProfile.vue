@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useTranslation } from '@/composables/useTranslation';
-import { Award, Brain, Code, Heart, Target, TrendingUp, User, Zap } from 'lucide-vue-next';
+import { Award, Brain, Code, Heart, Target, TrendingUp, Zap } from 'lucide-vue-next';
 import { computed, onMounted, ref } from 'vue';
 
 /**
@@ -320,16 +320,7 @@ const getTraitVisualization = (trait: any, index: number) => {
                                 <div
                                     class="absolute inset-12 overflow-hidden rounded-full border border-cyan-400/50 bg-gradient-to-br from-cyan-400/20 to-purple-600/20 backdrop-blur-sm"
                                 >
-                                    <img
-                                        v-if="props.image"
-                                        :src="props.image"
-                                        :alt="profileData.name"
-                                        class="h-full w-full object-cover"
-                                        @error="handleImageError"
-                                    />
-                                    <div v-else class="flex h-full w-full items-center justify-center">
-                                        <User :size="80" class="text-cyan-400 opacity-60" />
-                                    </div>
+                                    <img src="../../../public/Foto.png" />
                                 </div>
 
                                 <!-- Status indicators -->

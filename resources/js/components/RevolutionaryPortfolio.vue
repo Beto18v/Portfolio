@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useTranslation } from '@/composables/useTranslation';
 import { portfolioTranslations } from '@/data/translations';
-import type { PortfolioData, SkillCategory } from '@/types/portfolio';
+import type { PortfolioData } from '@/types/portfolio';
+import { skills } from '@/types/skills';
 import { Head } from '@inertiajs/vue3';
 import { computed, onMounted, ref } from 'vue';
 
@@ -9,6 +10,7 @@ import { computed, onMounted, ref } from 'vue';
 import ClassicPortfolio from '@/components/ClassicPortfolio.vue';
 import ContactSection from '@/components/ContactSection.vue';
 import HolographicSkillsFixed from '@/components/HolographicSkillsFixed.vue';
+import InterfaceModeSelector from '@/components/InterfaceModeSelector.vue';
 import LanguageSelector from '@/components/LanguageSelector.vue';
 import QuantumProfile from '@/components/QuantumProfile.vue';
 import SpaceModulesStatic from '@/components/SpaceModulesStatic.vue';
@@ -47,44 +49,8 @@ const portfolioData: PortfolioData = {
         technologiesMastered: 15,
     },
 
-    // Skills data - customize with your actual skills
-    skills: [
-        // Frontend Technologies
-        { name: 'Vue.js', level: 5, category: 'frontend' as SkillCategory, description: 'Advanced Vue 3 with Composition API and TypeScript' },
-        { name: 'React', level: 4, category: 'frontend' as SkillCategory, description: 'Modern React with hooks and context API' },
-        { name: 'TypeScript', level: 5, category: 'frontend' as SkillCategory, description: 'Strong typing and advanced TypeScript patterns' },
-        { name: 'JavaScript', level: 5, category: 'frontend' as SkillCategory, description: 'ES6+ features and modern JavaScript' },
-        { name: 'Tailwind CSS', level: 5, category: 'frontend' as SkillCategory, description: 'Utility-first CSS framework for rapid development' },
-        { name: 'HTML5/CSS3', level: 5, category: 'frontend' as SkillCategory, description: 'Semantic HTML and modern CSS features' },
-        { name: 'Sass/SCSS', level: 4, category: 'frontend' as SkillCategory, description: 'CSS preprocessor with advanced features' },
-        { name: 'Bootstrap', level: 4, category: 'frontend' as SkillCategory, description: 'Responsive web design framework' },
-
-        // Backend Technologies
-        { name: 'Laravel', level: 5, category: 'backend' as SkillCategory, description: 'PHP framework with Eloquent ORM and advanced features' },
-        { name: 'PHP', level: 5, category: 'backend' as SkillCategory, description: 'Modern PHP 8+ with best practices and design patterns' },
-        { name: 'Node.js', level: 4, category: 'backend' as SkillCategory, description: 'JavaScript runtime for server-side development' },
-        { name: 'Express.js', level: 4, category: 'backend' as SkillCategory, description: 'Fast and minimalist web framework for Node.js' },
-        { name: 'Python', level: 3, category: 'backend' as SkillCategory, description: 'Python with Django and Flask frameworks' },
-        { name: 'RESTful APIs', level: 5, category: 'backend' as SkillCategory, description: 'Design and implementation of REST APIs' },
-        { name: 'GraphQL', level: 3, category: 'backend' as SkillCategory, description: 'Query language for APIs and runtime' },
-
-        // Database Technologies
-        { name: 'MySQL', level: 5, category: 'database' as SkillCategory, description: 'Relational database design and optimization' },
-        { name: 'PostgreSQL', level: 4, category: 'database' as SkillCategory, description: 'Advanced SQL features and performance tuning' },
-        { name: 'MongoDB', level: 3, category: 'database' as SkillCategory, description: 'NoSQL document database for scalable applications' },
-        { name: 'Redis', level: 3, category: 'database' as SkillCategory, description: 'In-memory data structure store for caching' },
-        { name: 'SQLite', level: 4, category: 'database' as SkillCategory, description: 'Lightweight database for development and testing' },
-
-        // Development Tools
-        { name: 'Git', level: 5, category: 'tools' as SkillCategory, description: 'Version control and collaborative development' },
-        { name: 'Docker', level: 4, category: 'tools' as SkillCategory, description: 'Containerization and development environments' },
-        { name: 'Vite', level: 5, category: 'tools' as SkillCategory, description: 'Fast build tool and development server' },
-        { name: 'Webpack', level: 3, category: 'tools' as SkillCategory, description: 'Module bundler and build optimization' },
-        { name: 'VS Code', level: 5, category: 'tools' as SkillCategory, description: 'Integrated development environment and extensions' },
-        { name: 'NPM/Yarn', level: 5, category: 'tools' as SkillCategory, description: 'Package management and dependency handling' },
-        { name: 'Composer', level: 5, category: 'tools' as SkillCategory, description: 'PHP dependency manager and autoloading' },
-        { name: 'AWS', level: 3, category: 'tools' as SkillCategory, description: 'Cloud services and deployment platforms' },
-    ],
+    // Skills data
+    skills,
 
     // Projects data - replace with your actual projects
     projects: [
@@ -130,13 +96,13 @@ const portfolioData: PortfolioData = {
     ],
 };
 
-// Interface switching animations
+// Interface switching animations (faster transition)
 const switchInterface = (mode: 'holo' | 'space' | 'traditional') => {
     isTransitioning.value = true;
     setTimeout(() => {
         interfaceMode.value = mode;
         isTransitioning.value = false;
-    }, 500);
+    }, 200);
 };
 
 // Section switching for holographic interface
@@ -187,34 +153,14 @@ const interfaceClasses = computed(() => ({
         </div>
 
         <!-- Interface mode selector - Visible in all modes -->
-        <div class="fixed top-4 left-4 z-[60]">
-            <div class="interface-selector rounded-xl border border-cyan-400/30 bg-black/50 p-2 backdrop-blur-sm">
-                <div class="mb-2 px-2 text-xs text-cyan-400">{{ t('interface.mode') }}:</div>
-                <div class="flex gap-1">
-                    <button
-                        @click="switchInterface('holo')"
-                        class="rounded px-3 py-1 text-xs transition-all"
-                        :class="interfaceMode === 'holo' ? 'bg-cyan-400 text-black' : 'text-cyan-400 hover:bg-cyan-400/20'"
-                    >
-                        {{ t('interface.holo') }}
-                    </button>
-                    <button
-                        @click="switchInterface('space')"
-                        class="rounded px-3 py-1 text-xs transition-all"
-                        :class="interfaceMode === 'space' ? 'bg-purple-400 text-black' : 'text-purple-400 hover:bg-purple-400/20'"
-                    >
-                        {{ t('interface.space') }}
-                    </button>
-                    <button
-                        @click="switchInterface('traditional')"
-                        class="rounded px-3 py-1 text-xs transition-all"
-                        :class="interfaceMode === 'traditional' ? 'bg-gray-400 text-black' : 'text-gray-400 hover:bg-gray-400/20'"
-                    >
-                        {{ t('interface.classic') }}
-                    </button>
-                </div>
-            </div>
-        </div>
+        <InterfaceModeSelector
+            :mode="interfaceMode"
+            :label="t('interface.mode') + ':'"
+            :holoLabel="t('interface.holo')"
+            :spaceLabel="t('interface.space')"
+            :classicLabel="t('interface.classic')"
+            @switch="switchInterface"
+        />
 
         <!-- Transition overlay -->
         <Transition name="interface-transition">
@@ -553,15 +499,23 @@ const interfaceClasses = computed(() => ({
     }
 }
 
-/* Transition effects */
+/* Transition effects (more fluid and smooth) */
 .interface-transition-enter-active,
 .interface-transition-leave-active {
-    transition: all 0.5s ease-in-out;
+    transition:
+        opacity 0.18s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .interface-transition-enter-from,
 .interface-transition-leave-to {
     opacity: 0;
+    transform: scale(0.98);
+}
+.interface-transition-enter-to,
+.interface-transition-leave-from {
+    opacity: 1;
+    transform: scale(1);
 }
 
 /* Responsive interface selectors */

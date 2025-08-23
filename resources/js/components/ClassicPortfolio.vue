@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { skills } from '@/types/skills';
 import { Briefcase, Code, ExternalLink, Github, Mail, MapPin, User } from 'lucide-vue-next';
 import { onMounted, ref } from 'vue';
 
@@ -38,23 +39,23 @@ const activeSection = ref('hero');
 const isMenuOpen = ref(false);
 
 // Skills organized by category
-const skillCategories = [
-    {
-        name: 'Frontend',
-        skills: ['Vue.js', 'React', 'TypeScript', 'Tailwind CSS', 'HTML5', 'CSS3'],
-        color: 'blue',
-    },
-    {
-        name: 'Backend',
-        skills: ['Laravel', 'Node.js', 'PHP', 'MySQL', 'PostgreSQL', 'Redis'],
-        color: 'green',
-    },
-    {
-        name: 'Tools & DevOps',
-        skills: ['Git', 'Docker', 'Linux', 'AWS', 'Vite', 'Webpack'],
-        color: 'purple',
-    },
-];
+const skillCategoryNames: Record<string, string> = {
+    frontend: 'Frontend',
+    backend: 'Backend',
+    database: 'Database',
+    tools: 'Tools & DevOps',
+};
+
+const skillCategories = Object.entries(
+    skills.reduce<Record<string, string[]>>((acc, skill) => {
+        if (!acc[skill.category]) acc[skill.category] = [];
+        acc[skill.category].push(skill.name);
+        return acc;
+    }, {}),
+).map(([category, skillNames]) => ({
+    name: skillCategoryNames[category] || category,
+    skills: skillNames,
+}));
 
 // Navigation items
 const navItems = [
