@@ -25,37 +25,30 @@ export function usePortfolioData() {
     // Project data with translations
     const projects = computed(() => [
         {
-            id: 1,
-            title: t('projects.ecommerce.title', 'E-Commerce Platform'),
-            description: t('projects.ecommerce.description', 'Modern e-commerce platform with real-time inventory management'),
-            technologies: ['Vue.js', 'Laravel', 'MySQL', 'Stripe'],
-            image: '/images/projects/ecommerce.jpg',
-            liveUrl: 'https://demo-ecommerce.dev',
-            githubUrl: 'https://github.com/developer/ecommerce',
+            id: '1',
+            title: 'AdoptaFácil',
+            description:
+                'AdoptaFácil is a complete digital ecosystem designed to revolutionize the pet adoption process in Colombia. The platform combines modern technologies with a focus on animal welfare, creating a comprehensive experience that connects adopters, pet owners, shelters, and business partners in one place.',
+            image: 'public/Adoptafacil.jpg',
+            technologies: ['Laravel', 'React.js', 'MySQL', 'Typescript', 'Python', 'Tailwind CSS'],
+            liveUrl: 'https://adoptafacil.up.railway.app/',
+            githubUrl: 'https://github.com/Beto18v/AdoptaFacil.git',
+            category: 'Full Stack',
             featured: true,
-            category: 'web',
+            date: '2024-01-15',
         },
         {
-            id: 2,
-            title: t('projects.taskmanager.title', 'Task Management App'),
-            description: t('projects.taskmanager.description', 'Collaborative task management application with real-time updates'),
-            technologies: ['React', 'Node.js', 'MongoDB', 'Socket.io'],
-            image: '/images/projects/taskmanager.jpg',
-            liveUrl: 'https://demo-tasks.dev',
-            githubUrl: 'https://github.com/developer/taskmanager',
+            id: '2',
+            title: 'Vision 4k',
+            description:
+                'Vision4K is a modern platform for sharing and downloading wallpapers in ultra high definition (4K). It offers a seamless user experience with a focus on high-quality visuals and easy navigation.',
+            image: '/api/placeholder/600/400',
+            technologies: ['Laravel', 'React.js', 'MySQL', 'Typescript', 'Tailwind CSS'],
+            liveUrl: '##',
+            githubUrl: 'https://github.com/Beto18v/Vision4k.git',
+            category: 'Full Stack',
             featured: true,
-            category: 'web',
-        },
-        {
-            id: 3,
-            title: t('projects.weather.title', 'Mobile Weather App'),
-            description: t('projects.weather.description', 'Cross-platform weather application with location-based forecasts'),
-            technologies: ['React Native', 'TypeScript', 'Weather API'],
-            image: '/images/projects/weather.jpg',
-            liveUrl: 'https://app-store-link',
-            githubUrl: 'https://github.com/developer/weather-app',
-            featured: false,
-            category: 'mobile',
+            date: '2023-11-20',
         },
     ]);
 
@@ -96,29 +89,38 @@ export function usePortfolioData() {
         },
     ]);
 
-    // Skills data (categories translated, but skill names remain in original language for consistency)
-    const skillCategories = computed(() => ({
-        frontend: {
-            name: t('skills.category.frontend', 'Frontend'),
-            icon: 'Code2',
-            color: '#00D4FF',
-        },
-        backend: {
-            name: t('skills.category.backend', 'Backend'),
-            icon: 'Server',
-            color: '#00FF88',
-        },
-        database: {
-            name: t('skills.category.database', 'Database'),
-            icon: 'Database',
-            color: '#FF0080',
-        },
-        tools: {
-            name: t('skills.category.tools', 'Tools'),
-            icon: 'Wrench',
-            color: '#FFAA00',
-        },
-    }));
+    // Skills data
+    const skills = [
+        // Frontend Technologies
+        { name: 'Vue.js', level: 3, category: 'frontend', description: 'Advanced Vue 3 with Composition API and TypeScript' },
+        { name: 'React', level: 4, category: 'frontend', description: 'Modern React with hooks and context API' },
+        { name: 'TypeScript', level: 4, category: 'frontend', description: 'Strong typing and advanced TypeScript patterns' },
+        { name: 'JavaScript', level: 4, category: 'frontend', description: 'ES6+ features and modern JavaScript' },
+        { name: 'Tailwind CSS', level: 4, category: 'frontend', description: 'Utility-first CSS framework for rapid development' },
+        { name: 'HTML5/CSS3', level: 5, category: 'frontend', description: 'Semantic HTML and modern CSS features' },
+        { name: 'Bootstrap', level: 4, category: 'frontend', description: 'Responsive web design framework' },
+
+        // Backend Technologies
+        { name: 'Laravel', level: 4, category: 'backend', description: 'PHP framework with Eloquent ORM and advanced features' },
+        { name: 'PHP', level: 4, category: 'backend', description: 'Modern PHP 8+ with best practices and design patterns' },
+        { name: 'Node.js', level: 3, category: 'backend', description: 'JavaScript runtime for server-side development' },
+        { name: 'Python', level: 3, category: 'backend', description: 'Python with Django and Flask frameworks' },
+        { name: 'RESTful APIs', level: 3, category: 'backend', description: 'Design and implementation of REST APIs' },
+
+        // Database Technologies
+        { name: 'MySQL', level: 5, category: 'database', description: 'Relational database design and optimization' },
+        { name: 'PostgreSQL', level: 3, category: 'database', description: 'Advanced SQL features and performance tuning' },
+        { name: 'MongoDB', level: 3, category: 'database', description: 'NoSQL document database for scalable applications' },
+        { name: 'SQLite', level: 3, category: 'database', description: 'Lightweight database for development and testing' },
+
+        // Development Tools
+        { name: 'Git', level: 4, category: 'tools', description: 'Version control and collaborative development' },
+        { name: 'Docker', level: 2, category: 'tools', description: 'Containerization and development environments' },
+        { name: 'Vite', level: 3, category: 'tools', description: 'Fast build tool and development server' },
+        { name: 'VS Code', level: 4, category: 'tools', description: 'Integrated development environment and extensions' },
+        { name: 'NPM', level: 3, category: 'tools', description: 'Package management and dependency handling' },
+        { name: 'Composer', level: 3, category: 'tools', description: 'PHP dependency manager and autoloading' },
+    ];
 
     // Achievement stats with translations
     const achievements = computed(() => ({
@@ -145,7 +147,7 @@ export function usePortfolioData() {
         projects,
         experience,
         education,
-        skillCategories,
+        skills,
         achievements,
         t,
     };

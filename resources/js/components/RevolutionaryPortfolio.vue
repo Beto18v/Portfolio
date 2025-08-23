@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import { usePortfolioData } from '@/composables/usePortfolioData';
+const { projects, skills } = usePortfolioData();
+
 import { useTranslation } from '@/composables/useTranslation';
 import { portfolioTranslations } from '@/data/translations';
 import type { PortfolioData } from '@/types/portfolio';
-import { projects } from '@/types/projects';
-import { skills } from '@/types/skills';
 import { Head } from '@inertiajs/vue3';
 import { computed, onMounted, ref } from 'vue';
 
@@ -51,10 +52,13 @@ const portfolioData: PortfolioData = {
     },
 
     // Skills data
-    skills,
+    skills: skills.map((skill) => ({
+        ...skill,
+        category: skill.category as import('@/types/portfolio').SkillCategory,
+    })),
 
     // Projects data - replace with your actual projects
-    projects,
+    projects: projects.value,
 };
 
 // Interface switching animations (faster transition)
