@@ -19,7 +19,7 @@ export function usePortfolioData() {
         website: 'https://portfolio.dev',
         github: 'https://github.com/developer',
         linkedin: 'https://linkedin.com/in/developer',
-        profileImage: '/images/profile.jpg',
+        profileImage: '/Foto.png',
     }));
 
     // Project data with translations

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 // import { skills } from '@/types/skills';
+import Foto from '@/../../public/Foto.png';
 import { Brain, Database, Eye, Github, Mail, Monitor, Rocket, Satellite, User, Zap } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
 
@@ -178,8 +179,8 @@ const scrollToModule = (moduleId: string) => {
                         <div class="grid items-center gap-8 md:grid-cols-2">
                             <div class="text-center">
                                 <div class="mx-auto mb-6 h-48 w-48 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 p-2">
-                                    <div class="flex h-full w-full items-center justify-center rounded-full bg-gray-800">
-                                        <User class="text-cyan-400" :size="64" />
+                                    <div class="items-cent er flex h-full w-full justify-center overflow-hidden rounded-full bg-gray-800">
+                                        <img :src="Foto" alt="Profile" class="h-full w-full rounded-full object-cover" />
                                     </div>
                                 </div>
                                 <h3 class="mb-2 text-2xl font-bold text-white">Developer Profile</h3>
@@ -193,7 +194,7 @@ const scrollToModule = (moduleId: string) => {
                                 </div>
                                 <div class="rounded-xl border border-cyan-400/20 bg-black/40 p-4">
                                     <div class="mb-1 font-mono text-sm text-cyan-400">EXPERIENCE</div>
-                                    <div class="text-white">3+ Years in Development</div>
+                                    <div class="text-white">1+ Years in Development</div>
                                 </div>
                                 <div class="rounded-xl border border-cyan-400/20 bg-black/40 p-4">
                                     <div class="mb-1 font-mono text-sm text-cyan-400">SPECIALIZATION</div>
