@@ -1,8 +1,10 @@
 <script setup lang="ts">
 // import { skills } from '@/types/skills';
 import Foto from '@/../../public/Foto.png';
+import { useTranslation } from '@/composables/useTranslation';
 import { Brain, Database, Eye, Github, Mail, Monitor, Rocket, Satellite, User, Zap } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
+const { t } = useTranslation();
 
 /**
  * SpaceModules Component - Static Scrollable Space Interface
@@ -184,7 +186,7 @@ const scrollToModule = (moduleId: string) => {
                                     </div>
                                 </div>
                                 <h3 class="mb-2 text-2xl font-bold text-white">Developer Profile</h3>
-                                <p class="text-gray-300">Full Stack Developer & Tech Enthusiast</p>
+                                <p class="text-gray-300">{{ props.profileData?.description || t('about.description') }}</p>
                             </div>
 
                             <div class="space-y-4">

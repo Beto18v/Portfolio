@@ -1,8 +1,12 @@
 <script setup lang="ts">
 // import { skills } from '@/types/skills';
 import Foto from '@/../../public/Foto.png';
+
+import { useTranslation } from '@/composables/useTranslation';
 import { Briefcase, Code, ExternalLink, Github, Mail, MapPin, User } from 'lucide-vue-next';
 import { onMounted, ref } from 'vue';
+import LanguageSelector from './LanguageSelector.vue';
+const { t } = useTranslation();
 
 /**
  * ClassicPortfolio Component
@@ -101,6 +105,10 @@ onMounted(() => {
 
 <template>
     <div class="classic-portfolio -gray-50 bg-white">
+        <!-- Language Selector (fixed top right) -->
+        <div class="fixed top-4 right-4 z-[60]">
+            <LanguageSelector />
+        </div>
         <!-- Navigation -->
         <nav class="-50/95 fixed top-0 right-0 left-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur-md">
             <div class="mx-auto max-w-6xl px-6">
@@ -153,8 +161,7 @@ onMounted(() => {
                     </div>
                     <h1 class="mb-4 text-4xl font-bold text-gray-900 md:text-6xl">Full Stack Developer</h1>
                     <p class="mx-auto max-w-2xl text-xl leading-relaxed text-gray-600">
-                        Passionate about creating beautiful, functional, and user-friendly web applications with modern technologies and best
-                        practices.
+                        {{ props.profileData?.description || t('about.description') }}
                     </p>
                 </div>
                 <div class="flex flex-col justify-center gap-4 sm:flex-row">

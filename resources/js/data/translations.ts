@@ -19,6 +19,8 @@ export const portfolioTranslations: TranslationData = {
         'hero.subtitle': 'Passionate about creating innovative digital solutions',
         'hero.cta': 'View My Work',
         'hero.contact': 'Get In Touch',
+        'hero.description':
+            'I am passionate about creating beautiful, functional, and user-friendly web applications using modern technologies and best practices.',
 
         // About section
         'about.title': 'About Me',
@@ -196,6 +198,8 @@ export const portfolioTranslations: TranslationData = {
         'hero.subtitle': 'Apasionado por crear soluciones digitales innovadoras',
         'hero.cta': 'Ver Mi Trabajo',
         'hero.contact': 'Contactar',
+        'hero.description':
+            'Apasionado por crear aplicaciones web hermosas, funcionales y fáciles de usar con tecnologías modernas y las mejores prácticas.',
 
         // About section
         'about.title': 'Acerca de Mí',
@@ -373,6 +377,7 @@ export const portfolioTranslations: TranslationData = {
         'hero.subtitle': '热衷于创造创新的数字解决方案',
         'hero.cta': '查看我的作品',
         'hero.contact': '联系我',
+        'hero.description': '热衷于创造美观、实用且用户友好的网络应用程序，使用现代技术和最佳实践。',
 
         // About section
         'about.title': '关于我',

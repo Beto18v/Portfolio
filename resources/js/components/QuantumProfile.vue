@@ -435,13 +435,7 @@ const getTraitVisualization = (trait: any, index: number) => {
                             <div class="relative z-10">
                                 <h4 class="mb-2 text-lg font-bold text-cyan-400">Mission Statement</h4>
                                 <p class="leading-relaxed text-gray-300">
-                                    {{
-                                        props.description ||
-                                        t(
-                                            'about.description',
-                                            'Passionate about creating innovative digital solutions that push the boundaries of technology and user experience.',
-                                        )
-                                    }}
+                                    {{ props.description || t('about.description') }}
                                 </p>
                                 <div class="mt-4 flex items-center gap-4 text-sm">
                                     <span class="text-purple-400">💡 {{ profileData.passion }}</span>
