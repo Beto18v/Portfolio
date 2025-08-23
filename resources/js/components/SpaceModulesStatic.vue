@@ -383,32 +383,3 @@ const scrollToModule = (moduleId: string) => {
         </div>
     </div>
 </template>
-
-<style scoped>
-.space-interface {
-    scroll-behavior: smooth;
-}
-
-/* Custom scrollbar for space theme */
-.space-interface::-webkit-scrollbar {
-    width: 12px;
-}
-
-.space-interface::-webkit-scrollbar-track {
-    background: rgba(10, 10, 26, 0.8);
-    border-radius: 6px;
-    border: 1px solid rgba(147, 51, 234, 0.3);
-}
-
-.space-interface::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #9333ea 0%, #7c3aed 50%, #9333ea 100%);
-    border-radius: 6px;
-    border: 2px solid rgba(10, 10, 26, 0.8);
-    box-shadow: 0 0 10px rgba(147, 51, 234, 0.5);
-}
-
-.space-interface::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #a855f7 0%, #9333ea 50%, #a855f7 100%);
-    box-shadow: 0 0 15px rgba(168, 85, 247, 0.8);
-}
-</style>

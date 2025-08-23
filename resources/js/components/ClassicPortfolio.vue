@@ -390,15 +390,3 @@ onMounted(() => {
         </footer>
     </div>
 </template>
-
-<style scoped>
-.classic-portfolio {
-    scroll-behavior: smooth;
-}
-
-/* Custom focus styles */
-.classic-portfolio input:focus,
-.classic-portfolio textarea:focus {
-    box-shadow: 0 0 0 3px rgba(75, 85, 99, 0.1);
-}
-</style>

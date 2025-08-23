@@ -92,6 +92,9 @@ export const portfolioTranslations: TranslationData = {
         'holo.command.projects': 'Accessing project database...',
         'holo.command.contact': 'Opening communication channel...',
 
+        // Personality traits
+        'personality.traits': 'Problem Solving',
+
         // Skills Matrix
         'skills.matrix': 'Skills Matrix',
         'skills.level': 'Level',
@@ -265,6 +268,9 @@ export const portfolioTranslations: TranslationData = {
         'holo.command.skills': 'Mostrando matriz de habilidades...',
         'holo.command.projects': 'Accediendo a base de datos de proyectos...',
         'holo.command.contact': 'Abriendo canal de comunicación...',
+
+        // Personality traits
+        'personality.traits': 'Resolución de Problemas',
 
         // Skills Matrix
         'skills.matrix': 'Matriz de Habilidades',

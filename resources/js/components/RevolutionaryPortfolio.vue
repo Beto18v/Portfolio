@@ -2,11 +2,12 @@
 import { useTranslation } from '@/composables/useTranslation';
 import { portfolioTranslations } from '@/data/translations';
 import type { PortfolioData } from '@/types/portfolio';
+import { projects } from '@/types/projects';
 import { skills } from '@/types/skills';
 import { Head } from '@inertiajs/vue3';
 import { computed, onMounted, ref } from 'vue';
 
-// Import revolutionary components
+// Import components
 import ClassicPortfolio from '@/components/ClassicPortfolio.vue';
 import ContactSection from '@/components/ContactSection.vue';
 import HolographicSkillsFixed from '@/components/HolographicSkillsFixed.vue';
@@ -32,18 +33,18 @@ const isTransitioning = ref(false);
 // Portfolio data - customize these values for your personal information
 const portfolioData: PortfolioData = {
     // Personal information
-    name: 'Nicolas A. Valenzuela', // Replace with your actual name
-    profileImage: '', // Add your profile image URL here
+    name: 'Nicolas A. Valenzuela',
+    profileImage: 'public/Foto.png',
 
     // Hero section customization
     hero: {
-        title: '', // Will use translation if empty
-        subtitle: '', // Will use translation if empty
+        title: '',
+        subtitle: '',
     },
 
     // About section customization
     about: {
-        description: '', // Will use translation if empty
+        description: '',
         experience: 3,
         projectsCompleted: 25,
         technologiesMastered: 15,
@@ -53,47 +54,7 @@ const portfolioData: PortfolioData = {
     skills,
 
     // Projects data - replace with your actual projects
-    projects: [
-        {
-            id: '1',
-            title: 'E-Commerce Platform',
-            description:
-                'Plataforma completa de comercio electrónico con Laravel backend, Vue.js frontend, procesamiento de pagos integrado y panel de administración.',
-            image: '/api/placeholder/600/400', // Replace with actual project image
-            technologies: ['Laravel', 'Vue.js', 'MySQL', 'Stripe', 'Tailwind CSS', 'Redis'],
-            liveUrl: 'https://tu-proyecto.com', // Replace with actual URL
-            githubUrl: 'https://github.com/tu-usuario/ecommerce', // Replace with actual GitHub URL
-            category: 'Full Stack',
-            featured: true,
-            date: '2024-01-15',
-        },
-        {
-            id: '2',
-            title: 'Task Management App',
-            description:
-                'Aplicación colaborativa de gestión de tareas con actualizaciones en tiempo real, características de colaboración en equipo y notificaciones.',
-            image: '/api/placeholder/600/400', // Replace with actual project image
-            technologies: ['React', 'Node.js', 'Socket.io', 'MongoDB', 'TypeScript', 'Express'],
-            liveUrl: 'https://tu-app-tareas.com', // Replace with actual URL
-            githubUrl: 'https://github.com/tu-usuario/task-manager', // Replace with actual GitHub URL
-            category: 'Web App',
-            featured: true,
-            date: '2023-11-20',
-        },
-        {
-            id: '3',
-            title: 'Weather Dashboard',
-            description:
-                'Aplicación moderna del clima con interfaz hermosa, pronósticos basados en ubicación, gráficos interactivos y múltiples ciudades.',
-            image: '/api/placeholder/600/400', // Replace with actual project image
-            technologies: ['Vue.js', 'Chart.js', 'OpenWeather API', 'CSS3', 'Geolocation API'],
-            liveUrl: 'https://tu-clima-app.com', // Replace with actual URL
-            githubUrl: 'https://github.com/tu-usuario/weather-app', // Replace with actual GitHub URL
-            category: 'Frontend',
-            featured: false,
-            date: '2023-08-10',
-        },
-    ],
+    projects,
 };
 
 // Interface switching animations (faster transition)
@@ -128,7 +89,7 @@ const interfaceClasses = computed(() => ({
 <template>
     <!-- Page head with SEO meta tags -->
     <Head>
-        <title>{{ portfolioData.name }} - Revolutionary Portfolio</title>
+        <title>{{ portfolioData.name }}</title>
         <meta name="description" content="Immersive portfolio experience with holographic interface and 3D navigation" />
         <meta name="keywords" content="portfolio, developer, holographic, 3D, futuristic, immersive" />
         <meta name="author" :content="portfolioData.name" />
@@ -450,403 +411,3 @@ const interfaceClasses = computed(() => ({
         </div>
     </div>
 </template>
-
-<style scoped>
-.revolutionary-portfolio {
-    min-height: 100vh;
-    transition: all 0.5s ease-in-out;
-}
-
-/* Interface-specific styles */
-.interface-holo {
-    background: linear-gradient(135deg, #000000 0%, #001122 50%, #000000 100%);
-}
-
-.interface-space {
-    background: radial-gradient(circle at center, #0a0a1a 0%, #000000 100%);
-}
-
-.interface-traditional {
-    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-}
-
-/* Holographic wrapper styling */
-.holo-wrapper {
-    position: relative;
-    z-index: 10;
-}
-
-.holo-wrapper::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background:
-        linear-gradient(90deg, transparent 98%, rgba(0, 212, 255, 0.1) 100%), linear-gradient(180deg, transparent 98%, rgba(0, 212, 255, 0.1) 100%);
-    background-size: 30px 30px;
-    pointer-events: none;
-    animation: holographic-grid 20s linear infinite;
-}
-
-@keyframes holographic-grid {
-    0% {
-        transform: translate(0, 0);
-    }
-    100% {
-        transform: translate(30px, 30px);
-    }
-}
-
-/* Transition effects (more fluid and smooth) */
-.interface-transition-enter-active,
-.interface-transition-leave-active {
-    transition:
-        opacity 0.18s cubic-bezier(0.4, 0, 0.2, 1),
-        transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.interface-transition-enter-from,
-.interface-transition-leave-to {
-    opacity: 0;
-    transform: scale(0.98);
-}
-.interface-transition-enter-to,
-.interface-transition-leave-from {
-    opacity: 1;
-    transform: scale(1);
-}
-
-/* Responsive interface selectors */
-.interface-selector,
-.section-selector {
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 212, 255, 0.3);
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
-}
-
-.is-transitioning {
-    overflow: hidden;
-}
-
-/* Futuristic scrollbar for holo mode */
-.interface-holo ::-webkit-scrollbar {
-    width: 12px;
-}
-
-.interface-holo ::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.8);
-    border-radius: 6px;
-    border: 1px solid rgba(0, 212, 255, 0.2);
-}
-
-.interface-holo ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #00d4ff 0%, #0080ff 50%, #00d4ff 100%);
-    border-radius: 6px;
-    border: 2px solid rgba(0, 0, 0, 0.8);
-    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-    animation: scroll-glow 2s ease-in-out infinite alternate;
-}
-
-.interface-holo ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #00ffff 0%, #00d4ff 50%, #00ffff 100%);
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
-}
-
-.interface-holo ::-webkit-scrollbar-corner {
-    background: rgba(0, 0, 0, 0.8);
-}
-
-@keyframes scroll-glow {
-    0% {
-        box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
-    }
-    100% {
-        box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
-    }
-}
-
-/* Space mode scrollbar */
-.interface-space ::-webkit-scrollbar {
-    width: 12px;
-}
-
-.interface-space ::-webkit-scrollbar-track {
-    background: rgba(10, 10, 26, 0.8);
-    border-radius: 6px;
-    border: 1px solid rgba(147, 51, 234, 0.3);
-}
-
-.interface-space ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #9333ea 0%, #7c3aed 50%, #9333ea 100%);
-    border-radius: 6px;
-    border: 2px solid rgba(10, 10, 26, 0.8);
-    box-shadow: 0 0 10px rgba(147, 51, 234, 0.5);
-}
-
-.interface-space ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #a855f7 0%, #9333ea 50%, #a855f7 100%);
-    box-shadow: 0 0 15px rgba(168, 85, 247, 0.8);
-}
-
-/* Traditional mode scrollbar */
-.interface-traditional ::-webkit-scrollbar {
-    width: 8px;
-}
-
-.interface-traditional ::-webkit-scrollbar-track {
-    background: rgba(243, 244, 246, 0.5);
-    border-radius: 4px;
-}
-
-.interface-traditional ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #6b7280 0%, #4b5563 100%);
-    border-radius: 4px;
-}
-
-.interface-traditional ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #374151 0%, #1f2937 100%);
-}
-
-/* Quantum menu animations */
-.quantum-menu {
-    animation: quantum-float 3s ease-in-out infinite;
-}
-
-@keyframes quantum-float {
-    0%,
-    100% {
-        transform: translateY(0px);
-    }
-    50% {
-        transform: translateY(-5px);
-    }
-}
-
-.quantum-menu .section-selector {
-    position: relative;
-}
-
-.quantum-menu .section-selector::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(45deg, #00d4ff, #0080ff, #00d4ff);
-    border-radius: 18px;
-    opacity: 0;
-    z-index: -1;
-    animation: quantum-border 4s linear infinite;
-}
-
-.quantum-menu:hover .section-selector::before {
-    opacity: 0.3;
-}
-
-@keyframes quantum-border {
-    0% {
-        transform: rotate(0deg) scale(1);
-    }
-    50% {
-        transform: rotate(180deg) scale(1.02);
-    }
-    100% {
-        transform: rotate(360deg) scale(1);
-    }
-}
-
-/* Smooth scroll behavior */
-html {
-    scroll-behavior: smooth;
-}
-
-.revolutionary-portfolio {
-    scroll-behavior: smooth;
-}
-
-/* Custom scroll for all modes */
-* {
-    scrollbar-width: thin;
-}
-
-.interface-holo * {
-    scrollbar-color: #00d4ff rgba(0, 0, 0, 0.8);
-}
-
-.interface-space * {
-    scrollbar-color: #9333ea rgba(10, 10, 26, 0.8);
-}
-
-.interface-traditional * {
-    scrollbar-color: #6b7280 rgba(243, 244, 246, 0.5);
-}
-
-/* Space mode cursor */
-.interface-space {
-    cursor: crosshair;
-}
-
-/* Animation for interface switching */
-@keyframes interface-boot {
-    0% {
-        opacity: 0;
-        transform: scale(0.8);
-        filter: blur(10px);
-    }
-    50% {
-        opacity: 0.5;
-        transform: scale(1.05);
-        filter: blur(5px);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-        filter: blur(0);
-    }
-}
-
-.holo-interface,
-.space-interface,
-.traditional-interface {
-    animation: interface-boot 1s ease-out;
-}
-
-/* Projects Section Holographic Styles */
-/* Quantum Projects Section Styles */
-.quantum-projects {
-    background:
-        radial-gradient(circle at 25% 25%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 75% 75%, rgba(128, 0, 255, 0.1) 0%, transparent 50%), linear-gradient(135deg, #000000 0%, #0a0a1a 100%);
-}
-
-.quantum-grid {
-    background-image:
-        linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
-    background-size: 50px 50px;
-    animation: grid-flow 20s linear infinite;
-}
-
-@keyframes grid-flow {
-    0% {
-        transform: translate(0, 0);
-    }
-    100% {
-        transform: translate(50px, 50px);
-    }
-}
-
-.quantum-project-card {
-    animation: fade-in-up 0.6s ease-out forwards;
-    animation-fill-mode: both;
-}
-
-@keyframes fade-in-up {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.quantum-border {
-    background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.5), transparent);
-    background-size: 400% 400%;
-    animation: border-flow 3s linear infinite;
-    padding: 1px;
-    border-radius: 12px;
-    mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-    mask-composite: exclude;
-}
-
-@keyframes border-flow {
-    0% {
-        background-position: 0% 50%;
-    }
-    100% {
-        background-position: 100% 50%;
-    }
-}
-
-.quantum-tech-tag {
-    animation: fade-in-up 0.4s ease-out forwards;
-    animation-fill-mode: both;
-}
-
-.quantum-btn-primary,
-.quantum-btn-secondary {
-    position: relative;
-    overflow: hidden;
-}
-
-.quantum-btn-primary::before,
-.quantum-btn-secondary::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 8px;
-    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    opacity: 0;
-    transition: opacity 0.3s;
-    z-index: 0;
-}
-
-.quantum-btn-primary:hover::before,
-.quantum-btn-secondary:hover::before {
-    opacity: 1;
-}
-
-@keyframes scan-horizontal {
-    0%,
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    50% {
-        transform: translateY(100vh);
-        opacity: 0.3;
-    }
-}
-
-@keyframes scan-vertical {
-    0%,
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    50% {
-        transform: translateX(100vw);
-        opacity: 0.3;
-    }
-}
-
-.animate-scan-horizontal {
-    animation: scan-horizontal 8s ease-in-out infinite;
-}
-
-.animate-scan-vertical {
-    animation: scan-vertical 12s ease-in-out infinite;
-    animation-delay: 2s;
-}
-
-.quantum-summary::before {
-    animation: pulse-glow 3s ease-in-out infinite;
-}
-
-@keyframes pulse-glow {
-    0%,
-    100% {
-        opacity: 0.1;
-    }
-    50% {
-        opacity: 0.3;
-    }
-}
-</style>

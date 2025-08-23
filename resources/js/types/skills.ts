@@ -16,7 +16,6 @@ export const skills: Skill[] = [
     { name: 'Node.js', level: 3, category: 'backend', description: 'JavaScript runtime for server-side development' },
     { name: 'Python', level: 3, category: 'backend', description: 'Python with Django and Flask frameworks' },
     { name: 'RESTful APIs', level: 3, category: 'backend', description: 'Design and implementation of REST APIs' },
-    { name: 'GraphQL', level: 2, category: 'backend', description: 'Query language for APIs and runtime' },
 
     // Database Technologies
     { name: 'MySQL', level: 5, category: 'database', description: 'Relational database design and optimization' },

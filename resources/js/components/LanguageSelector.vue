@@ -116,23 +116,3 @@ onMounted(() => {
         </Transition>
     </div>
 </template>
-
-<style scoped>
-/* Dropdown animations */
-.dropdown-enter-active,
-.dropdown-leave-active {
-    transition: all 0.3s ease;
-}
-
-.dropdown-enter-from,
-.dropdown-leave-to {
-    opacity: 0;
-    transform: translateY(-10px) scale(0.95);
-}
-
-.dropdown-enter-to,
-.dropdown-leave-from {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
-</style>
