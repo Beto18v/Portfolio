@@ -26,6 +26,19 @@ export function usePortfolioData() {
     const projects = computed(() => [
         {
             id: '1',
+            title: 'Portfolio',
+            description:
+                'This is a modern, elegant, and professional portfolio built with cutting-edge technologies. The site is fully modularized into reusable components and features support for multiple languages (Spanish, English, and Mandarin).',
+            image: './Portfolio.jpg',
+            technologies: ['Laravel', 'Vue', 'SQLite', 'Typescript', 'Tailwind CSS'],
+            liveUrl: '####',
+            githubUrl: 'https://github.com/Beto18v/Portfolio.git',
+            category: 'Frontend',
+            featured: true,
+            date: '2024-01-15',
+        },
+        {
+            id: '2',
             title: 'AdoptaFácil',
             description:
                 'AdoptaFácil is a complete digital ecosystem designed to revolutionize the pet adoption process in Colombia. The platform combines modern technologies with a focus on animal welfare, creating a comprehensive experience that connects adopters, pet owners, shelters, and business partners in one place.',
@@ -38,11 +51,11 @@ export function usePortfolioData() {
             date: '2024-01-15',
         },
         {
-            id: '2',
+            id: '3',
             title: 'Vision 4k',
             description:
                 'Vision4K is a modern platform for sharing and downloading wallpapers in ultra high definition (4K). It offers a seamless user experience with a focus on high-quality visuals and easy navigation.',
-            image: '/api/placeholder/600/400',
+            image: '/Vision4k.jpg',
             technologies: ['Laravel', 'React.js', 'MySQL', 'Typescript', 'Tailwind CSS'],
             liveUrl: '##',
             githubUrl: 'https://github.com/Beto18v/Vision4k.git',

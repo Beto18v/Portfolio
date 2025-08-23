@@ -3,7 +3,7 @@ export type SkillCategory = 'frontend' | 'backend' | 'database' | 'tools';
 
 export interface Skill {
     name: string;
-    level: number; // 1-5 scale
+    level: number;
     icon?: string;
     description?: string;
     category: SkillCategory;

@@ -247,7 +247,7 @@ const interfaceClasses = computed(() => ({
 
                                             <!-- Project Image -->
                                             <div class="mb-6 flex justify-center">
-                                                <div class="flex h-60 w-110 items-center justify-center rounded-2xl border-2 border-cyan-400/40">
+                                                <div class="flex h-50 w-110 items-center justify-center rounded-2xl border-2 border-cyan-400/40">
                                                     <img
                                                         :src="project.image"
                                                         :alt="project.title"
