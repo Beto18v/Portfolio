@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { translationInstance } from '@/composables/translationInstance';
 import { usePortfolioData } from '@/composables/usePortfolioData';
 import { Award, Brain, Code, Heart, Target, TrendingUp, Zap } from 'lucide-vue-next';
 import { computed, onMounted, ref } from 'vue';
@@ -10,6 +11,7 @@ import { computed, onMounted, ref } from 'vue';
  */
 
 const { sectionTexts } = usePortfolioData();
+const { t, language } = translationInstance;
 
 interface Props {
     description?: string;
@@ -29,14 +31,14 @@ const props = withDefaults(defineProps<Props>(), {
 
 // Animation and particle system
 const particleCanvas = ref<HTMLCanvasElement>();
-const profileData = ref({
-    name: sectionTexts.ui.quantumProfile.name,
-    title: sectionTexts.ui.quantumProfile.title,
-    location: sectionTexts.ui.quantumProfile.location,
-    availability: sectionTexts.ui.quantumProfile.availability,
-    passion: sectionTexts.ui.quantumProfile.passion,
-    currentFocus: sectionTexts.ui.quantumProfile.currentFocus,
-});
+const profileData = computed(() => ({
+    name: t('ui.quantumProfile.name', sectionTexts.ui.quantumProfile.name),
+    title: t('ui.quantumProfile.title', sectionTexts.ui.quantumProfile.title),
+    location: t('ui.quantumProfile.location', sectionTexts.ui.quantumProfile.location),
+    availability: t('ui.quantumProfile.availability', sectionTexts.ui.quantumProfile.availability),
+    passion: t('ui.quantumProfile.passion', sectionTexts.ui.quantumProfile.passion),
+    currentFocus: t('ui.quantumProfile.currentFocus', sectionTexts.ui.quantumProfile.currentFocus),
+}));
 
 // Real-time data simulation
 const realTimeStats = ref({

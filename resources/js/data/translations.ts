@@ -6,6 +6,25 @@ import type { TranslationData } from '@/composables/useTranslation';
  */
 export const portfolioTranslations: TranslationData = {
     en: {
+        'about.sectionTitle': 'About Me',
+        'about.sectionDescription': 'Learn more about my background, experience, and what drives my passion for development.',
+        'about.subtitle': "Hello, I'm a Developer",
+        'about.experience':
+            'With over 1 year of experience in web development, I specialize in creating modern, responsive, and user-friendly applications. I enjoy working with both frontend and backend technologies to deliver complete solutions.',
+        'about.approach':
+            'My approach combines technical expertise with creative problem-solving to build applications that not only function well but also provide excellent user experiences.',
+        'about.stats.years': '1+',
+        'about.stats.yearsLabel': 'Years Experience',
+        'about.stats.projectsLabel': 'Projects Completed',
+        'contact.responseBox.title': 'Response Time',
+        'contact.responseBox.description': 'I typically respond to messages within 24 hours. For urgent matters, please mention it in your message.',
+        // ClassicPortfolio extras
+        'nav.logo': 'Portfolio',
+        'projects.viewMyWork': 'View My Work',
+        'contact.form.namePlaceholder': 'Your name',
+        'contact.form.emailPlaceholder': 'your.email@example.com',
+        'contact.form.messagePlaceholder': 'Tell me about your project...',
+        'contact.availableWorldwide': 'Available worldwide',
         // Navigation
         'nav.home': 'Home',
         'nav.about': 'About',
@@ -16,17 +35,20 @@ export const portfolioTranslations: TranslationData = {
         // Hero section
         'hero.greeting': "Hello, I'm",
         'hero.title': 'Full Stack Developer',
-        'hero.subtitle': 'Passionate about creating innovative digital solutions',
-        'hero.cta': 'View My Work',
-        'hero.contact': 'Get In Touch',
-        'hero.description':
-            'I am passionate about creating beautiful, functional, and user-friendly web applications using modern technologies and best practices.',
-
         // About section
         'about.title': 'About Me',
+        'skills.sectionTitle': 'Skills & Expertise',
+        'skills.sectionDescription': 'Technologies and tools I use to bring ideas to life.',
+        'projects.sectionTitle': 'Featured Projects',
+        'projects.sectionDescription': 'A selection of projects that showcase my skills and experience.',
+        'contact.sectionTitle': 'Get In Touch',
+        'contact.sectionDescription': "Ready to start a project or just want to chat? I'd love to hear from you.",
+        'contact.form.name': 'Name',
+        'contact.form.email': 'Email',
+        'contact.form.message': 'Message',
+        'contact.form.send': 'Send Message',
         'about.description':
             'I am a passionate full-stack developer with experience in modern web technologies. I love creating efficient, scalable, and user-friendly applications.',
-        'about.experience': 'Years of Experience',
         'about.projects': 'Projects Completed',
         'about.technologies': 'Technologies Mastered',
 
@@ -38,24 +60,12 @@ export const portfolioTranslations: TranslationData = {
         'skills.database': 'Database Management',
         'skills.tools': 'Development Tools',
 
-        // Projects section
-        'projects.title': 'Featured Projects',
-        'projects.subtitle': 'Some of my recent work',
-        'projects.viewLive': 'View Live',
-        'projects.viewCode': 'View Code',
-        'projects.allProjects': 'View All Projects',
-
         // Contact section
         'contact.title': 'Get In Touch',
         'contact.subtitle': "Let's discuss your next project",
         'contact.name': 'Your Name',
         'contact.email': 'Your Email',
         'contact.subject': 'Subject',
-        'contact.message': 'Your Message',
-        'contact.send': 'Send Message',
-        'contact.sending': 'Sending...',
-        'contact.success': 'Message sent successfully!',
-        'contact.error': 'Error sending message. Please try again.',
 
         // Language selector
         'language.select': 'Select Language',
@@ -71,6 +81,17 @@ export const portfolioTranslations: TranslationData = {
         // Footer
         'footer.rights': 'All rights reserved.',
         'footer.built': 'Built with Vue.js, Laravel, and Tailwind CSS',
+
+        // Projects
+        'projects.adoptafacil.title': 'AdoptaFácil',
+        'projects.adoptafacil.description':
+            'AdoptaFácil is a complete digital ecosystem designed to revolutionize the pet adoption process in Colombia. The platform combines modern technologies with a focus on animal welfare, creating a comprehensive experience that connects adopters, pet owners, shelters, and business partners in one place.',
+        'projects.vision4k.title': 'Vision4K',
+        'projects.vision4k.description':
+            'Vision4K is a modern platform for sharing and downloading wallpapers in ultra high definition (4K). It offers a seamless user experience with a focus on high-quality visuals and easy navigation.',
+        'projects.portfolio.title': 'Portfolio',
+        'projects.portfolio.description':
+            'This is a modern, elegant, and professional portfolio built with cutting-edge technologies. The site is fully modularized into reusable components and features support for multiple languages (Spanish, English, and Mandarin).',
 
         // Revolutionary Interface
         'interface.mode': 'Interface Mode',
@@ -129,6 +150,8 @@ export const portfolioTranslations: TranslationData = {
         'projects.technologies': 'Technologies',
         'projects.repository': 'Repository',
         'projects.demo': 'Live Demo',
+        'projects.liveDemo': 'Live Demo',
+        'projects.source': 'Source',
         'projects.details': 'Project Details',
         'projects.description': 'Description',
         'projects.features': 'Key Features',
@@ -182,15 +205,46 @@ export const portfolioTranslations: TranslationData = {
         // Education
         'education.computer.degree': 'Computer Science Degree',
         'education.computer.description': 'Specialized in software engineering and web technologies',
+        'footer.copyright': '© 2025 Portfolio. Built with Vue.js and Tailwind CSS.',
     },
 
     es: {
+        'about.sectionTitle': 'Acerca de Mí',
+        'about.sectionDescription': 'Conoce más sobre mi experiencia, formación y lo que impulsa mi pasión por el desarrollo.',
+        'about.subtitle': 'Hola, soy Desarrollador',
+        'about.experience':
+            'Con más de 1 año de experiencia en desarrollo web, me especializo en crear aplicaciones modernas, responsivas y fáciles de usar. Disfruto trabajar tanto en frontend como en backend para entregar soluciones completas.',
+        'about.approach':
+            'Mi enfoque combina experiencia técnica con creatividad para construir aplicaciones que no solo funcionan bien, sino que también ofrecen excelentes experiencias de usuario.',
+        'about.stats.years': '1+',
+        'about.stats.yearsLabel': 'Años de Experiencia',
+        'about.stats.projectsLabel': 'Proyectos Completados',
+        'contact.responseBox.title': 'Tiempo de Respuesta',
+        'contact.responseBox.description': 'Normalmente respondo los mensajes en menos de 24 horas. Si es urgente, por favor indícalo en tu mensaje.',
+        // ClassicPortfolio extras
+        'nav.logo': 'Portafolio',
+        'projects.viewMyWork': 'Ver Mi Trabajo',
+        'contact.form.namePlaceholder': 'Tu nombre',
+        'contact.form.emailPlaceholder': 'tu.email@ejemplo.com',
+        'contact.form.messagePlaceholder': 'Cuéntame sobre tu proyecto...',
+        'contact.availableWorldwide': 'Disponible en todo el mundo',
         // Navigation
         'nav.home': 'Inicio',
         'nav.about': 'Acerca de',
         'nav.skills': 'Habilidades',
         'nav.projects': 'Proyectos',
         'nav.contact': 'Contacto',
+
+        'skills.sectionTitle': 'Habilidades y Experiencia',
+        'skills.sectionDescription': 'Tecnologías y herramientas que uso para dar vida a las ideas.',
+        'projects.sectionTitle': 'Proyectos Destacados',
+        'projects.sectionDescription': 'Una selección de proyectos que muestran mis habilidades y experiencia.',
+        'contact.sectionTitle': 'Contacto',
+        'contact.sectionDescription': '¿Listo para comenzar un proyecto o simplemente quieres conversar? Me encantaría saber de ti.',
+        'contact.form.name': 'Nombre',
+        'contact.form.email': 'Email',
+        'contact.form.message': 'Mensaje',
+        'contact.form.send': 'Enviar Mensaje',
 
         // Hero section
         'hero.greeting': 'Hola, soy',
@@ -205,7 +259,6 @@ export const portfolioTranslations: TranslationData = {
         'about.title': 'Acerca de Mí',
         'about.description':
             'Soy un desarrollador full-stack apasionado con experiencia en tecnologías web modernas. Me encanta crear aplicaciones eficientes, escalables y fáciles de usar.',
-        'about.experience': 'Años de Experiencia',
         'about.projects': 'Proyectos Completados',
         'about.technologies': 'Tecnologías Dominadas',
 
@@ -250,6 +303,18 @@ export const portfolioTranslations: TranslationData = {
         // Footer
         'footer.rights': 'Todos los derechos reservados.',
         'footer.built': 'Construido con Vue.js, Laravel y Tailwind CSS',
+        'footer.copyright': '© 2025 Portfolio. Construido con Vue.js y Tailwind CSS.',
+
+        // Proyectos
+        'projects.adoptafacil.title': 'AdoptaFácil',
+        'projects.adoptafacil.description':
+            'AdoptaFácil es un ecosistema digital completo diseñado para revolucionar el proceso de adopción de mascotas en Colombia. La plataforma combina tecnologías modernas con un enfoque en el bienestar animal, creando una experiencia integral que conecta a adoptantes, dueños de mascotas, refugios y socios comerciales en un solo lugar.',
+        'projects.vision4k.title': 'Vision4K',
+        'projects.vision4k.description':
+            'Vision4K es una plataforma moderna para compartir y descargar fondos de pantalla en ultra alta definición (4K). Ofrece una experiencia de usuario fluida con un enfoque en visuales de alta calidad y fácil navegación.',
+        'projects.portfolio.title': 'Portafolio',
+        'projects.portfolio.description':
+            'Este es un portfolio moderno, elegante y profesional construido con tecnologías de vanguardia. El sitio está completamente modularizado en componentes reutilizables y cuenta con soporte para múltiples idiomas (español, inglés y mandarín).',
 
         // Revolutionary Interface
         'interface.mode': 'Modo de Interfaz',
@@ -308,6 +373,8 @@ export const portfolioTranslations: TranslationData = {
         'projects.technologies': 'Tecnologías',
         'projects.repository': 'Repositorio',
         'projects.demo': 'Demo en Vivo',
+        'projects.liveDemo': 'Demo en Vivo',
+        'projects.source': 'Código fuente',
         'projects.details': 'Detalles del Proyecto',
         'projects.description': 'Descripción',
         'projects.features': 'Características Principales',
@@ -364,6 +431,23 @@ export const portfolioTranslations: TranslationData = {
     },
 
     zh: {
+        'about.sectionTitle': '关于我',
+        'about.sectionDescription': '了解我的背景、经验以及驱动我热情的原因。',
+        'about.subtitle': '你好，我是开发者',
+        'about.experience': '拥有超过1年的网页开发经验，专注于创建现代、响应式且用户友好的应用程序。喜欢前后端技术，提供完整解决方案。',
+        'about.approach': '我的方法结合了技术专长与创造性解决问题，打造不仅功能完善且用户体验优异的应用。',
+        'about.stats.years': '1+',
+        'about.stats.yearsLabel': '年经验',
+        'about.stats.projectsLabel': '完成项目',
+        'contact.responseBox.title': '响应时间',
+        'contact.responseBox.description': '我通常会在24小时内回复消息。如有紧急事项，请在消息中注明。',
+        // ClassicPortfolio extras
+        'nav.logo': '作品集',
+        'projects.viewMyWork': '查看我的作品',
+        'contact.form.namePlaceholder': '您的姓名',
+        'contact.form.emailPlaceholder': '您的邮箱@example.com',
+        'contact.form.messagePlaceholder': '请描述您的项目...',
+        'contact.availableWorldwide': '全球可用',
         // Navigation
         'nav.home': '首页',
         'nav.about': '关于我',
@@ -382,7 +466,6 @@ export const portfolioTranslations: TranslationData = {
         // About section
         'about.title': '关于我',
         'about.description': '我是一名充满激情的全栈开发者，在现代网络技术方面有丰富经验。我喜欢创建高效、可扩展且用户友好的应用程序。',
-        'about.experience': '年工作经验',
         'about.projects': '完成项目',
         'about.technologies': '掌握技术',
 
@@ -393,6 +476,16 @@ export const portfolioTranslations: TranslationData = {
         'skills.backend': '后端开发',
         'skills.database': '数据库管理',
         'skills.tools': '开发工具',
+        'skills.sectionTitle': '技能与专长',
+        'skills.sectionDescription': '我用来实现创意的技术和工具。',
+        'projects.sectionTitle': '精选项目',
+        'projects.sectionDescription': '展示我技能和经验的部分项目。',
+        'contact.sectionTitle': '联系我',
+        'contact.sectionDescription': '准备开始项目或想聊聊？欢迎联系我。',
+        'contact.form.name': '姓名',
+        'contact.form.email': '邮箱',
+        'contact.form.message': '信息',
+        'contact.form.send': '发送信息',
 
         // Projects section
         'projects.title': '精选项目',
@@ -482,11 +575,22 @@ export const portfolioTranslations: TranslationData = {
         'projects.technologies': '技术栈',
         'projects.repository': '代码仓库',
         'projects.demo': '在线演示',
+        'projects.liveDemo': '实时演示',
+        'projects.source': '源代码',
         'projects.details': '项目详情',
         'projects.description': '描述',
         'projects.features': '主要特性',
         'projects.challenge': '挑战',
         'projects.solution': '解决方案',
+        'projects.adoptafacil.title': 'AdoptaFácil',
+        'projects.adoptafacil.description':
+            'AdoptaFácil 是一個完整的數位生態系統，旨在徹底改變哥倫比亞的寵物領養流程。該平台將現代科技與動物福利概念結合，打造集領養者、寵物主人、收容所和商業夥伴於一身的全方位體驗。',
+        'projects.vision4k.title': 'Vision4K',
+        'projects.vision4k.description':
+            'Vision4K 是一個現代化的平台，旨在分享和下載超高畫質（4K）的桌面背景。它提供流暢的用戶體驗，專注於高品質的視覺效果和易於導航。',
+        'projects.portfolio.title': '作品集',
+        'projects.portfolio.description':
+            '這是一個現代、優雅和專業的組合，採用先鋒技術構建。該網站是一個完整的模組化元件，可重複使用，並支援多種慣用語（西班牙語、英語和普通話）。',
 
         // Revolutionary Interface Specific
         'revolutionary.welcome': '欢迎来到未来',
@@ -535,5 +639,8 @@ export const portfolioTranslations: TranslationData = {
         // Education
         'education.computer.degree': '计算机科学学位',
         'education.computer.description': '专注于软件工程和Web技术',
+
+        // Footer
+        'footer.copyright': '© 2025 Portfolio。使用 Vue.js 和 Tailwind CSS 建置。',
     },
 };

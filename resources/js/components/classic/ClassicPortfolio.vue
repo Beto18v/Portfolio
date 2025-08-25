@@ -1,10 +1,101 @@
 <script setup lang="ts">
+import { translationInstance } from '@/composables/translationInstance';
 import { usePortfolioData } from '@/composables/usePortfolioData';
 import { Briefcase, Code, ExternalLink, Github, Mail, MapPin, User } from 'lucide-vue-next';
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import LanguageSelector from '../fixedcont/LanguageSelector.vue';
 
-const { personalInfo, projects, skills, contactInfo, skillCategoryNames, sectionTexts } = usePortfolioData();
+const { projects, skills, skillCategoryNames } = usePortfolioData();
+const { t, language } = translationInstance;
+
+const personalInfo = computed(() => ({
+    name: t('personal.name', 'Nicolas Valenzuela'),
+    title: t('personal.title', 'Full Stack Developer'),
+    bio: t(
+        'personal.bio',
+        'Innovative Digital Solutions Creator. Passionate developer with expertise in modern web technologies, creating efficient and scalable applications.',
+    ),
+    location: t('personal.location', 'Madrid, Spain'),
+    email: t('personal.email', 'contact@portfolio.dev'),
+    phone: t('personal.phone', '+57 310 207 9572'),
+    website: t('personal.website', 'https://portfolio.dev'),
+    github: t('personal.github', 'https://github.com/beto18v'),
+    linkedin: t('personal.linkedin', 'https://linkedin.com/in/beto18v'),
+    profileImage: t('personal.profileImage', '/Foto.png'),
+}));
+
+const sectionTexts = computed(() => ({
+    nav: {
+        home: t('nav.home', 'Home'),
+        about: t('nav.about', 'About'),
+        skills: t('nav.skills', 'Skills'),
+        projects: t('nav.projects', 'Projects'),
+        contact: t('nav.contact', 'Contact'),
+        logo: t('nav.logo', 'Portfolio'),
+    },
+    about: {
+        sectionTitle: t('about.sectionTitle', 'About Me'),
+        sectionDescription: t('about.sectionDescription', 'Learn more about my background, experience, and what drives my passion for development.'),
+        subtitle: t('about.subtitle', "Hello, I'm a Developer"),
+        experience: t(
+            'about.experience',
+            'With over 1 year of experience in web development, I specialize in creating modern, responsive, and user-friendly applications. I enjoy working with both frontend and backend technologies to deliver complete solutions.',
+        ),
+        approach: t(
+            'about.approach',
+            'My approach combines technical expertise with creative problem-solving to build applications that not only function well but also provide excellent user experiences.',
+        ),
+        stats: {
+            years: t('about.stats.years', '1+'),
+            yearsLabel: t('about.stats.yearsLabel', 'Years Experience'),
+            projects: t('about.stats.projects', projects.value.length.toString() + '+'),
+            projectsLabel: t('about.stats.projectsLabel', 'Projects Completed'),
+        },
+    },
+    skills: {
+        sectionTitle: t('skills.sectionTitle', 'Skills & Expertise'),
+        sectionDescription: t('skills.sectionDescription', 'Technologies and tools I use to bring ideas to life.'),
+    },
+    projects: {
+        sectionTitle: t('projects.sectionTitle', 'Featured Projects'),
+        sectionDescription: t('projects.sectionDescription', 'A selection of projects that showcase my skills and experience.'),
+        viewMyWork: t('projects.viewMyWork', 'View My Work'),
+    },
+    contact: {
+        sectionTitle: t('contact.sectionTitle', 'Get In Touch'),
+        sectionDescription: t('contact.sectionDescription', "Ready to start a project or just want to chat? I'd love to hear from you."),
+        form: {
+            name: t('contact.form.name', 'Name'),
+            email: t('contact.form.email', 'Email'),
+            message: t('contact.form.message', 'Message'),
+            send: t('contact.form.send', 'Send Message'),
+            namePlaceholder: t('contact.form.namePlaceholder', 'Your name'),
+            emailPlaceholder: t('contact.form.emailPlaceholder', 'your.email@example.com'),
+            messagePlaceholder: t('contact.form.messagePlaceholder', 'Tell me about your project...'),
+        },
+        infoTitle: t('contact.infoTitle', 'Contact Information'),
+        availableWorldwide: t('contact.availableWorldwide', 'Available worldwide'),
+        responseBox: {
+            title: t('contact.responseBox.title', 'Response Time'),
+            description: t(
+                'contact.responseBox.description',
+                'I typically respond to messages within 24 hours. For urgent matters, please mention it in your message.',
+            ),
+        },
+    },
+    footer: {
+        copyright: t('footer.copyright', '© 2025 Portfolio. Built with Vue.js and Tailwind CSS.'),
+    },
+}));
+
+const contactInfo = computed(() => ({
+    email: personalInfo.value.email,
+    github: personalInfo.value.github,
+    linkedin: personalInfo.value.linkedin,
+    phone: personalInfo.value.phone,
+    location: personalInfo.value.location,
+    website: personalInfo.value.website,
+}));
 
 /**
  * ClassicPortfolio Component
@@ -33,25 +124,27 @@ const activeSection = ref('hero');
 const isMenuOpen = ref(false);
 
 // Skills organized by category, con nivel y descripción
-const skillCategories = Object.entries(
-    skills.reduce<Record<string, any[]>>((acc, skill) => {
-        if (!acc[skill.category]) acc[skill.category] = [];
-        acc[skill.category].push(skill);
-        return acc;
-    }, {}),
-).map(([category, skillList]) => ({
-    name: skillCategoryNames[category as keyof typeof skillCategoryNames] || category,
-    skills: skillList,
-}));
+const skillCategories = computed(() =>
+    Object.entries(
+        skills.reduce<Record<string, any[]>>((acc, skill) => {
+            if (!acc[skill.category]) acc[skill.category] = [];
+            acc[skill.category].push(skill);
+            return acc;
+        }, {}),
+    ).map(([category, skillList]) => ({
+        name: t(`skills.category.${category}`, skillCategoryNames[category as keyof typeof skillCategoryNames] || category),
+        skills: skillList,
+    })),
+);
 
 // Navigation items
-const navItems = [
-    { id: 'hero', label: sectionTexts.nav.home, icon: User },
-    { id: 'about', label: sectionTexts.nav.about, icon: User },
-    { id: 'skills', label: sectionTexts.nav.skills, icon: Code },
-    { id: 'projects', label: sectionTexts.nav.projects, icon: Briefcase },
-    { id: 'contact', label: sectionTexts.nav.contact, icon: Mail },
-];
+const navItems = computed(() => [
+    { id: 'hero', label: t('nav.home', sectionTexts.value.nav.home), icon: User },
+    { id: 'about', label: t('nav.about', sectionTexts.value.nav.about), icon: User },
+    { id: 'skills', label: t('nav.skills', sectionTexts.value.nav.skills), icon: Code },
+    { id: 'projects', label: t('nav.projects', sectionTexts.value.nav.projects), icon: Briefcase },
+    { id: 'contact', label: t('nav.contact', sectionTexts.value.nav.contact), icon: Mail },
+]);
 
 // Scroll to section
 const scrollToSection = (sectionId: string) => {
@@ -65,7 +158,7 @@ const scrollToSection = (sectionId: string) => {
 
 // Handle scroll to update active section
 const handleScroll = () => {
-    const sections = navItems.map((item) => item.id);
+    const sections = navItems.value.map((item: any) => item.id);
     const scrollPosition = window.scrollY + 100;
 
     for (const sectionId of sections) {
@@ -96,7 +189,7 @@ onMounted(() => {
             <div class="mx-auto max-w-6xl px-6">
                 <div class="flex h-16 items-center justify-between">
                     <!-- Logo -->
-                    <div class="-gray-800 text-xl font-bold text-gray-900">Portfolio</div>
+                    <div class="-gray-800 text-xl font-bold text-gray-900">{{ sectionTexts.nav.logo }}</div>
 
                     <!-- Desktop Navigation -->
                     <div class="hidden items-center space-x-8 md:flex">
@@ -151,13 +244,13 @@ onMounted(() => {
                         @click="scrollToSection('projects')"
                         class="rounded-lg bg-gray-900 px-8 py-3 font-medium text-white transition-colors hover:bg-gray-800"
                     >
-                        View My Work
+                        {{ sectionTexts.projects.viewMyWork }}
                     </button>
                     <button
                         @click="scrollToSection('contact')"
                         class="rounded-lg border border-gray-300 px-8 py-3 font-medium text-gray-900 transition-colors hover:bg-gray-50"
                     >
-                        Get In Touch
+                        {{ sectionTexts.contact.sectionTitle }}
                     </button>
                 </div>
             </div>
@@ -250,7 +343,7 @@ onMounted(() => {
                     <div
                         v-for="project in projects"
                         :key="project.id"
-                        class="-gray-50 overflow-hidden rounded-xl border border-gray-200 bg-white transition-shadow hover:shadow-lg"
+                        class="-gray-50 flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white transition-shadow hover:shadow-lg"
                     >
                         <div
                             class="-gray-300 flex h-48 w-full items-center justify-center overflow-hidden rounded-xl border-2 border-gray-200 bg-gray-200"
@@ -258,7 +351,7 @@ onMounted(() => {
                             <img v-if="project.image" :src="project.image" :alt="project.title" class="h-full w-full rounded-xl" />
                             <Briefcase v-else class="h-12 w-12 text-gray-600" />
                         </div>
-                        <div class="p-6">
+                        <div class="flex flex-1 flex-col p-6">
                             <div class="mb-2 flex items-center justify-between">
                                 <h3 class="text-xl font-semibold text-gray-900">{{ project.title }}</h3>
                                 <span class="rounded bg-gray-100 px-2 py-1 text-xs text-gray-600">
@@ -275,7 +368,8 @@ onMounted(() => {
                                     {{ tech }}
                                 </span>
                             </div>
-                            <div class="flex gap-3">
+                            <div class="flex-1"></div>
+                            <div class="mt-4 flex gap-3">
                                 <a
                                     v-if="project.liveUrl"
                                     :href="project.liveUrl"
@@ -284,7 +378,7 @@ onMounted(() => {
                                     class="flex items-center gap-2 rounded-lg bg-gray-900 px-4 py-2 text-sm text-white transition-colors hover:bg-gray-800"
                                 >
                                     <ExternalLink :size="14" />
-                                    Live Demo
+                                    {{ t('projects.liveDemo', 'Live Demo') }}
                                 </a>
                                 <a
                                     v-if="project.githubUrl"
@@ -294,7 +388,7 @@ onMounted(() => {
                                     class="flex items-center gap-2 rounded-lg border border-gray-300 px-4 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50"
                                 >
                                     <Github :size="14" />
-                                    Source
+                                    {{ t('projects.source', 'Source') }}
                                 </a>
                             </div>
                         </div>
@@ -319,24 +413,24 @@ onMounted(() => {
                                 <label class="mb-2 block text-sm font-medium text-gray-700">{{ sectionTexts.contact.form.name }}</label>
                                 <input
                                     type="text"
-                                    class="-gray-400 w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500"
-                                    placeholder="Your name"
+                                    class="-gray-400 w-full rounded-lg border border-gray-300 px-4 py-3 text-black outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500"
+                                    :placeholder="sectionTexts.contact.form.namePlaceholder"
                                 />
                             </div>
                             <div>
                                 <label class="mb-2 block text-sm font-medium text-gray-700">{{ sectionTexts.contact.form.email }}</label>
                                 <input
                                     type="email"
-                                    class="-gray-400 w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500"
-                                    placeholder="your.email@example.com"
+                                    class="-gray-400 w-full rounded-lg border border-gray-300 px-4 py-3 text-black outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500"
+                                    :placeholder="sectionTexts.contact.form.emailPlaceholder"
                                 />
                             </div>
                             <div>
                                 <label class="mb-2 block text-sm font-medium text-gray-700">{{ sectionTexts.contact.form.message }}</label>
                                 <textarea
                                     rows="5"
-                                    class="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500"
-                                    placeholder="Tell me about your project..."
+                                    class="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 text-black outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500"
+                                    :placeholder="sectionTexts.contact.form.messagePlaceholder"
                                 ></textarea>
                             </div>
                             <button
@@ -361,7 +455,7 @@ onMounted(() => {
                             </div>
                             <div class="flex items-center gap-4">
                                 <MapPin class="h-5 w-5 text-gray-600" />
-                                <span class="text-gray-600">Available worldwide</span>
+                                <span class="text-gray-600">{{ sectionTexts.contact.availableWorldwide }}</span>
                             </div>
                         </div>
 

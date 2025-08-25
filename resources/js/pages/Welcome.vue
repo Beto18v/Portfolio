@@ -4,7 +4,6 @@ const { projects, skills } = usePortfolioData();
 
 import { useTranslation } from '@/composables/useTranslation';
 import { portfolioTranslations } from '@/data/translations';
-import type { PortfolioData } from '@/types/portfolio';
 import { Head } from '@inertiajs/vue3';
 import { computed, onMounted, ref } from 'vue';
 
@@ -30,7 +29,7 @@ const currentSection = ref<'profile' | 'skills' | 'projects' | 'contact'>('profi
 const isTransitioning = ref(false);
 
 // Portfolio data - customize these values for your personal information
-const portfolioData: PortfolioData = {
+const portfolioData = computed(() => ({
     // Personal information
     name: 'Nicolas A. Valenzuela',
     profileImage: 'public/Foto.png',
@@ -55,9 +54,9 @@ const portfolioData: PortfolioData = {
         category: skill.category as import('@/types/portfolio').SkillCategory,
     })),
 
-    // Projects data - replace with your actual projects
+    // Projects data - now reactive
     projects: projects.value,
-};
+}));
 
 // Interface switching animations (faster transition)
 const switchInterface = (mode: 'holo' | 'space' | 'traditional') => {
