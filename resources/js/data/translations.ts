@@ -6,6 +6,16 @@ import type { TranslationData } from '@/composables/useTranslation';
  */
 export const portfolioTranslations: TranslationData = {
     en: {
+        // Space Projects Buttons
+        'space.projects.view': 'View',
+        'space.projects.code': 'Code',
+        // Space Contact Protocols & Response Time
+        'space.contact.protocols.heading': 'Contact Protocols',
+        'space.contact.protocols.available': 'Available for projects',
+        'space.contact.response.heading': 'Response Time',
+        'space.contact.response.online': 'Online: Usually responds within hours',
+        'space.contact.response.busy': 'Busy: Responds within 24 hours',
+        'space.contact.response.offline': 'Offline: Responds within 2-3 days',
         // Space Contact Form
         'space.contact.form.heading': 'Send Message',
         'space.contact.form.name': 'Your Name',
@@ -243,6 +253,16 @@ export const portfolioTranslations: TranslationData = {
     },
 
     es: {
+        // Space Projects Buttons
+        'space.projects.view': 'Ver',
+        'space.projects.code': 'Código',
+        // Space Contact Protocols & Response Time
+        'space.contact.protocols.heading': 'Protocolos de Contacto',
+        'space.contact.protocols.available': 'Disponible para proyectos',
+        'space.contact.response.heading': 'Tiempo de Respuesta',
+        'space.contact.response.online': 'En línea: suele responder en horas',
+        'space.contact.response.busy': 'Ocupado: responde en 24 horas',
+        'space.contact.response.offline': 'Desconectado: responde en 2-3 días',
         // Space Contact Form
         'space.contact.form.heading': 'Enviar Mensaje',
         'space.contact.form.name': 'Tu Nombre',
@@ -498,6 +518,16 @@ export const portfolioTranslations: TranslationData = {
     },
 
     zh: {
+        // Space Projects Buttons
+        'space.projects.view': '查看',
+        'space.projects.code': '代码',
+        // Space Contact Protocols & Response Time
+        'space.contact.protocols.heading': '联系协议',
+        'space.contact.protocols.available': '可参与项目',
+        'space.contact.response.heading': '响应时间',
+        'space.contact.response.online': '在线：通常数小时内回复',
+        'space.contact.response.busy': '忙碌：24小时内回复',
+        'space.contact.response.offline': '离线：2-3天内回复',
         // Space Contact Form
         'space.contact.form.heading': '发送消息',
         'space.contact.form.name': '你的名字',

@@ -221,7 +221,7 @@ const scrollToModule = (moduleId: string) => {
                             <div
                                 v-for="project in projects"
                                 :key="project.id"
-                                class="overflow-hidden rounded-xl border border-pink-400/20 bg-black/40 transition-all duration-300 hover:scale-105 hover:border-pink-400/40"
+                                class="flex h-full flex-col overflow-hidden rounded-xl border border-pink-400/20 bg-black/40 transition-all duration-300 hover:scale-105 hover:border-pink-400/40"
                             >
                                 <div
                                     class="flex h-48 w-full items-center justify-center overflow-hidden rounded-xl border-2 border-pink-400/30 bg-gradient-to-br from-gray-800 to-gray-900"
@@ -234,7 +234,7 @@ const scrollToModule = (moduleId: string) => {
                                         loading="lazy"
                                     />
                                 </div>
-                                <div class="p-6">
+                                <div class="flex flex-1 flex-col p-6">
                                     <div class="mb-2 flex items-center justify-between">
                                         <h3 class="text-xl font-semibold text-white">{{ project.title }}</h3>
                                         <span class="rounded bg-pink-400/20 px-2 py-1 text-xs text-pink-300">
@@ -251,7 +251,7 @@ const scrollToModule = (moduleId: string) => {
                                             {{ tech }}
                                         </span>
                                     </div>
-                                    <div class="flex gap-3">
+                                    <div class="mt-auto flex gap-3">
                                         <a
                                             v-if="project.liveUrl"
                                             :href="project.liveUrl"
@@ -260,7 +260,7 @@ const scrollToModule = (moduleId: string) => {
                                             class="flex items-center gap-1 rounded-lg bg-pink-500 px-3 py-2 text-sm text-white transition-colors hover:bg-pink-600"
                                         >
                                             <Eye :size="14" />
-                                            View
+                                            {{ t('space.projects.view', 'View') }}
                                         </a>
                                         <a
                                             v-if="project.githubUrl"
@@ -270,7 +270,7 @@ const scrollToModule = (moduleId: string) => {
                                             class="flex items-center gap-1 rounded-lg bg-gray-700 px-3 py-2 text-sm text-white transition-colors hover:bg-gray-600"
                                         >
                                             <Github :size="14" />
-                                            Code
+                                            {{ t('space.projects.code', 'Code') }}
                                         </a>
                                     </div>
                                 </div>
@@ -324,7 +324,9 @@ const scrollToModule = (moduleId: string) => {
 
                             <div class="space-y-6">
                                 <div class="rounded-xl border border-yellow-400/20 bg-black/40 p-6">
-                                    <h3 class="mb-4 text-xl font-semibold text-white">Contact Protocols</h3>
+                                    <h3 class="mb-4 text-xl font-semibold text-white">
+                                        {{ t('space.contact.protocols.heading', 'Contact Protocols') }}
+                                    </h3>
                                     <div class="space-y-3">
                                         <div class="flex items-center gap-3">
                                             <Mail class="text-yellow-400" :size="20" />
@@ -336,17 +338,17 @@ const scrollToModule = (moduleId: string) => {
                                         </div>
                                         <div class="flex items-center gap-3">
                                             <Zap class="text-yellow-400" :size="20" />
-                                            <span class="text-gray-300">Available for projects</span>
+                                            <span class="text-gray-300">{{ t('space.contact.protocols.available', 'Available for projects') }}</span>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="rounded-xl border border-yellow-400/20 bg-black/40 p-6">
-                                    <h3 class="mb-4 text-xl font-semibold text-white">Response Time</h3>
+                                    <h3 class="mb-4 text-xl font-semibold text-white">{{ t('space.contact.response.heading', 'Response Time') }}</h3>
                                     <div class="text-gray-300">
-                                        <div class="mb-2">🟢 Online: Usually responds within hours</div>
-                                        <div class="mb-2">🟡 Busy: Responds within 24 hours</div>
-                                        <div>🔴 Offline: Responds within 2-3 days</div>
+                                        <div class="mb-2">🟢 {{ t('space.contact.response.online', 'Online: Usually responds within hours') }}</div>
+                                        <div class="mb-2">🟡 {{ t('space.contact.response.busy', 'Busy: Responds within 24 hours') }}</div>
+                                        <div>🔴 {{ t('space.contact.response.offline', 'Offline: Responds within 2-3 days') }}</div>
                                     </div>
                                 </div>
                             </div>
