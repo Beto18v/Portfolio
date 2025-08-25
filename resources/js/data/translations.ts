@@ -6,6 +6,18 @@ import type { TranslationData } from '@/composables/useTranslation';
  */
 export const portfolioTranslations: TranslationData = {
     en: {
+        // Space Profile Heading & Description
+        'space.profile.heading': 'Digital Profile',
+        'space.profile.description':
+            'Innovative Digital Solutions Creator. Passionate developer with expertise in modern web technologies, creating efficient and scalable applications.',
+        // Space Profile Module
+        'space.profile.title': 'Developer Profile',
+        'space.profile.status': 'STATUS',
+        'space.profile.statusText': 'Active & Available for Projects',
+        'space.profile.experience': 'EXPERIENCE',
+        'space.profile.experienceText': '1+ Years in Development',
+        'space.profile.specialization': 'SPECIALIZATION',
+        'space.profile.specializationText': 'Web Applications & Modern UI/UX',
         'about.sectionTitle': 'About Me',
         'about.sectionDescription': 'Learn more about my background, experience, and what drives my passion for development.',
         'about.subtitle': "Hello, I'm a Developer",
@@ -25,6 +37,12 @@ export const portfolioTranslations: TranslationData = {
         'contact.form.emailPlaceholder': 'your.email@example.com',
         'contact.form.messagePlaceholder': 'Tell me about your project...',
         'contact.availableWorldwide': 'Available worldwide',
+        // Space Navigation
+        'space.nav.navigatorTitle': 'SPACE STATION NAVIGATOR',
+        'space.nav.module.profile-module': 'Profile',
+        'space.nav.module.skills-module': 'Skills',
+        'space.nav.module.projects-module': 'Projects',
+        'space.nav.module.contact-module': 'Contact',
         // Navigation
         'nav.home': 'Home',
         'nav.about': 'About',
@@ -47,6 +65,7 @@ export const portfolioTranslations: TranslationData = {
         'contact.form.email': 'Email',
         'contact.form.message': 'Message',
         'contact.form.send': 'Send Message',
+        'contact.infoTitle': 'Contact Information',
         'about.description':
             'I am a passionate full-stack developer with experience in modern web technologies. I love creating efficient, scalable, and user-friendly applications.',
         'about.projects': 'Projects Completed',
@@ -209,6 +228,18 @@ export const portfolioTranslations: TranslationData = {
     },
 
     es: {
+        // Space Profile Heading & Description
+        'space.profile.heading': 'Perfil Digital',
+        'space.profile.description':
+            'Creador de soluciones digitales innovadoras. Desarrollador apasionado con experiencia en tecnologías web modernas, creando aplicaciones eficientes y escalables.',
+        // Space Profile Module
+        'space.profile.title': 'Perfil del Desarrollador',
+        'space.profile.status': 'ESTADO',
+        'space.profile.statusText': 'Activo y disponible para proyectos',
+        'space.profile.experience': 'EXPERIENCIA',
+        'space.profile.experienceText': '1+ años en desarrollo',
+        'space.profile.specialization': 'ESPECIALIZACIÓN',
+        'space.profile.specializationText': 'Aplicaciones web y UI/UX moderno',
         'about.sectionTitle': 'Acerca de Mí',
         'about.sectionDescription': 'Conoce más sobre mi experiencia, formación y lo que impulsa mi pasión por el desarrollo.',
         'about.subtitle': 'Hola, soy Desarrollador',
@@ -228,6 +259,13 @@ export const portfolioTranslations: TranslationData = {
         'contact.form.emailPlaceholder': 'tu.email@ejemplo.com',
         'contact.form.messagePlaceholder': 'Cuéntame sobre tu proyecto...',
         'contact.availableWorldwide': 'Disponible en todo el mundo',
+        // Space Navigation
+        'space.nav.navigatorTitle': 'NAVEGADOR DE LA ESTACIÓN ESPACIAL',
+        'space.nav.module.profile-module': 'Perfil',
+        'space.nav.module.skills-module': 'Habilidades',
+        'space.nav.module.projects-module': 'Proyectos',
+        'space.nav.module.contact-module': 'Contacto',
+
         // Navigation
         'nav.home': 'Inicio',
         'nav.about': 'Acerca de',
@@ -288,6 +326,7 @@ export const portfolioTranslations: TranslationData = {
         'contact.sending': 'Enviando...',
         'contact.success': '¡Mensaje enviado exitosamente!',
         'contact.error': 'Error al enviar el mensaje. Por favor intenta de nuevo.',
+        'contact.infoTitle': 'Información de Contacto',
 
         // Language selector
         'language.select': 'Seleccionar Idioma',
@@ -302,7 +341,6 @@ export const portfolioTranslations: TranslationData = {
 
         // Footer
         'footer.rights': 'Todos los derechos reservados.',
-        'footer.built': 'Construido con Vue.js, Laravel y Tailwind CSS',
         'footer.copyright': '© 2025 Portfolio. Construido con Vue.js y Tailwind CSS.',
 
         // Proyectos
@@ -366,7 +404,6 @@ export const portfolioTranslations: TranslationData = {
         'personal.github': 'GitHub',
         'personal.linkedin': 'LinkedIn',
 
-        // Projects
         'projects.featured': 'Proyectos Destacados',
         'projects.all': 'Todos los Proyectos',
         'projects.technology': 'Tecnología',
@@ -431,6 +468,17 @@ export const portfolioTranslations: TranslationData = {
     },
 
     zh: {
+        // Space Profile Heading & Description
+        'space.profile.heading': '数字档案',
+        'space.profile.description': '创新数字解决方案创造者。热衷于现代网络技术的开发者，创建高效可扩展的应用程序。',
+        // Space Profile Module
+        'space.profile.title': '开发者简介',
+        'space.profile.status': '状态',
+        'space.profile.statusText': '可参与项目，状态活跃',
+        'space.profile.experience': '经验',
+        'space.profile.experienceText': '1年以上开发经验',
+        'space.profile.specialization': '专长',
+        'space.profile.specializationText': 'Web应用与现代UI/UX',
         'about.sectionTitle': '关于我',
         'about.sectionDescription': '了解我的背景、经验以及驱动我热情的原因。',
         'about.subtitle': '你好，我是开发者',
@@ -505,6 +553,7 @@ export const portfolioTranslations: TranslationData = {
         'contact.sending': '发送中...',
         'contact.success': '消息发送成功！',
         'contact.error': '发送消息时出错。请重试。',
+        'contact.infoTitle': '联系信息',
 
         // Language selector
         'language.select': '选择语言',
@@ -639,6 +688,13 @@ export const portfolioTranslations: TranslationData = {
         // Education
         'education.computer.degree': '计算机科学学位',
         'education.computer.description': '专注于软件工程和Web技术',
+
+        // Space navigation
+        'space.nav.navigatorTitle': '太空站导航器',
+        'space.nav.module.profile-module': '个人资料',
+        'space.nav.module.skills-module': '技能',
+        'space.nav.module.projects-module': '项目',
+        'space.nav.module.contact-module': '联系',
 
         // Footer
         'footer.copyright': '© 2025 Portfolio。使用 Vue.js 和 Tailwind CSS 建置。',

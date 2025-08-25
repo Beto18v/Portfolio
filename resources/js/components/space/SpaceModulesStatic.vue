@@ -1,9 +1,16 @@
 <script setup lang="ts">
+import { translationInstance } from '@/composables/translationInstance';
 import { usePortfolioData } from '@/composables/usePortfolioData';
 import { Brain, Database, Eye, Github, Mail, Monitor, Rocket, Satellite, Server, User, Zap } from 'lucide-vue-next';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
 const { personalInfo, projects, skills, moduleTexts, contactInfo, skillCategoryNames, skillCategoryIcons } = usePortfolioData();
+const { t } = translationInstance;
+
+const moduleNavTexts = computed(() => ({
+    navigatorTitle: t('space.nav.navigatorTitle', 'SPACE STATION NAVIGATOR'),
+    moduleButton: t('space.nav.moduleButton', 'Module'), // fallback, not used directly
+}));
 
 const spaceModules = [
     {
@@ -90,7 +97,7 @@ const scrollToModule = (moduleId: string) => {
         <!-- Space station navigation -->
         <div class="fixed top-8 left-1/2 z-50 -translate-x-1/2 transform">
             <div class="rounded-2xl border border-purple-400/30 bg-black/80 px-6 py-4 backdrop-blur-lg">
-                <div class="mb-2 text-center font-mono text-sm text-purple-400">SPACE STATION NAVIGATOR</div>
+                <div class="mb-2 text-center font-mono text-sm text-purple-400">{{ moduleNavTexts.navigatorTitle }}</div>
                 <div class="flex gap-4">
                     <button
                         v-for="module in spaceModules"
@@ -104,7 +111,7 @@ const scrollToModule = (moduleId: string) => {
                         "
                     >
                         <component :is="module.icon" :size="16" />
-                        {{ module.title.split(' ')[0] }}
+                        {{ t(`space.nav.module.${module.id}`, module.title.split(' ')[0]) }}
                     </button>
                 </div>
             </div>
@@ -120,8 +127,8 @@ const scrollToModule = (moduleId: string) => {
                     >
                         <div class="mb-8 text-center">
                             <component :is="spaceModules[0].icon" class="mx-auto mb-4 text-cyan-400" :size="48" />
-                            <h2 class="mb-2 text-4xl font-bold text-white">{{ spaceModules[0].title }}</h2>
-                            <p class="text-cyan-300">{{ spaceModules[0].description }}</p>
+                            <h2 class="mb-2 text-4xl font-bold text-white">{{ t('space.profile.heading', spaceModules[0].title) }}</h2>
+                            <p class="text-cyan-300">{{ t('space.profile.description', spaceModules[0].description) }}</p>
                         </div>
 
                         <div class="grid items-center gap-8 md:grid-cols-2">
@@ -131,22 +138,22 @@ const scrollToModule = (moduleId: string) => {
                                         <img :src="personalInfo.profileImage" alt="Profile" class="h-full w-full rounded-full object-cover" />
                                     </div>
                                 </div>
-                                <h3 class="mb-2 text-2xl font-bold text-white">Developer Profile</h3>
+                                <h3 class="mb-2 text-2xl font-bold text-white">{{ t('space.profile.title', 'Developer Profile') }}</h3>
                                 <p class="text-gray-300">{{ personalInfo.bio }}</p>
                             </div>
 
                             <div class="space-y-4">
                                 <div class="rounded-xl border border-cyan-400/20 bg-black/40 p-4">
-                                    <div class="mb-1 font-mono text-sm text-cyan-400">STATUS</div>
-                                    <div class="text-white">Active & Available for Projects</div>
+                                    <div class="mb-1 font-mono text-sm text-cyan-400">{{ t('space.profile.status', 'STATUS') }}</div>
+                                    <div class="text-white">{{ t('space.profile.statusText', 'Active & Available for Projects') }}</div>
                                 </div>
                                 <div class="rounded-xl border border-cyan-400/20 bg-black/40 p-4">
-                                    <div class="mb-1 font-mono text-sm text-cyan-400">EXPERIENCE</div>
-                                    <div class="text-white">1+ Years in Development</div>
+                                    <div class="mb-1 font-mono text-sm text-cyan-400">{{ t('space.profile.experience', 'EXPERIENCE') }}</div>
+                                    <div class="text-white">{{ t('space.profile.experienceText', '1+ Years in Development') }}</div>
                                 </div>
                                 <div class="rounded-xl border border-cyan-400/20 bg-black/40 p-4">
-                                    <div class="mb-1 font-mono text-sm text-cyan-400">SPECIALIZATION</div>
-                                    <div class="text-white">Web Applications & Modern UI/UX</div>
+                                    <div class="mb-1 font-mono text-sm text-cyan-400">{{ t('space.profile.specialization', 'SPECIALIZATION') }}</div>
+                                    <div class="text-white">{{ t('space.profile.specializationText', 'Web Applications & Modern UI/UX') }}</div>
                                 </div>
                             </div>
                         </div>

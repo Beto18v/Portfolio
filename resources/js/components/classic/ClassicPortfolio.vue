@@ -6,7 +6,7 @@ import { computed, onMounted, ref } from 'vue';
 import LanguageSelector from '../fixedcont/LanguageSelector.vue';
 
 const { projects, skills, skillCategoryNames } = usePortfolioData();
-const { t, language } = translationInstance;
+const { t } = translationInstance;
 
 const personalInfo = computed(() => ({
     name: t('personal.name', 'Nicolas Valenzuela'),
@@ -203,26 +203,6 @@ onMounted(() => {
                             {{ item.label }}
                         </button>
                     </div>
-
-                    <!-- Mobile menu button -->
-                    <button @click="isMenuOpen = !isMenuOpen" class="-gray-900 p-2 text-gray-600 hover:text-gray-900 md:hidden">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- Mobile Navigation -->
-                <div v-if="isMenuOpen" class="-gray-300 border-t border-gray-200 py-4 md:hidden">
-                    <button
-                        v-for="item in navItems"
-                        :key="item.id"
-                        @click="scrollToSection(item.id)"
-                        class="-gray-100 -gray-900 block w-full px-4 py-2 text-left text-gray-600 transition-colors hover:bg-gray-50 hover:text-gray-900"
-                        :class="{ 'bg-gray-50 font-semibold text-gray-900': activeSection === item.id }"
-                    >
-                        {{ item.label }}
-                    </button>
                 </div>
             </div>
         </nav>
