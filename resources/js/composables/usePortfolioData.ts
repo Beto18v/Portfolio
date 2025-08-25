@@ -8,21 +8,21 @@ import { useTranslation } from './useTranslation';
 export function usePortfolioData() {
     const { t } = useTranslation();
 
-    // Personal information with translations
+    // Personal information
     const personalInfo = computed(() => ({
         name: t('personal.name', 'Full Stack Developer'),
         title: t('personal.title', 'Innovative Digital Solutions Creator'),
         bio: t('personal.bio', 'Passionate developer with expertise in modern web technologies, creating efficient and scalable applications.'),
         location: 'Madrid, Spain',
         email: 'contact@portfolio.dev',
-        phone: '+34 123 456 789',
+        phone: '+57 310 207 9572',
         website: 'https://portfolio.dev',
-        github: 'https://github.com/developer',
-        linkedin: 'https://linkedin.com/in/developer',
+        github: 'https://github.com/beto18v',
+        linkedin: 'https://linkedin.com/in/beto18v',
         profileImage: '/Foto.png',
     }));
 
-    // Project data with translations
+    // Projects data
     const projects = computed(() => [
         {
             id: '1',
@@ -65,39 +65,15 @@ export function usePortfolioData() {
         },
     ]);
 
-    // Experience data with translations
-    const experience = computed(() => [
-        {
-            id: 1,
-            position: t('experience.senior.title', 'Senior Full Stack Developer'),
-            company: 'Tech Solutions Inc.',
-            location: 'Madrid, Spain',
-            startDate: '2022-01',
-            endDate: t('experience.current', 'Current'),
-            description: t('experience.senior.description', 'Lead development of enterprise web applications using modern technologies'),
-            technologies: ['Vue.js', 'Laravel', 'AWS', 'Docker'],
-        },
-        {
-            id: 2,
-            position: t('experience.fullstack.title', 'Full Stack Developer'),
-            company: 'Digital Agency Ltd.',
-            location: 'Barcelona, Spain',
-            startDate: '2020-03',
-            endDate: '2021-12',
-            description: t('experience.fullstack.description', 'Developed custom web solutions for clients across various industries'),
-            technologies: ['React', 'Node.js', 'PostgreSQL', 'MongoDB'],
-        },
-    ]);
-
-    // Education data with translations
+    // Education data
     const education = computed(() => [
         {
             id: 1,
             degree: t('education.computer.degree', 'Computer Science Degree'),
-            institution: 'Universidad Politécnica de Madrid',
-            location: 'Madrid, Spain',
-            startDate: '2016-09',
-            endDate: '2020-06',
+            institution: 'Servicio Nacional de Aprendizaje - SENA',
+            location: 'Bogotá, Colombia',
+            startDate: '2024-06',
+            endDate: '2026-06',
             description: t('education.computer.description', 'Specialized in software engineering and web technologies'),
         },
     ]);
@@ -135,33 +111,11 @@ export function usePortfolioData() {
         { name: 'Composer', level: 3, category: 'tools', description: 'PHP dependency manager and autoloading' },
     ];
 
-    // Achievement stats with translations
-    const achievements = computed(() => ({
-        projects: {
-            value: 50,
-            label: t('achievements.projects', 'Projects Completed'),
-        },
-        clients: {
-            value: 25,
-            label: t('achievements.clients', 'Happy Clients'),
-        },
-        technologies: {
-            value: 15,
-            label: t('achievements.technologies', 'Technologies Mastered'),
-        },
-        experience: {
-            value: 4,
-            label: t('achievements.years', 'Years Experience'),
-        },
-    }));
-
     return {
         personalInfo,
         projects,
-        experience,
         education,
         skills,
-        achievements,
         t,
     };
 }

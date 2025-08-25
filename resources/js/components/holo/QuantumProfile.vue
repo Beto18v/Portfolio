@@ -316,7 +316,7 @@ const getTraitVisualization = (trait: any, index: number) => {
                                 <div
                                     class="absolute inset-12 overflow-hidden rounded-full border border-cyan-400/50 bg-gradient-to-br from-cyan-400/20 to-purple-600/20 backdrop-blur-sm"
                                 >
-                                    <img src="../../../public/Foto.png" />
+                                    <img src="Foto.png" />
                                 </div>
 
                                 <!-- Status indicators -->

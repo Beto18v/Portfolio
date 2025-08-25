@@ -1,11 +1,9 @@
 <script setup lang="ts">
-// import { skills } from '@/types/skills';
-import Foto from '@/../../public/Foto.png';
-
-import { useTranslation } from '@/composables/useTranslation';
 import { Briefcase, Code, ExternalLink, Github, Mail, MapPin, User } from 'lucide-vue-next';
 import { onMounted, ref } from 'vue';
-import LanguageSelector from './LanguageSelector.vue';
+import Foto from '../../../../public/Foto.png';
+import { useTranslation } from '../../composables/useTranslation';
+import LanguageSelector from '../fixedcont/LanguageSelector.vue';
 const { t } = useTranslation();
 
 /**
