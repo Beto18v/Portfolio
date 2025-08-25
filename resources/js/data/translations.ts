@@ -6,6 +6,21 @@ import type { TranslationData } from '@/composables/useTranslation';
  */
 export const portfolioTranslations: TranslationData = {
     en: {
+        // Space Contact Form
+        'space.contact.form.heading': 'Send Message',
+        'space.contact.form.name': 'Your Name',
+        'space.contact.form.email': 'Your Email',
+        'space.contact.form.message': 'Your Message',
+        'space.contact.form.submit': 'Transmit Message',
+        // Space Contact Heading & Description
+        'space.contact.heading': 'Contact & Communication',
+        'space.contact.description': 'Get in touch or send a message to start a new mission.',
+        // Space Projects Heading & Description
+        'space.projects.heading': 'Projects & Missions',
+        'space.projects.description': 'A selection of my work and creative missions.',
+        // Space Skills Heading & Description
+        'space.skills.heading': 'Skills & Expertise',
+        'space.skills.description': 'Technologies and tools I use to bring ideas to life.',
         // Space Profile Heading & Description
         'space.profile.heading': 'Digital Profile',
         'space.profile.description':
@@ -228,6 +243,21 @@ export const portfolioTranslations: TranslationData = {
     },
 
     es: {
+        // Space Contact Form
+        'space.contact.form.heading': 'Enviar Mensaje',
+        'space.contact.form.name': 'Tu Nombre',
+        'space.contact.form.email': 'Tu Correo',
+        'space.contact.form.message': 'Tu Mensaje',
+        'space.contact.form.submit': 'Transmitir Mensaje',
+        // Space Contact Heading & Description
+        'space.contact.heading': 'Contacto y Comunicación',
+        'space.contact.description': 'Ponte en contacto o envía un mensaje para iniciar una nueva misión.',
+        // Space Projects Heading & Description
+        'space.projects.heading': 'Proyectos y Misiones',
+        'space.projects.description': 'Una selección de mi trabajo y misiones creativas.',
+        // Space Skills Heading & Description
+        'space.skills.heading': 'Habilidades y Experiencia',
+        'space.skills.description': 'Tecnologías y herramientas que uso para dar vida a las ideas.',
         // Space Profile Heading & Description
         'space.profile.heading': 'Perfil Digital',
         'space.profile.description':
@@ -468,6 +498,21 @@ export const portfolioTranslations: TranslationData = {
     },
 
     zh: {
+        // Space Contact Form
+        'space.contact.form.heading': '发送消息',
+        'space.contact.form.name': '你的名字',
+        'space.contact.form.email': '你的邮箱',
+        'space.contact.form.message': '你的信息',
+        'space.contact.form.submit': '发送信息',
+        // Space Contact Heading & Description
+        'space.contact.heading': '联系与沟通',
+        'space.contact.description': '欢迎联系或发送消息，开启新任务。',
+        // Space Projects Heading & Description
+        'space.projects.heading': '项目与任务',
+        'space.projects.description': '我的作品和创意任务精选。',
+        // Space Skills Heading & Description
+        'space.skills.heading': '技能与专长',
+        'space.skills.description': '我用来实现创意的技术和工具。',
         // Space Profile Heading & Description
         'space.profile.heading': '数字档案',
         'space.profile.description': '创新数字解决方案创造者。热衷于现代网络技术的开发者，创建高效可扩展的应用程序。',

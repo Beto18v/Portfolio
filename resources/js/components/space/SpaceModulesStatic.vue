@@ -169,8 +169,8 @@ const scrollToModule = (moduleId: string) => {
                     >
                         <div class="mb-12 text-center">
                             <component :is="spaceModules[1].icon" class="mx-auto mb-4 text-green-400" :size="48" />
-                            <h2 class="mb-2 text-4xl font-bold text-white">{{ spaceModules[1].title }}</h2>
-                            <p class="text-green-300">{{ spaceModules[1].description }}</p>
+                            <h2 class="mb-2 text-4xl font-bold text-white">{{ t('space.skills.heading', spaceModules[1].title) }}</h2>
+                            <p class="text-green-300">{{ t('space.skills.description', spaceModules[1].description) }}</p>
                         </div>
 
                         <div class="grid gap-8 md:grid-cols-3">
@@ -213,8 +213,8 @@ const scrollToModule = (moduleId: string) => {
                     >
                         <div class="mb-12 text-center">
                             <component :is="spaceModules[2].icon" class="mx-auto mb-4 text-pink-400" :size="48" />
-                            <h2 class="mb-2 text-4xl font-bold text-white">{{ spaceModules[2].title }}</h2>
-                            <p class="text-pink-300">{{ spaceModules[2].description }}</p>
+                            <h2 class="mb-2 text-4xl font-bold text-white">{{ t('space.projects.heading', spaceModules[2].title) }}</h2>
+                            <p class="text-pink-300">{{ t('space.projects.description', spaceModules[2].description) }}</p>
                         </div>
 
                         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -288,27 +288,27 @@ const scrollToModule = (moduleId: string) => {
                     >
                         <div class="mb-12 text-center">
                             <component :is="spaceModules[3].icon" class="mx-auto mb-4 text-yellow-400" :size="48" />
-                            <h2 class="mb-2 text-4xl font-bold text-white">{{ spaceModules[3].title }}</h2>
-                            <p class="text-yellow-300">{{ spaceModules[3].description }}</p>
+                            <h2 class="mb-2 text-4xl font-bold text-white">{{ t('space.contact.heading', spaceModules[3].title) }}</h2>
+                            <p class="text-yellow-300">{{ t('space.contact.description', spaceModules[3].description) }}</p>
                         </div>
 
                         <div class="grid gap-8 md:grid-cols-2">
                             <div class="space-y-6">
                                 <div class="rounded-xl border border-yellow-400/20 bg-black/40 p-6">
-                                    <h3 class="mb-4 text-xl font-semibold text-white">Send Message</h3>
+                                    <h3 class="mb-4 text-xl font-semibold text-white">{{ t('space.contact.form.heading', 'Send Message') }}</h3>
                                     <form class="space-y-4">
                                         <input
                                             type="text"
-                                            placeholder="Your Name"
+                                            :placeholder="t('space.contact.form.name', 'Your Name')"
                                             class="w-full rounded-lg border border-gray-600 bg-gray-800 px-4 py-3 text-white focus:border-yellow-400 focus:outline-none"
                                         />
                                         <input
                                             type="email"
-                                            placeholder="Your Email"
+                                            :placeholder="t('space.contact.form.email', 'Your Email')"
                                             class="w-full rounded-lg border border-gray-600 bg-gray-800 px-4 py-3 text-white focus:border-yellow-400 focus:outline-none"
                                         />
                                         <textarea
-                                            placeholder="Your Message"
+                                            :placeholder="t('space.contact.form.message', 'Your Message')"
                                             rows="4"
                                             class="w-full resize-none rounded-lg border border-gray-600 bg-gray-800 px-4 py-3 text-white focus:border-yellow-400 focus:outline-none"
                                         ></textarea>
@@ -316,7 +316,7 @@ const scrollToModule = (moduleId: string) => {
                                             type="submit"
                                             class="w-full rounded-lg bg-yellow-500 py-3 font-semibold text-black transition-colors hover:bg-yellow-400"
                                         >
-                                            Transmit Message
+                                            {{ t('space.contact.form.submit', 'Transmit Message') }}
                                         </button>
                                     </form>
                                 </div>
