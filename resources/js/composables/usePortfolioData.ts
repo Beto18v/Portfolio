@@ -45,6 +45,88 @@ export function usePortfolioData() {
         },
     };
 
+    // Textos de secciones y labels centralizados
+    const sectionTexts = {
+        nav: {
+            home: t('nav.home', 'Home'),
+            about: t('nav.about', 'About'),
+            skills: t('nav.skills', 'Skills'),
+            projects: t('nav.projects', 'Projects'),
+            contact: t('nav.contact', 'Contact'),
+        },
+        about: {
+            sectionTitle: t('about.sectionTitle', 'About Me'),
+            sectionDescription: t(
+                'about.sectionDescription',
+                'Learn more about my background, experience, and what drives my passion for development.',
+            ),
+            subtitle: t('about.subtitle', "Hello, I'm a Developer"),
+            experience: t(
+                'about.experience',
+                'With over 1 year of experience in web development, I specialize in creating modern, responsive, and user-friendly applications. I enjoy working with both frontend and backend technologies to deliver complete solutions.',
+            ),
+            approach: t(
+                'about.approach',
+                'My approach combines technical expertise with creative problem-solving to build applications that not only function well but also provide excellent user experiences.',
+            ),
+            stats: {
+                years: t('about.stats.years', '1+'),
+                yearsLabel: t('about.stats.yearsLabel', 'Years Experience'),
+                projects: t('about.stats.projects', '2+'),
+                projectsLabel: t('about.stats.projectsLabel', 'Projects Completed'),
+            },
+        },
+        skills: {
+            sectionTitle: t('skills.sectionTitle', 'Skills & Expertise'),
+            sectionDescription: t('skills.sectionDescription', 'Technologies and tools I use to bring ideas to life.'),
+        },
+        projects: {
+            sectionTitle: t('projects.sectionTitle', 'Featured Projects'),
+            sectionDescription: t('projects.sectionDescription', 'A selection of projects that showcase my skills and experience.'),
+        },
+        contact: {
+            sectionTitle: t('contact.sectionTitle', 'Get In Touch'),
+            sectionDescription: t('contact.sectionDescription', "Ready to start a project or just want to chat? I'd love to hear from you."),
+            form: {
+                name: t('contact.form.name', 'Name'),
+                email: t('contact.form.email', 'Email'),
+                message: t('contact.form.message', 'Message'),
+                send: t('contact.form.send', 'Send Message'),
+            },
+            infoTitle: t('contact.infoTitle', 'Contact Information'),
+            responseBox: {
+                title: t('contact.responseBox.title', 'Response Time'),
+                description: t(
+                    'contact.responseBox.description',
+                    'I typically respond to messages within 24 hours. For urgent matters, please mention it in your message.',
+                ),
+            },
+        },
+        footer: {
+            copyright: t('footer.copyright', '© 2025 Portfolio. Built with Vue.js and Tailwind CSS.'),
+        },
+        ui: {
+            skillsMatrixHeader: t('ui.skillsMatrixHeader', 'SKILLS MATRIX'),
+            skillsMatrixSubtitle: t('ui.skillsMatrixSubtitle', '{count} technologies loaded'),
+            skillsMatrixModalProficiency: t('ui.skillsMatrixModalProficiency', 'Proficiency'),
+            skillsMatrixModalClose: t('ui.skillsMatrixModalClose', 'Close Matrix'),
+            quantumProfile: {
+                name: t('ui.quantumProfile.name', 'Nicolas A. Valenzuela'),
+                title: t('ui.quantumProfile.title', 'Full Stack Developer'),
+                location: t('ui.quantumProfile.location', 'Bogota, Colombia'),
+                availability: t('ui.quantumProfile.availability', 'Available'),
+                passion: t('ui.quantumProfile.passion', 'Creating digital experiences'),
+                currentFocus: t('ui.quantumProfile.currentFocus', 'Modern web technologies'),
+            },
+            quantumProjectsHeader: t('ui.quantumProjectsHeader', 'Projects Portfolio'),
+            quantumProjectsStatusOnline: t('ui.quantumProjectsStatusOnline', 'All Systems Online'),
+            quantumProjectsStatusActive: t('ui.quantumProjectsStatusActive', 'Portfolio Active'),
+            contactSuccess: t('ui.contactSuccess', 'Message sent successfully!'),
+            contactError: t('ui.contactError', 'There was an error sending your message.'),
+            contactLoading: t('ui.contactLoading', 'Sending...'),
+        },
+    };
+
     // Nombres de categorías de skills
     const skillCategoryNames = {
         frontend: t('skills.category.frontend', 'Frontend'),
@@ -169,6 +251,7 @@ export function usePortfolioData() {
         skillCategoryIcons,
         moduleTexts,
         contactInfo,
+        sectionTexts,
         t,
     };
 }

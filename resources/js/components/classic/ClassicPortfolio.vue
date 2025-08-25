@@ -4,7 +4,7 @@ import { Briefcase, Code, ExternalLink, Github, Mail, MapPin, User } from 'lucid
 import { onMounted, ref } from 'vue';
 import LanguageSelector from '../fixedcont/LanguageSelector.vue';
 
-const { personalInfo, projects, skills, contactInfo, skillCategoryNames } = usePortfolioData();
+const { personalInfo, projects, skills, contactInfo, skillCategoryNames, sectionTexts } = usePortfolioData();
 
 /**
  * ClassicPortfolio Component
@@ -46,11 +46,11 @@ const skillCategories = Object.entries(
 
 // Navigation items
 const navItems = [
-    { id: 'hero', label: 'Home', icon: User },
-    { id: 'about', label: 'About', icon: User },
-    { id: 'skills', label: 'Skills', icon: Code },
-    { id: 'projects', label: 'Projects', icon: Briefcase },
-    { id: 'contact', label: 'Contact', icon: Mail },
+    { id: 'hero', label: sectionTexts.nav.home, icon: User },
+    { id: 'about', label: sectionTexts.nav.about, icon: User },
+    { id: 'skills', label: sectionTexts.nav.skills, icon: Code },
+    { id: 'projects', label: sectionTexts.nav.projects, icon: Briefcase },
+    { id: 'contact', label: sectionTexts.nav.contact, icon: Mail },
 ];
 
 // Scroll to section
@@ -167,31 +167,29 @@ onMounted(() => {
         <section id="about" class="bg-gray-100 px-6 py-20">
             <div class="mx-auto max-w-6xl">
                 <div class="mb-16 text-center">
-                    <h2 class="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">About Me</h2>
+                    <h2 class="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">{{ sectionTexts.about.sectionTitle }}</h2>
                     <p class="mx-auto max-w-2xl text-lg text-gray-600">
-                        Learn more about my background, experience, and what drives my passion for development.
+                        {{ sectionTexts.about.sectionDescription }}
                     </p>
                 </div>
 
                 <div class="grid items-center gap-12 md:grid-cols-2">
                     <div>
-                        <h3 class="mb-4 text-2xl font-semibold text-gray-900">Hello, I'm a Developer</h3>
+                        <h3 class="mb-4 text-2xl font-semibold text-gray-900">{{ sectionTexts.about.subtitle }}</h3>
                         <p class="mb-6 leading-relaxed text-gray-600">
-                            With over 1 year of experience in web development, I specialize in creating modern, responsive, and user-friendly
-                            applications. I enjoy working with both frontend and backend technologies to deliver complete solutions.
+                            {{ sectionTexts.about.experience }}
                         </p>
                         <p class="mb-6 leading-relaxed text-gray-600">
-                            My approach combines technical expertise with creative problem-solving to build applications that not only function well
-                            but also provide excellent user experiences.
+                            {{ sectionTexts.about.approach }}
                         </p>
                         <div class="grid grid-cols-2 gap-6">
                             <div class="rounded-lg border border-gray-200 bg-white p-4 text-center">
-                                <div class="text-2xl font-bold text-gray-900">1+</div>
-                                <div class="text-sm text-gray-600">Years Experience</div>
+                                <div class="text-2xl font-bold text-gray-900">{{ sectionTexts.about.stats.years }}</div>
+                                <div class="text-sm text-gray-600">{{ sectionTexts.about.stats.yearsLabel }}</div>
                             </div>
                             <div class="rounded-lg border border-gray-200 bg-white p-4 text-center">
-                                <div class="text-2xl font-bold text-gray-900">2+</div>
-                                <div class="-gray-700 text-sm text-gray-600">Projects Completed</div>
+                                <div class="text-2xl font-bold text-gray-900">{{ sectionTexts.about.stats.projects }}</div>
+                                <div class="-gray-700 text-sm text-gray-600">{{ sectionTexts.about.stats.projectsLabel }}</div>
                             </div>
                         </div>
                     </div>
@@ -208,8 +206,8 @@ onMounted(() => {
         <section id="skills" class="px-6 py-20">
             <div class="mx-auto max-w-6xl">
                 <div class="mb-16 text-center">
-                    <h2 class="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">Skills & Expertise</h2>
-                    <p class="mx-auto max-w-2xl text-lg text-gray-600">Technologies and tools I use to bring ideas to life.</p>
+                    <h2 class="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">{{ sectionTexts.skills.sectionTitle }}</h2>
+                    <p class="mx-auto max-w-2xl text-lg text-gray-600">{{ sectionTexts.skills.sectionDescription }}</p>
                 </div>
 
                 <div class="grid gap-8 md:grid-cols-3">
@@ -244,8 +242,8 @@ onMounted(() => {
         <section id="projects" class="bg-gray-100 px-6 py-20">
             <div class="mx-auto max-w-6xl">
                 <div class="mb-16 text-center">
-                    <h2 class="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">Featured Projects</h2>
-                    <p class="mx-auto max-w-2xl text-lg text-gray-600">A selection of projects that showcase my skills and experience.</p>
+                    <h2 class="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">{{ sectionTexts.projects.sectionTitle }}</h2>
+                    <p class="mx-auto max-w-2xl text-lg text-gray-600">{{ sectionTexts.projects.sectionDescription }}</p>
                 </div>
 
                 <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -309,16 +307,16 @@ onMounted(() => {
         <section id="contact" class="px-6 py-20">
             <div class="mx-auto max-w-4xl">
                 <div class="mb-16 text-center">
-                    <h2 class="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">Get In Touch</h2>
-                    <p class="mx-auto max-w-2xl text-lg text-gray-600">Ready to start a project or just want to chat? I'd love to hear from you.</p>
+                    <h2 class="mb-4 text-3xl font-bold text-gray-900 md:text-4xl">{{ sectionTexts.contact.sectionTitle }}</h2>
+                    <p class="mx-auto max-w-2xl text-lg text-gray-600">{{ sectionTexts.contact.sectionDescription }}</p>
                 </div>
 
                 <div class="grid gap-12 md:grid-cols-2">
                     <div>
-                        <h3 class="mb-6 text-xl font-semibold text-gray-900">Send a Message</h3>
+                        <h3 class="mb-6 text-xl font-semibold text-gray-900">{{ sectionTexts.contact.form.send }}</h3>
                         <form class="space-y-6">
                             <div>
-                                <label class="mb-2 block text-sm font-medium text-gray-700">Name</label>
+                                <label class="mb-2 block text-sm font-medium text-gray-700">{{ sectionTexts.contact.form.name }}</label>
                                 <input
                                     type="text"
                                     class="-gray-400 w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500"
@@ -326,7 +324,7 @@ onMounted(() => {
                                 />
                             </div>
                             <div>
-                                <label class="mb-2 block text-sm font-medium text-gray-700">Email</label>
+                                <label class="mb-2 block text-sm font-medium text-gray-700">{{ sectionTexts.contact.form.email }}</label>
                                 <input
                                     type="email"
                                     class="-gray-400 w-full rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500"
@@ -334,7 +332,7 @@ onMounted(() => {
                                 />
                             </div>
                             <div>
-                                <label class="mb-2 block text-sm font-medium text-gray-700">Message</label>
+                                <label class="mb-2 block text-sm font-medium text-gray-700">{{ sectionTexts.contact.form.message }}</label>
                                 <textarea
                                     rows="5"
                                     class="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500"
@@ -345,13 +343,13 @@ onMounted(() => {
                                 type="submit"
                                 class="-gray-700 w-full rounded-lg bg-gray-900 py-3 font-medium text-white transition-colors hover:bg-gray-800"
                             >
-                                Send Message
+                                {{ sectionTexts.contact.form.send }}
                             </button>
                         </form>
                     </div>
 
                     <div>
-                        <h3 class="mb-6 text-xl font-semibold text-gray-900">Contact Information</h3>
+                        <h3 class="mb-6 text-xl font-semibold text-gray-900">{{ sectionTexts.contact.infoTitle }}</h3>
                         <div class="space-y-4">
                             <div class="flex items-center gap-4">
                                 <Mail class="h-5 w-5 text-gray-600" />
@@ -368,9 +366,9 @@ onMounted(() => {
                         </div>
 
                         <div class="mt-8 rounded-lg border border-gray-200 bg-gray-50 p-6">
-                            <h4 class="mb-2 font-semibold text-gray-900">Response Time</h4>
+                            <h4 class="mb-2 font-semibold text-gray-900">{{ sectionTexts.contact.responseBox.title }}</h4>
                             <p class="text-sm text-gray-600">
-                                I typically respond to messages within 24 hours. For urgent matters, please mention it in your message.
+                                {{ sectionTexts.contact.responseBox.description }}
                             </p>
                         </div>
                     </div>
@@ -381,7 +379,7 @@ onMounted(() => {
         <!-- Footer -->
         <footer class="border-t border-gray-200 bg-gray-100 px-6 py-8">
             <div class="mx-auto max-w-6xl text-center">
-                <p class="text-gray-600">© 2025 Portfolio. Built with Vue.js and Tailwind CSS.</p>
+                <p class="text-gray-600">{{ sectionTexts.footer.copyright }}</p>
             </div>
         </footer>
     </div>

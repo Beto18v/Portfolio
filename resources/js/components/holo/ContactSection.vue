@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import { useTranslation } from '@/composables/useTranslation';
+import { usePortfolioData } from '@/composables/usePortfolioData';
 import { AlertCircle, Check, Loader2, Mail, MessageSquare, Send, User } from 'lucide-vue-next';
 import { computed, reactive, ref } from 'vue';
+const { sectionTexts } = usePortfolioData();
 
 /**
  * Contact Section Component
  * Features a contact form with validation, loading states, and success/error handling
  * Integrates with backend email sending functionality
  */
-
-const { t } = useTranslation();
 
 // Form data interface
 interface ContactForm {
@@ -65,37 +64,37 @@ const validateForm = (): boolean => {
 
     // Validate name
     if (!form.name.trim()) {
-        errors.name = t('contact.error.name', 'Name is required');
+        errors.name = sectionTexts.ui.contactError;
         isValid = false;
     } else if (form.name.trim().length < 2) {
-        errors.name = t('contact.error.nameLength', 'Name must be at least 2 characters');
+        errors.name = 'Name must be at least 2 characters';
         isValid = false;
     }
 
     // Validate email
     if (!form.email.trim()) {
-        errors.email = t('contact.error.email', 'Email is required');
+        errors.email = 'Email is required';
         isValid = false;
     } else if (!isValidEmail(form.email)) {
-        errors.email = t('contact.error.emailFormat', 'Please enter a valid email address');
+        errors.email = 'Please enter a valid email address';
         isValid = false;
     }
 
     // Validate subject
     if (!form.subject.trim()) {
-        errors.subject = t('contact.error.subject', 'Subject is required');
+        errors.subject = 'Subject is required';
         isValid = false;
     } else if (form.subject.trim().length < 5) {
-        errors.subject = t('contact.error.subjectLength', 'Subject must be at least 5 characters');
+        errors.subject = 'Subject must be at least 5 characters';
         isValid = false;
     }
 
     // Validate message
     if (!form.message.trim()) {
-        errors.message = t('contact.error.message', 'Message is required');
+        errors.message = 'Message is required';
         isValid = false;
     } else if (form.message.trim().length < 10) {
-        errors.message = t('contact.error.messageLength', 'Message must be at least 10 characters');
+        errors.message = 'Message must be at least 10 characters';
         isValid = false;
     }
 
@@ -166,7 +165,7 @@ const handleSubmit = async () => {
     } catch (error) {
         console.error('Contact form error:', error);
         showError.value = true;
-        errorMessage.value = error instanceof Error ? error.message : t('contact.error');
+        errorMessage.value = error instanceof Error ? error.message : sectionTexts.ui.contactError;
     } finally {
         isLoading.value = false;
     }
@@ -178,8 +177,8 @@ const isFormValid = computed(() => {
 });
 
 const buttonText = computed(() => {
-    if (isLoading.value) return t('contact.sending');
-    return t('contact.send');
+    if (isLoading.value) return sectionTexts.ui.contactLoading;
+    return sectionTexts.contact.form.send;
 });
 </script>
 
@@ -216,7 +215,7 @@ const buttonText = computed(() => {
                         <div class="mb-8 text-center">
                             <div class="inline-flex items-center gap-3 text-cyan-400">
                                 <div class="h-2 w-2 animate-pulse rounded-full bg-cyan-400"></div>
-                                <span class="font-mono text-sm">{{ t('holo.command.contact', 'COMMUNICATION CHANNEL ACTIVE') }}</span>
+                                <span class="font-mono text-sm">{{ sectionTexts.contact.sectionTitle }}</span>
                                 <div class="h-2 w-2 animate-pulse rounded-full bg-cyan-400"></div>
                             </div>
                         </div>
@@ -229,7 +228,7 @@ const buttonText = computed(() => {
                             >
                                 <Check :size="20" class="flex-shrink-0 text-green-400" />
                                 <p class="font-medium text-green-400">
-                                    {{ t('contact.success') }}
+                                    {{ sectionTexts.ui.contactSuccess }}
                                 </p>
                             </div>
 
@@ -240,7 +239,7 @@ const buttonText = computed(() => {
                             >
                                 <AlertCircle :size="20" class="flex-shrink-0 text-red-400" />
                                 <p class="font-medium text-red-400">
-                                    {{ errorMessage || t('contact.error') }}
+                                    {{ errorMessage || sectionTexts.ui.contactError }}
                                 </p>
                             </div>
 
@@ -249,13 +248,13 @@ const buttonText = computed(() => {
                                 <div class="holo-field">
                                     <label for="name" class="mb-2 block font-mono text-sm font-medium text-cyan-400">
                                         <User :size="16" class="mr-2 inline" />
-                                        {{ t('contact.name') }}
+                                        {{ sectionTexts.contact.form.name }}
                                     </label>
                                     <input
                                         id="name"
                                         v-model="form.name"
                                         type="text"
-                                        :placeholder="t('contact.name')"
+                                        :placeholder="sectionTexts.contact.form.name"
                                         class="w-full rounded-lg border border-cyan-400/30 bg-black/50 px-4 py-3 text-cyan-400 placeholder-cyan-400/50 backdrop-blur-sm transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none"
                                         :class="{ 'border-red-400 focus:border-red-400 focus:ring-red-400/20': errors.name }"
                                     />
@@ -266,13 +265,13 @@ const buttonText = computed(() => {
                                 <div class="holo-field">
                                     <label for="email" class="mb-2 block font-mono text-sm font-medium text-cyan-400">
                                         <Mail :size="16" class="mr-2 inline" />
-                                        {{ t('contact.email') }}
+                                        {{ sectionTexts.contact.form.email }}
                                     </label>
                                     <input
                                         id="email"
                                         v-model="form.email"
                                         type="email"
-                                        :placeholder="t('contact.email')"
+                                        :placeholder="sectionTexts.contact.form.email"
                                         class="w-full rounded-lg border border-cyan-400/30 bg-black/50 px-4 py-3 text-cyan-400 placeholder-cyan-400/50 backdrop-blur-sm transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none"
                                         :class="{ 'border-red-400 focus:border-red-400 focus:ring-red-400/20': errors.email }"
                                     />
@@ -284,13 +283,13 @@ const buttonText = computed(() => {
                             <div class="holo-field">
                                 <label for="subject" class="mb-2 block font-mono text-sm font-medium text-cyan-400">
                                     <MessageSquare :size="16" class="mr-2 inline" />
-                                    {{ t('contact.subject') }}
+                                    {{ sectionTexts.contact.form.message }}
                                 </label>
                                 <input
                                     id="subject"
                                     v-model="form.subject"
                                     type="text"
-                                    :placeholder="t('contact.subject')"
+                                    :placeholder="sectionTexts.contact.form.message"
                                     class="w-full rounded-lg border border-cyan-400/30 bg-black/50 px-4 py-3 text-cyan-400 placeholder-cyan-400/50 backdrop-blur-sm transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none"
                                     :class="{ 'border-red-400 focus:border-red-400 focus:ring-red-400/20': errors.subject }"
                                 />
@@ -301,13 +300,13 @@ const buttonText = computed(() => {
                             <div class="holo-field">
                                 <label for="message" class="mb-2 block font-mono text-sm font-medium text-cyan-400">
                                     <MessageSquare :size="16" class="mr-2 inline" />
-                                    {{ t('contact.message') }}
+                                    {{ sectionTexts.contact.form.message }}
                                 </label>
                                 <textarea
                                     id="message"
                                     v-model="form.message"
                                     rows="6"
-                                    :placeholder="t('contact.message')"
+                                    :placeholder="sectionTexts.contact.form.message"
                                     class="w-full resize-none rounded-lg border border-cyan-400/30 bg-black/50 px-4 py-3 text-cyan-400 placeholder-cyan-400/50 backdrop-blur-sm transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none"
                                     :class="{ 'border-red-400 focus:border-red-400 focus:ring-red-400/20': errors.message }"
                                 ></textarea>

@@ -2,8 +2,8 @@
 import { usePortfolioData } from '@/composables/usePortfolioData';
 import { Code2, Database, Server, Star, Wrench } from 'lucide-vue-next';
 import { ref } from 'vue';
-
-const { skills, skillCategoryNames } = usePortfolioData();
+// ...existing code...
+const { skills, skillCategoryNames, sectionTexts } = usePortfolioData();
 const selectedSkill = ref<any>(null);
 
 const skillCategories = {
@@ -62,8 +62,8 @@ const skillCategories = {
         <div class="relative z-10 flex h-full flex-col">
             <!-- Header -->
             <div class="py-8 text-center">
-                <h1 class="mb-2 font-mono text-4xl font-bold text-cyan-400">SKILLS MATRIX</h1>
-                <p class="text-lg text-cyan-300">{{ skills.length }} technologies loaded</p>
+                <h1 class="mb-2 font-mono text-4xl font-bold text-cyan-400">{{ sectionTexts.ui.skillsMatrixHeader }}</h1>
+                <p class="text-lg text-cyan-300">{{ sectionTexts.ui.skillsMatrixSubtitle.replace('{count}', String(skills.length)) }}</p>
                 <div class="mx-auto mt-4 h-1 w-24 bg-gradient-to-r from-cyan-400 to-blue-500"></div>
             </div>
 
@@ -180,7 +180,9 @@ const skillCategories = {
                             />
                         </div>
 
-                        <div class="mb-4 font-mono text-xl text-cyan-300">{{ Math.round((selectedSkill.level / 5) * 100) }}% Proficiency</div>
+                        <div class="mb-4 font-mono text-xl text-cyan-300">
+                            {{ Math.round((selectedSkill.level / 5) * 100) }}% {{ sectionTexts.ui.skillsMatrixModalProficiency }}
+                        </div>
 
                         <p class="text-lg leading-relaxed text-gray-300">
                             {{ selectedSkill.description }}
@@ -192,7 +194,7 @@ const skillCategories = {
                             @click="selectedSkill = null"
                             class="rounded-xl bg-cyan-400 px-8 py-3 text-lg font-semibold text-black transition-colors hover:bg-cyan-300"
                         >
-                            Close Matrix
+                            {{ sectionTexts.ui.skillsMatrixModalClose }}
                         </button>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useTranslation } from '@/composables/useTranslation';
+import { usePortfolioData } from '@/composables/usePortfolioData';
 import { Award, Brain, Code, Heart, Target, TrendingUp, Zap } from 'lucide-vue-next';
 import { computed, onMounted, ref } from 'vue';
 
@@ -9,7 +9,7 @@ import { computed, onMounted, ref } from 'vue';
  * Features quantum-inspired design and interactive elements
  */
 
-const { t } = useTranslation();
+const { sectionTexts } = usePortfolioData();
 
 interface Props {
     description?: string;
@@ -30,12 +30,12 @@ const props = withDefaults(defineProps<Props>(), {
 // Animation and particle system
 const particleCanvas = ref<HTMLCanvasElement>();
 const profileData = ref({
-    name: 'Nicolas A. Valenzuela',
-    title: 'Full Stack Developer',
-    location: 'Bogota, Colombia',
-    availability: 'Available',
-    passion: 'Creating digital experiences',
-    currentFocus: 'Modern web technologies',
+    name: sectionTexts.ui.quantumProfile.name,
+    title: sectionTexts.ui.quantumProfile.title,
+    location: sectionTexts.ui.quantumProfile.location,
+    availability: sectionTexts.ui.quantumProfile.availability,
+    passion: sectionTexts.ui.quantumProfile.passion,
+    currentFocus: sectionTexts.ui.quantumProfile.currentFocus,
 });
 
 // Real-time data simulation
@@ -65,7 +65,7 @@ const statistics = computed(() => [
     {
         icon: TrendingUp,
         value: props.experience,
-        label: t('about.experience', 'Years Experience'),
+        label: sectionTexts.about.stats.yearsLabel,
         suffix: '+',
         color: 'text-blue-400',
         bgColor: 'bg-blue-500/20',
@@ -74,7 +74,7 @@ const statistics = computed(() => [
     {
         icon: Award,
         value: props.projectsCompleted,
-        label: t('about.projects', 'Projects Completed'),
+        label: sectionTexts.about.stats.projectsLabel,
         suffix: '+',
         color: 'text-green-400',
         bgColor: 'bg-green-500/20',
@@ -83,7 +83,7 @@ const statistics = computed(() => [
     {
         icon: Code,
         value: props.technologiesMastered,
-        label: t('about.technologies', 'Technologies'),
+        label: sectionTexts.skills.sectionTitle,
         suffix: '+',
         color: 'text-purple-400',
         bgColor: 'bg-purple-500/20',
@@ -435,7 +435,7 @@ const getTraitVisualization = (trait: any, index: number) => {
                             <div class="relative z-10">
                                 <h4 class="mb-2 text-lg font-bold text-cyan-400">Mission Statement</h4>
                                 <p class="leading-relaxed text-gray-300">
-                                    {{ props.description || t('about.description') }}
+                                    {{ props.description || sectionTexts.about.sectionDescription }}
                                 </p>
                                 <div class="mt-4 flex items-center gap-4 text-sm">
                                     <span class="text-purple-400">💡 {{ profileData.passion }}</span>

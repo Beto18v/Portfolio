@@ -2,7 +2,9 @@
 import ContactSection from '@/components/holo/ContactSection.vue';
 import HolographicSkillsFixed from '@/components/holo/HolographicSkillsFixed.vue';
 import QuantumProfile from '@/components/holo/QuantumProfile.vue';
+import { usePortfolioData } from '@/composables/usePortfolioData';
 import { computed } from 'vue';
+const { sectionTexts } = usePortfolioData();
 
 const props = defineProps<{ currentSection: string; portfolioData: any }>();
 
@@ -52,7 +54,7 @@ const showContact = computed(() => props.currentSection === 'contact');
 
                                     <h2 class="relative mb-6 text-5xl font-bold text-white">
                                         <span class="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                                            Projects Portfolio
+                                            {{ sectionTexts.ui.quantumProjectsHeader }}
                                         </span>
                                     </h2>
                                 </div>
@@ -65,11 +67,11 @@ const showContact = computed(() => props.currentSection === 'contact');
                                 <div class="mt-6 flex items-center justify-center gap-6 text-sm">
                                     <div class="flex items-center gap-2">
                                         <div class="h-2 w-2 animate-pulse rounded-full bg-green-400"></div>
-                                        <span class="text-green-400">All Systems Online</span>
+                                        <span class="text-green-400">{{ sectionTexts.ui.quantumProjectsStatusOnline }}</span>
                                     </div>
                                     <div class="flex items-center gap-2">
                                         <div class="h-2 w-2 animate-pulse rounded-full bg-cyan-400"></div>
-                                        <span class="text-cyan-400">Portfolio Active</span>
+                                        <span class="text-cyan-400">{{ sectionTexts.ui.quantumProjectsStatusActive }}</span>
                                     </div>
                                 </div>
                             </div>
