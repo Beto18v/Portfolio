@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useTranslation, type Language } from '@/composables/useTranslation';
-import { portfolioTranslations } from '@/data/translations';
 import { ChevronDown, Globe } from 'lucide-vue-next';
 import { computed, onMounted, ref } from 'vue';
+import { useTranslation, type Language } from '../../composables/useTranslation';
+import { portfolioTranslations } from '../../data/translations';
 
 /**
  * Language Selector Component

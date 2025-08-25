@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { Briefcase, Code, ExternalLink, Github, Mail, MapPin, User } from 'lucide-vue-next';
 import { onMounted, ref } from 'vue';
-import Foto from '../../../../public/Foto.png';
 import { useTranslation } from '../../composables/useTranslation';
 import LanguageSelector from '../fixedcont/LanguageSelector.vue';
 const { t } = useTranslation();
@@ -155,7 +154,7 @@ onMounted(() => {
             <div class="mx-auto max-w-6xl text-center">
                 <div class="mb-8">
                     <div class="mx-auto mb-6 flex h-32 w-32 items-center justify-center rounded-full bg-gray-200">
-                        <img :src="Foto" alt="Profile" class="h-full w-full rounded-full object-cover" />
+                        <img src="/Foto.png" alt="Profile" class="h-full w-full rounded-full object-cover" />
                     </div>
                     <h1 class="mb-4 text-4xl font-bold text-gray-900 md:text-6xl">Full Stack Developer</h1>
                     <p class="mx-auto max-w-2xl text-xl leading-relaxed text-gray-600">
@@ -213,7 +212,7 @@ onMounted(() => {
                     </div>
                     <div class="text-center">
                         <div class="mx-auto flex h-80 w-80 items-center justify-center rounded-2xl bg-gray-200">
-                            <img :src="Foto" alt="Profile" class="h-full w-full rounded-full object-cover" />
+                            <img src="/Foto.png" alt="Profile" class="h-full w-full rounded-full object-cover" />
                         </div>
                     </div>
                 </div>
