@@ -1,53 +1,37 @@
 <script setup lang="ts">
-import type { Skill } from '@/types/portfolio';
+import { usePortfolioData } from '@/composables/usePortfolioData';
 import { Code2, Database, Server, Star, Wrench } from 'lucide-vue-next';
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 
-/**
- * HolographicSkills Component - Full Screen Fixed Matrix
- */
+const { skills, skillCategoryNames } = usePortfolioData();
+const selectedSkill = ref<any>(null);
 
-interface Props {
-    skills?: Skill[];
-}
-
-const props = withDefaults(defineProps<Props>(), {
-    skills: () => [],
-});
-
-// Selected skill for modal
-const selectedSkill = ref<Skill | null>(null);
-
-// Skill categorization for display
-const skillCategories = computed(() => {
-    const categories = {
-        frontend: {
-            name: 'Frontend Matrix',
-            icon: Code2,
-            color: '#00D4FF',
-            skills: props.skills.filter((s) => s.category === 'frontend'),
-        },
-        backend: {
-            name: 'Backend Core',
-            icon: Server,
-            color: '#00FF88',
-            skills: props.skills.filter((s) => s.category === 'backend'),
-        },
-        database: {
-            name: 'Data Layer',
-            icon: Database,
-            color: '#FF0080',
-            skills: props.skills.filter((s) => s.category === 'database'),
-        },
-        tools: {
-            name: 'DevOps Suite',
-            icon: Wrench,
-            color: '#FFAA00',
-            skills: props.skills.filter((s) => s.category === 'tools'),
-        },
-    };
-    return categories;
-});
+const skillCategories = {
+    frontend: {
+        name: skillCategoryNames.frontend,
+        icon: Code2,
+        color: '#00D4FF',
+        skills: skills.filter((s) => s.category === 'frontend'),
+    },
+    backend: {
+        name: skillCategoryNames.backend,
+        icon: Server,
+        color: '#00FF88',
+        skills: skills.filter((s) => s.category === 'backend'),
+    },
+    database: {
+        name: skillCategoryNames.database,
+        icon: Database,
+        color: '#FF0080',
+        skills: skills.filter((s) => s.category === 'database'),
+    },
+    tools: {
+        name: skillCategoryNames.tools,
+        icon: Wrench,
+        color: '#FFAA00',
+        skills: skills.filter((s) => s.category === 'tools'),
+    },
+};
 </script>
 
 <template>
@@ -79,7 +63,7 @@ const skillCategories = computed(() => {
             <!-- Header -->
             <div class="py-8 text-center">
                 <h1 class="mb-2 font-mono text-4xl font-bold text-cyan-400">SKILLS MATRIX</h1>
-                <p class="text-lg text-cyan-300">{{ props.skills.length }} technologies loaded</p>
+                <p class="text-lg text-cyan-300">{{ skills.length }} technologies loaded</p>
                 <div class="mx-auto mt-4 h-1 w-24 bg-gradient-to-r from-cyan-400 to-blue-500"></div>
             </div>
 

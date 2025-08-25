@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import { usePortfolioData } from '@/composables/usePortfolioData';
 import { Briefcase, Code, ExternalLink, Github, Mail, MapPin, User } from 'lucide-vue-next';
 import { onMounted, ref } from 'vue';
-import { useTranslation } from '../../composables/useTranslation';
 import LanguageSelector from '../fixedcont/LanguageSelector.vue';
-const { t } = useTranslation();
+
+const { personalInfo, projects, skills, contactInfo, skillCategoryNames } = usePortfolioData();
 
 /**
  * ClassicPortfolio Component
@@ -25,38 +26,22 @@ interface Project {
     date: string;
 }
 
-interface Props {
-    projects?: Project[];
-    skills?: any[];
-    profileData?: any;
-}
-
-const props = withDefaults(defineProps<Props>(), {
-    projects: () => [],
-    // skills: () => [], // Eliminar duplicado
-});
+// Eliminar props, todo viene del composable
 
 // Navigation state
 const activeSection = ref('hero');
 const isMenuOpen = ref(false);
 
-// Skills organized by category
-const skillCategoryNames: Record<string, string> = {
-    frontend: 'Frontend',
-    backend: 'Backend',
-    database: 'Database',
-    tools: 'Tools & DevOps',
-};
-
+// Skills organized by category, con nivel y descripción
 const skillCategories = Object.entries(
-    (props.skills ?? []).reduce<Record<string, string[]>>((acc: Record<string, string[]>, skill: any) => {
+    skills.reduce<Record<string, any[]>>((acc, skill) => {
         if (!acc[skill.category]) acc[skill.category] = [];
-        acc[skill.category].push(skill.name);
+        acc[skill.category].push(skill);
         return acc;
     }, {}),
-).map(([category, skillNames]) => ({
-    name: skillCategoryNames[category] || category,
-    skills: skillNames,
+).map(([category, skillList]) => ({
+    name: skillCategoryNames[category as keyof typeof skillCategoryNames] || category,
+    skills: skillList,
 }));
 
 // Navigation items
@@ -154,11 +139,11 @@ onMounted(() => {
             <div class="mx-auto max-w-6xl text-center">
                 <div class="mb-8">
                     <div class="mx-auto mb-6 flex h-32 w-32 items-center justify-center rounded-full bg-gray-200">
-                        <img src="/Foto.png" alt="Profile" class="h-full w-full rounded-full object-cover" />
+                        <img :src="personalInfo.profileImage" alt="Profile" class="h-full w-full rounded-full object-cover" />
                     </div>
-                    <h1 class="mb-4 text-4xl font-bold text-gray-900 md:text-6xl">Full Stack Developer</h1>
+                    <h1 class="mb-4 text-4xl font-bold text-gray-900 md:text-6xl">{{ personalInfo.title }}</h1>
                     <p class="mx-auto max-w-2xl text-xl leading-relaxed text-gray-600">
-                        {{ props.profileData?.description || t('about.description') }}
+                        {{ personalInfo.bio }}
                     </p>
                 </div>
                 <div class="flex flex-col justify-center gap-4 sm:flex-row">
@@ -212,7 +197,7 @@ onMounted(() => {
                     </div>
                     <div class="text-center">
                         <div class="mx-auto flex h-80 w-80 items-center justify-center rounded-2xl bg-gray-200">
-                            <img src="/Foto.png" alt="Profile" class="h-full w-full rounded-full object-cover" />
+                            <img :src="personalInfo.profileImage" alt="Profile" class="h-full w-full rounded-full object-cover" />
                         </div>
                     </div>
                 </div>
@@ -237,10 +222,17 @@ onMounted(() => {
                         <div class="space-y-2">
                             <div
                                 v-for="skill in category.skills"
-                                :key="skill"
-                                class="rounded-lg bg-gray-100 px-3 py-2 text-sm font-medium text-gray-700"
+                                :key="skill.name"
+                                class="flex items-center justify-between rounded-lg bg-gray-100 px-3 py-2 text-sm font-medium text-gray-700"
                             >
-                                {{ skill }}
+                                <span>{{ skill.name }}</span>
+                                <span class="flex-1"></span>
+                                <span class="flex h-3 w-24 items-center overflow-hidden rounded-full bg-gray-200">
+                                    <span
+                                        class="h-full rounded-full bg-gradient-to-r from-green-400 to-green-600"
+                                        :style="{ width: skill.level * 20 + '%' }"
+                                    ></span>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -258,7 +250,7 @@ onMounted(() => {
 
                 <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                     <div
-                        v-for="project in props.projects"
+                        v-for="project in projects"
                         :key="project.id"
                         class="-gray-50 overflow-hidden rounded-xl border border-gray-200 bg-white transition-shadow hover:shadow-lg"
                     >
@@ -363,11 +355,11 @@ onMounted(() => {
                         <div class="space-y-4">
                             <div class="flex items-center gap-4">
                                 <Mail class="h-5 w-5 text-gray-600" />
-                                <span class="text-gray-600">hello@example.com</span>
+                                <span class="text-gray-600">{{ contactInfo.email }}</span>
                             </div>
                             <div class="flex items-center gap-4">
                                 <Github class="h-5 w-5 text-gray-600" />
-                                <span class="text-gray-600">github.com/username</span>
+                                <span class="text-gray-600">{{ contactInfo.github }}</span>
                             </div>
                             <div class="flex items-center gap-4">
                                 <MapPin class="h-5 w-5 text-gray-600" />

@@ -8,18 +8,67 @@ import { useTranslation } from './useTranslation';
 export function usePortfolioData() {
     const { t } = useTranslation();
 
-    // Personal information
+    // Personal information centralizada y traducible
     const personalInfo = computed(() => ({
-        name: t('personal.name', 'Full Stack Developer'),
-        title: t('personal.title', 'Innovative Digital Solutions Creator'),
-        bio: t('personal.bio', 'Passionate developer with expertise in modern web technologies, creating efficient and scalable applications.'),
-        location: 'Madrid, Spain',
-        email: 'contact@portfolio.dev',
-        phone: '+57 310 207 9572',
-        website: 'https://portfolio.dev',
-        github: 'https://github.com/beto18v',
-        linkedin: 'https://linkedin.com/in/beto18v',
-        profileImage: '/Foto.png',
+        name: t('personal.name', 'Nicolas Valenzuela'),
+        title: t('personal.title', 'Full Stack Developer'),
+        bio: t(
+            'personal.bio',
+            'Innovative Digital Solutions Creator. Passionate developer with expertise in modern web technologies, creating efficient and scalable applications.',
+        ),
+        location: t('personal.location', 'Madrid, Spain'),
+        email: t('personal.email', 'contact@portfolio.dev'),
+        phone: t('personal.phone', '+57 310 207 9572'),
+        website: t('personal.website', 'https://portfolio.dev'),
+        github: t('personal.github', 'https://github.com/beto18v'),
+        linkedin: t('personal.linkedin', 'https://linkedin.com/in/beto18v'),
+        profileImage: t('personal.profileImage', '/Foto.png'),
+    }));
+
+    // Textos de módulos centralizados
+    const moduleTexts = {
+        personal: {
+            title: t('modules.personal.title', 'PERSONAL DATA CORE'),
+            description: t('modules.personal.description', 'Central command with developer information and statistics'),
+        },
+        skills: {
+            title: t('modules.skills.title', 'SKILLS MATRIX'),
+            description: t('modules.skills.description', 'Technical expertise and competency systems'),
+        },
+        projects: {
+            title: t('modules.projects.title', 'PROJECT ARSENAL'),
+            description: t('modules.projects.description', 'Deployed applications and development missions'),
+        },
+        contact: {
+            title: t('modules.contact.title', 'COMMUNICATION HUB'),
+            description: t('modules.contact.description', 'Establish contact and collaboration protocols'),
+        },
+    };
+
+    // Nombres de categorías de skills
+    const skillCategoryNames = {
+        frontend: t('skills.category.frontend', 'Frontend'),
+        backend: t('skills.category.backend', 'Backend'),
+        database: t('skills.category.database', 'Database'),
+        tools: t('skills.category.tools', 'Tools'),
+    };
+
+    // Iconos de categorías de skills (para uso dinámico en componentes)
+    const skillCategoryIcons = {
+        frontend: 'Monitor',
+        backend: 'Server',
+        database: 'Database',
+        tools: 'Zap',
+    };
+
+    // Información de contacto centralizada
+    const contactInfo = computed(() => ({
+        email: personalInfo.value.email,
+        github: personalInfo.value.github,
+        linkedin: personalInfo.value.linkedin,
+        phone: personalInfo.value.phone,
+        location: personalInfo.value.location,
+        website: personalInfo.value.website,
     }));
 
     // Projects data
@@ -116,6 +165,10 @@ export function usePortfolioData() {
         projects,
         education,
         skills,
+        skillCategoryNames,
+        skillCategoryIcons,
+        moduleTexts,
+        contactInfo,
         t,
     };
 }

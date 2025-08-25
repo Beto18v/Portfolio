@@ -1,123 +1,69 @@
 <script setup lang="ts">
-// import { skills } from '@/types/skills';
-import Foto from '@/../../public/Foto.png';
-import { useTranslation } from '@/composables/useTranslation';
-import { Brain, Database, Eye, Github, Mail, Monitor, Rocket, Satellite, User, Zap } from 'lucide-vue-next';
-import { computed, ref } from 'vue';
-const { t } = useTranslation();
+import { usePortfolioData } from '@/composables/usePortfolioData';
+import { Brain, Database, Eye, Github, Mail, Monitor, Rocket, Satellite, Server, User, Zap } from 'lucide-vue-next';
+import { ref } from 'vue';
 
-/**
- * SpaceModules Component - Static Scrollable Space Interface
- * All portfolio sections displayed as space modules with scroll navigation
- */
+const { personalInfo, projects, skills, moduleTexts, contactInfo, skillCategoryNames, skillCategoryIcons } = usePortfolioData();
 
-// Define interfaces
-interface Project {
-    id: string;
-    title: string;
-    description: string;
-    image: string;
-    technologies: string[];
-    liveUrl?: string;
-    githubUrl?: string;
-    category: string;
-    featured?: boolean;
-    date: string;
-}
-
-interface SpaceModule {
-    id: string;
-    title: string;
-    type: 'profile' | 'skills' | 'projects' | 'contact';
-    icon: any;
-    color: string;
-    description: string;
-    data?: any;
-}
-
-interface Props {
-    projects?: Project[];
-    skills?: any[];
-    profileData?: any;
-}
-
-const props = withDefaults(defineProps<Props>(), {
-    projects: () => [],
-    // skills: () => [], // Eliminar duplicado
-});
-
-// Space modules configuration
-const spaceModules = computed((): SpaceModule[] => [
+const spaceModules = [
     {
         id: 'profile-module',
-        title: 'PERSONAL DATA CORE',
+        title: moduleTexts.personal.title,
         type: 'profile',
         icon: User,
         color: '#00D4FF',
-        description: 'Central command with developer information and statistics',
-        data: props.profileData,
+        description: moduleTexts.personal.description,
+        data: personalInfo,
     },
     {
         id: 'skills-module',
-        title: 'SKILLS MATRIX',
+        title: moduleTexts.skills.title,
         type: 'skills',
         icon: Brain,
         color: '#00FF88',
-        description: 'Technical expertise and competency systems',
-        data: props.skills,
+        description: moduleTexts.skills.description,
+        data: skills,
     },
     {
         id: 'projects-module',
-        title: 'PROJECT ARSENAL',
+        title: moduleTexts.projects.title,
         type: 'projects',
         icon: Rocket,
         color: '#FF0080',
-        description: 'Deployed applications and development missions',
-        data: props.projects,
+        description: moduleTexts.projects.description,
+        data: projects,
     },
     {
         id: 'contact-module',
-        title: 'COMMUNICATION HUB',
+        title: moduleTexts.contact.title,
         type: 'contact',
         icon: Satellite,
         color: '#FFAA00',
-        description: 'Establish contact and collaboration protocols',
-        data: null,
+        description: moduleTexts.contact.description,
+        data: contactInfo,
     },
-]);
+];
 
-// Skills data structure
-// Agrupar skills por categoría usando los datos importados
-const skillCategoryIcons: Record<string, any> = {
-    frontend: Monitor,
-    backend: Database,
-    database: Eye,
-    tools: Zap,
+const iconMap = {
+    Monitor,
+    Database,
+    Eye,
+    Zap,
+    Server,
 };
-
-const skillCategoryNames: Record<string, string> = {
-    frontend: 'Frontend Development',
-    backend: 'Backend Development',
-    database: 'Database',
-    tools: 'DevOps & Tools',
-};
-
 const skillCategories = Object.entries(
-    (props.skills ?? []).reduce<Record<string, string[]>>((acc: Record<string, string[]>, skill: any) => {
+    skills.reduce<Record<string, any[]>>((acc, skill) => {
         if (!acc[skill.category]) acc[skill.category] = [];
-        acc[skill.category].push(skill.name);
+        acc[skill.category].push(skill);
         return acc;
     }, {}),
-).map(([category, skillNames]) => ({
-    name: skillCategoryNames[category] || category,
-    icon: skillCategoryIcons[category] || Monitor,
-    skills: skillNames,
+).map(([category, skillList]) => ({
+    name: (skillCategoryNames as Record<string, string>)[category] || category,
+    icon: iconMap[(skillCategoryIcons as Record<string, keyof typeof iconMap>)[category]] || Monitor,
+    skills: skillList,
 }));
 
-// Current active module
-const activeModule = ref<string>('profile-module');
-
-// Scroll to module
+const activeModule = ref('profile-module');
 const scrollToModule = (moduleId: string) => {
     const element = document.getElementById(moduleId);
     if (element) {
@@ -182,11 +128,11 @@ const scrollToModule = (moduleId: string) => {
                             <div class="text-center">
                                 <div class="mx-auto mb-6 h-48 w-48 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 p-2">
                                     <div class="items-cent er flex h-full w-full justify-center overflow-hidden rounded-full bg-gray-800">
-                                        <img :src="Foto" alt="Profile" class="h-full w-full rounded-full object-cover" />
+                                        <img :src="personalInfo.profileImage" alt="Profile" class="h-full w-full rounded-full object-cover" />
                                     </div>
                                 </div>
                                 <h3 class="mb-2 text-2xl font-bold text-white">Developer Profile</h3>
-                                <p class="text-gray-300">{{ props.profileData?.description || t('about.description') }}</p>
+                                <p class="text-gray-300">{{ personalInfo.bio }}</p>
                             </div>
 
                             <div class="space-y-4">
@@ -233,10 +179,17 @@ const scrollToModule = (moduleId: string) => {
                                 <div class="space-y-2">
                                     <div
                                         v-for="skill in category.skills"
-                                        :key="skill"
-                                        class="rounded-lg bg-green-400/10 px-3 py-2 font-mono text-sm text-green-300"
+                                        :key="skill.name"
+                                        class="flex items-center rounded-lg bg-green-400/10 px-3 py-2 font-mono text-sm text-green-300"
                                     >
-                                        {{ skill }}
+                                        <span>{{ skill.name }}</span>
+                                        <span class="flex-1"></span>
+                                        <span class="flex justify-end pl-10 text-fuchsia-400">
+                                            <span v-for="i in 5" :key="i">
+                                                <span v-if="i <= skill.level">&#9733;</span>
+                                                <span v-else>&#9734;</span>
+                                            </span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -259,7 +212,7 @@ const scrollToModule = (moduleId: string) => {
 
                         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                             <div
-                                v-for="project in props.projects"
+                                v-for="project in projects"
                                 :key="project.id"
                                 class="overflow-hidden rounded-xl border border-pink-400/20 bg-black/40 transition-all duration-300 hover:scale-105 hover:border-pink-400/40"
                             >
@@ -368,11 +321,11 @@ const scrollToModule = (moduleId: string) => {
                                     <div class="space-y-3">
                                         <div class="flex items-center gap-3">
                                             <Mail class="text-yellow-400" :size="20" />
-                                            <span class="text-gray-300">email@example.com</span>
+                                            <span class="text-gray-300">{{ contactInfo.email }}</span>
                                         </div>
                                         <div class="flex items-center gap-3">
                                             <Github class="text-yellow-400" :size="20" />
-                                            <span class="text-gray-300">github.com/username</span>
+                                            <span class="text-gray-300">{{ contactInfo.github }}</span>
                                         </div>
                                         <div class="flex items-center gap-3">
                                             <Zap class="text-yellow-400" :size="20" />
