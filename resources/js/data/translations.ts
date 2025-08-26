@@ -6,49 +6,28 @@ import type { TranslationData } from '@/composables/useTranslation';
  */
 export const portfolioTranslations: TranslationData = {
     en: {
-        'ui.skillsMatrixHeader': 'Skills Matrix',
-        'ui.skillsMatrixSubtitle': 'Explore {count} skills by category',
-        'ui.quantumProjectsSubtitle': '{count} innovative projects showcasing modern web development and creative solutions',
-        // Space Projects Buttons
-        'space.projects.view': 'View',
-        'space.projects.code': 'Code',
-        // Space Contact Protocols & Response Time
-        'space.contact.protocols.heading': 'Contact Protocols',
-        'space.contact.protocols.available': 'Available for projects',
-        'space.contact.response.heading': 'Response Time',
-        'space.contact.response.online': 'Online: Usually responds within hours',
-        'space.contact.response.busy': 'Busy: Responds within 24 hours',
-        'space.contact.response.offline': 'Offline: Responds within 2-3 days',
-        // Space Contact Form
-        'space.contact.form.heading': 'Send Message',
-        'space.contact.form.name': 'Your Name',
-        'space.contact.form.email': 'Your Email',
-        'space.contact.form.message': 'Your Message',
-        'space.contact.form.submit': 'Transmit Message',
-        // Space Contact Heading & Description
-        'space.contact.heading': 'Contact & Communication',
-        'space.contact.description': 'Get in touch or send a message to start a new mission.',
-        // Space Projects Heading & Description
-        'space.projects.heading': 'Projects & Missions',
-        'space.projects.description': 'A selection of my work and creative missions.',
-        // Space Skills Heading & Description
-        'space.skills.heading': 'Skills & Expertise',
-        'space.skills.description': 'Technologies and tools I use to bring ideas to life.',
-        // Space Profile Heading & Description
-        'space.profile.heading': 'Digital Profile',
-        'space.profile.description':
-            'Innovative Digital Solutions Creator. Passionate developer with expertise in modern web technologies, creating efficient and scalable applications.',
-        // Space Profile Module
-        'space.profile.title': 'Developer Profile',
-        'space.profile.status': 'STATUS',
-        'space.profile.statusText': 'Active & Available for Projects',
-        'space.profile.experience': 'EXPERIENCE',
-        'space.profile.experienceText': '1+ Years in Development',
-        'space.profile.specialization': 'SPECIALIZATION',
-        'space.profile.specializationText': 'Web Applications & Modern UI/UX',
+        // ================= HEADER =================
+        'nav.logo': 'Portfolio',
+        'nav.home': 'Home',
+        'nav.about': 'About',
+        'nav.skills': 'Skills',
+        'nav.projects': 'Projects',
+        'nav.contact': 'Contact',
+        'nav.quantum': 'Quantum Access',
+        'nav.matrix': 'Neural Matrix',
+        'nav.terminal': 'Holo Terminal',
+        'nav.modules': 'Space Modules',
+        'nav.profile': 'Digital Profile',
+        // ================= HERO =================
+        'hero.greeting': "Hello, I'm",
+        'hero.title': 'Full Stack Developer',
+        // ================= INFO =================
         'about.sectionTitle': 'About Me',
         'about.sectionDescription': 'Learn more about my background, experience, and what drives my passion for development.',
         'about.subtitle': "Hello, I'm a Developer",
+        'about.title': 'About Me',
+        'about.description':
+            'I am a passionate full-stack developer with experience in modern web technologies. I love creating efficient, scalable, and user-friendly applications.',
         'about.experience':
             'With over 1 year of experience in web development, I specialize in creating modern, responsive, and user-friendly applications. I enjoy working with both frontend and backend technologies to deliver complete solutions.',
         'about.approach':
@@ -56,118 +35,19 @@ export const portfolioTranslations: TranslationData = {
         'about.stats.years': '1+',
         'about.stats.yearsLabel': 'Years Experience',
         'about.stats.projectsLabel': 'Projects Completed',
-        'contact.responseBox.title': 'Response Time',
-        'contact.responseBox.description': 'I typically respond to messages within 24 hours. For urgent matters, please mention it in your message.',
-        // ClassicPortfolio extras
-        'nav.logo': 'Portfolio',
-        'projects.viewMyWork': 'View My Work',
-        'contact.form.namePlaceholder': 'Your name',
-        'contact.form.emailPlaceholder': 'your.email@example.com',
-        'contact.form.messagePlaceholder': 'Tell me about your project...',
-        'contact.availableWorldwide': 'Available worldwide',
-        // Space Navigation
-        'space.nav.navigatorTitle': 'SPACE STATION NAVIGATOR',
-        'space.nav.module.profile-module': 'Profile',
-        'space.nav.module.skills-module': 'Skills',
-        'space.nav.module.projects-module': 'Projects',
-        'space.nav.module.contact-module': 'Contact',
-        // Navigation
-        'nav.home': 'Home',
-        'nav.about': 'About',
-        'nav.skills': 'Skills',
-        'nav.projects': 'Projects',
-        'nav.contact': 'Contact',
-
-        // Hero section
-        'ui.quantumProjectsHeader': 'Quantum Projects',
-        'hero.greeting': "Hello, I'm",
-        'hero.title': 'Full Stack Developer',
-        // About section
-        'about.title': 'About Me',
-        'skills.sectionTitle': 'Skills & Expertise',
-        'skills.sectionDescription': 'Technologies and tools I use to bring ideas to life.',
-        'projects.sectionTitle': 'Featured Projects',
-        'projects.sectionDescription': 'A selection of projects that showcase my skills and experience.',
-        'contact.sectionTitle': 'Get In Touch',
-        'contact.sectionDescription': "Ready to start a project or just want to chat? I'd love to hear from you.",
-        'contact.form.name': 'Name',
-        'contact.form.email': 'Email',
-        'contact.form.message': 'Message',
-        'contact.form.send': 'Send Message',
-        'contact.infoTitle': 'Contact Information',
-        'about.description':
-            'I am a passionate full-stack developer with experience in modern web technologies. I love creating efficient, scalable, and user-friendly applications.',
         'about.projects': 'Projects Completed',
         'about.technologies': 'Technologies Mastered',
-
-        // Skills section
+        'about.stats.linesOfCode': 'Lines of Code',
+        'about.missionStatement': 'Mission Statement',
+        // ================= SKILLS =================
+        'skills.sectionTitle': 'Skills & Expertise',
+        'skills.sectionDescription': 'Technologies and tools I use to bring ideas to life.',
         'skills.title': 'Technical Skills',
         'skills.subtitle': 'Technologies and tools I work with',
         'skills.frontend': 'Frontend Development',
         'skills.backend': 'Backend Development',
         'skills.database': 'Database Management',
         'skills.tools': 'Development Tools',
-
-        // Contact section
-        'contact.title': 'Get In Touch',
-        'contact.subtitle': "Let's discuss your next project",
-        'contact.name': 'Your Name',
-        'contact.email': 'Your Email',
-        'contact.subject': 'Subject',
-
-        // Language selector
-        'language.select': 'Select Language',
-        'language.english': 'English',
-        'language.spanish': 'Español',
-        'language.chinese': '中文',
-
-        // Common
-        'common.loading': 'Loading...',
-        'common.error': 'Something went wrong',
-        'common.retry': 'Try Again',
-
-        // Footer
-        'footer.rights': 'All rights reserved.',
-        'footer.built': 'Built with Vue.js, Laravel, and Tailwind CSS',
-
-        // Projects
-        'projects.adoptafacil.title': 'AdoptaFácil',
-
-        'projects.adoptafacil.description':
-            'AdoptaFácil is a complete digital ecosystem designed to revolutionize the pet adoption process in Colombia. The platform combines modern technologies with a focus on animal welfare, creating a comprehensive experience that connects adopters, pet owners, shelters, and business partners in one place.',
-        'projects.vision4k.title': 'Vision4K',
-        'projects.vision4k.description':
-            'Vision4K is a modern platform for sharing and downloading wallpapers in ultra high definition (4K). It offers a seamless user experience with a focus on high-quality visuals and easy navigation.',
-        'projects.portfolio.title': 'Portfolio',
-        'projects.portfolio.description':
-            'This is a modern, elegant, and professional portfolio built with cutting-edge technologies. The site is fully modularized into reusable components and features support for multiple languages (Spanish, English, and Mandarin).',
-
-        // Revolutionary Interface
-        'interface.mode': 'Interface Mode',
-        'interface.holo': 'HOLO',
-        'interface.space': 'SPACE',
-        'interface.classic': 'CLASSIC',
-        'interface.quickAccess': 'Quick Access',
-        'interface.terminal': 'Terminal',
-        'interface.profile': 'Profile',
-        'interface.skills': 'Skills Matrix',
-        'interface.projects': 'Projects',
-        'interface.contact': 'Contact',
-
-        // Holo Terminal
-        'holo.welcome': 'Welcome to Holographic Terminal',
-        'holo.initializing': 'Initializing neural interface...',
-        'holo.ready': 'System ready. Enter command:',
-        'holo.help': 'Available commands: profile, skills, projects, contact, clear',
-        'holo.command.profile': 'Loading personal profile...',
-        'holo.command.skills': 'Displaying skills matrix...',
-        'holo.command.projects': 'Accessing project database...',
-        'holo.command.contact': 'Opening communication channel...',
-
-        // Personality traits
-        'personality.traits': 'Problem Solving',
-
-        // Skills Matrix
         'skills.matrix': 'Skills Matrix',
         'skills.level': 'Level',
         'skills.experience': 'Experience',
@@ -180,103 +60,7 @@ export const portfolioTranslations: TranslationData = {
         'skills.drag': 'Drag to rotate',
         'skills.click': 'Click skills for details',
         'skills.hover': 'Hover for quick info',
-
-        // Personal Information
-        'personal.name': 'Full Stack Developer',
-        'personal.title': 'Innovative Digital Solutions Creator',
-        'personal.bio': 'Passionate developer with expertise in modern web technologies, creating efficient and scalable applications.',
-        'personal.location': 'Location',
-        'ui.quantumProfile.availability': 'Available',
-        'personal.email': 'Email',
-        'personal.phone': 'Phone',
-        'personal.website': 'Website',
-        'personal.github': 'GitHub',
-        'personal.linkedin': 'LinkedIn',
-
-        // Projects
-        'projects.featured': 'Featured Projects',
-        'projects.all': 'All Projects',
-        'projects.technology': 'Technology',
-        'projects.technologies': 'Technologies',
-        'projects.repository': 'Repository',
-        'projects.demo': 'Live Demo',
-        'projects.liveDemo': 'Live Demo',
-        'projects.source': 'Source',
-        'projects.details': 'Project Details',
-        'projects.description': 'Description',
-        'projects.features': 'Key Features',
-        'projects.challenge': 'Challenge',
-        'projects.solution': 'Solution',
-
-        // Revolutionary Interface Specific
-        'revolutionary.welcome': 'Welcome to the Future',
-        'revolutionary.subtitle': 'Experience Next-Generation Portfolio',
-        'revolutionary.chooseMode': 'Choose Your Experience Mode',
-        'revolutionary.holoDescription': 'Immersive holographic interface with 3D interactions',
-        'revolutionary.spaceDescription': 'Explore in a cosmic environment with floating modules',
-        'revolutionary.classicDescription': 'Elegant and professional traditional layout',
-
-        // Navigation
-        'nav.quantum': 'Quantum Access',
-        'nav.matrix': 'Neural Matrix',
-        'nav.terminal': 'Holo Terminal',
-        'nav.modules': 'Space Modules',
-        'nav.profile': 'Digital Profile',
-
-        // Experience & Education
-        'experience.title': 'Professional Experience',
-        'experience.education': 'Education',
-        'experience.certifications': 'Certifications',
-        'experience.years': 'years',
-        'experience.current': 'Current',
-        'experience.present': 'Present',
-
-        // Achievements
-        'achievements.title': 'Achievements',
-        'achievements.projects': 'Projects Completed',
-        'achievements.clients': 'Happy Clients',
-        'achievements.technologies': 'Technologies Mastered',
-        'achievements.years': 'Years Experience',
-
-        // Project Specific Translations
-        'projects.ecommerce.title': 'E-Commerce Platform',
-        'projects.ecommerce.description': 'Modern e-commerce platform with real-time inventory management',
-        'projects.taskmanager.title': 'Task Management App',
-        'projects.taskmanager.description': 'Collaborative task management application with real-time updates',
-        'projects.weather.title': 'Mobile Weather App',
-        'projects.weather.description': 'Cross-platform weather application with location-based forecasts',
-
-        // Experience Specific
-        'experience.senior.title': 'Senior Full Stack Developer',
-        'experience.senior.description': 'Lead development of enterprise web applications using modern technologies',
-        'experience.fullstack.title': 'Full Stack Developer',
-        'experience.fullstack.description': 'Developed custom web solutions for clients across various industries',
-
-        // Education
-        'education.computer.degree': 'Computer Science Degree',
-        'education.computer.description': 'Specialized in software engineering and web technologies',
-        'footer.copyright': '© 2025 Portfolio. Built with Vue.js and Tailwind CSS.',
-
-        'about.stats.linesOfCode': 'Lines of Code',
-        'ui.quantumProfile.title': 'Developer Profile',
-        'ui.quantumProfile.statusOnline': 'STATUS: ONLINE',
-        'ui.quantumProfile.modeCreative': 'MODE: CREATIVE',
-        'ui.quantumProfile.traitsAnalysis': 'Quantum Traits Analysis',
-        'ui.quantumProfile.passion': 'Passion for innovation and technology',
-        'ui.quantumProfile.currentFocus': 'Currently focused on advanced web development',
-        'about.missionStatement': 'Mission Statement',
-        'stats.live': 'LIVE',
-        // Personality Traits
-        'personality.problemSolving': 'Problem Solving',
-        'personality.teamCollaboration': 'Team Collaboration',
-        'personality.goalAchievement': 'Goal Achievement',
-        'personality.innovation': 'Innovation',
-        'personality.problemSolving.desc': 'Analytical thinking and creative solutions',
-        'personality.teamCollaboration.desc': 'Effective communication and leadership',
-        'personality.goalAchievement.desc': 'Focused execution and results delivery',
-        'personality.innovation.desc': 'Creative approaches and modern solutions',
-
-        // Skills Descriptions
+        // ================= SKILLS DESCRIPTIONS =================
         'skills.description.vuejs': 'Advanced Vue 3 with Composition API and TypeScript',
         'skills.description.react': 'Modern React with hooks and context API',
         'skills.description.typescript': 'Strong typing and advanced TypeScript patterns',
@@ -299,9 +83,187 @@ export const portfolioTranslations: TranslationData = {
         'skills.description.vscode': 'Integrated development environment and extensions',
         'skills.description.npm': 'Package management and dependency handling',
         'skills.description.composer': 'PHP dependency manager and autoloading',
+        // ================= PROJECTS =================
+        'projects.sectionTitle': 'Featured Projects',
+        'projects.sectionDescription': 'A selection of projects that showcase my skills and experience.',
+        'projects.featured': 'Featured Projects',
+        'projects.all': 'All Projects',
+        'projects.technology': 'Technology',
+        'projects.technologies': 'Technologies',
+        'projects.repository': 'Repository',
+        'projects.demo': 'Live Demo',
+        'projects.liveDemo': 'Live Demo',
+        'projects.source': 'Source',
+        'projects.details': 'Project Details',
+        'projects.description': 'Description',
+        'projects.features': 'Key Features',
+        'projects.challenge': 'Challenge',
+        'projects.solution': 'Solution',
+        'projects.viewMyWork': 'View My Work',
+        'projects.adoptafacil.title': 'AdoptaFácil',
+        'projects.adoptafacil.description':
+            'AdoptaFácil is a complete digital ecosystem designed to revolutionize the pet adoption process in Colombia. The platform combines modern technologies with a focus on animal welfare, creating a comprehensive experience that connects adopters, pet owners, shelters, and business partners in one place.',
+        'projects.vision4k.title': 'Vision4K',
+        'projects.vision4k.description':
+            'Vision4K is a modern platform for sharing and downloading wallpapers in ultra high definition (4K). It offers a seamless user experience with a focus on high-quality visuals and easy navigation.',
+        'projects.portfolio.title': 'Portfolio',
+        'projects.portfolio.description':
+            'This is a modern, elegant, and professional portfolio built with cutting-edge technologies. The site is fully modularized into reusable components and features support for multiple languages (Spanish, English, and Mandarin).',
+        'projects.ecommerce.title': 'E-Commerce Platform',
+        'projects.ecommerce.description': 'Modern e-commerce platform with real-time inventory management',
+        'projects.taskmanager.title': 'Task Management App',
+        'projects.taskmanager.description': 'Collaborative task management application with real-time updates',
+        'projects.weather.title': 'Mobile Weather App',
+        'projects.weather.description': 'Cross-platform weather application with location-based forecasts',
+        // ================= INTERFACE =================
+        'interface.mode': 'Interface Mode',
+        'interface.holo': 'HOLO',
+        'interface.space': 'SPACE',
+        'interface.classic': 'CLASSIC',
+        'interface.quickAccess': 'Quick Access',
+        'interface.terminal': 'Terminal',
+        'interface.profile': 'Profile',
+        'interface.skills': 'Skills Matrix',
+        'interface.projects': 'Projects',
+        'interface.contact': 'Contact',
+        // ================= HOLO TERMINAL =================
+        'holo.welcome': 'Welcome to Holographic Terminal',
+        'holo.initializing': 'Initializing neural interface...',
+        'holo.ready': 'System ready. Enter command:',
+        'holo.help': 'Available commands: profile, skills, projects, contact, clear',
+        'holo.command.profile': 'Loading personal profile...',
+        'holo.command.skills': 'Displaying skills matrix...',
+        'holo.command.projects': 'Accessing project database...',
+        'holo.command.contact': 'Opening communication channel...',
+        // ================= PERSONAL INFO =================
+        'personal.name': 'Full Stack Developer',
+        'personal.title': 'Innovative Digital Solutions Creator',
+        'personal.bio': 'Passionate developer with expertise in modern web technologies, creating efficient and scalable applications.',
+        'personal.location': 'Location',
+        'personal.email': 'Email',
+        'personal.phone': 'Phone',
+        'personal.website': 'Website',
+        'personal.github': 'GitHub',
+        'personal.linkedin': 'LinkedIn',
+        'ui.quantumProfile.availability': 'Available',
+        // ================= SPACE =================
+        'space.projects.view': 'View',
+        'space.projects.code': 'Code',
+        'space.projects.heading': 'Projects & Missions',
+        'space.projects.description': 'A selection of my work and creative missions.',
+        'space.skills.heading': 'Skills & Expertise',
+        'space.skills.description': 'Technologies and tools I use to bring ideas to life.',
+        'space.contact.protocols.heading': 'Contact Protocols',
+        'space.contact.protocols.available': 'Available for projects',
+        'space.contact.response.heading': 'Response Time',
+        'space.contact.response.online': 'Online: Usually responds within hours',
+        'space.contact.response.busy': 'Busy: Responds within 24 hours',
+        'space.contact.response.offline': 'Offline: Responds within 2-3 days',
+        'space.contact.form.heading': 'Send Message',
+        'space.contact.form.name': 'Your Name',
+        'space.contact.form.email': 'Your Email',
+        'space.contact.form.message': 'Your Message',
+        'space.contact.form.submit': 'Transmit Message',
+        'space.contact.heading': 'Contact & Communication',
+        'space.contact.description': 'Get in touch or send a message to start a new mission.',
+        'space.profile.heading': 'Digital Profile',
+        'space.profile.description':
+            'Innovative Digital Solutions Creator. Passionate developer with expertise in modern web technologies, creating efficient and scalable applications.',
+        'space.profile.title': 'Developer Profile',
+        'space.profile.status': 'STATUS',
+        'space.profile.statusText': 'Active & Available for Projects',
+        'space.profile.experience': 'EXPERIENCE',
+        'space.profile.experienceText': '1+ Years in Development',
+        'space.profile.specialization': 'SPECIALIZATION',
+        'space.profile.specializationText': 'Web Applications & Modern UI/UX',
+        'space.nav.navigatorTitle': 'SPACE STATION NAVIGATOR',
+        'space.nav.module.profile-module': 'Profile',
+        'space.nav.module.skills-module': 'Skills',
+        'space.nav.module.projects-module': 'Projects',
+        'space.nav.module.contact-module': 'Contact',
+        // ================= CONTACT =================
+        'contact.sectionTitle': 'Get In Touch',
+        'contact.sectionDescription': "Ready to start a project or just want to chat? I'd love to hear from you.",
+        'contact.title': 'Get In Touch',
+        'contact.subtitle': "Let's discuss your next project",
+        'contact.name': 'Your Name',
+        'contact.email': 'Your Email',
+        'contact.subject': 'Subject',
+        'contact.form.name': 'Name',
+        'contact.form.email': 'Email',
+        'contact.form.message': 'Message',
+        'contact.form.send': 'Send Message',
+        'contact.form.namePlaceholder': 'Your name',
+        'contact.form.emailPlaceholder': 'your.email@example.com',
+        'contact.form.messagePlaceholder': 'Tell me about your project...',
+        'contact.availableWorldwide': 'Available worldwide',
+        'contact.infoTitle': 'Contact Information',
+        'contact.responseBox.title': 'Response Time',
+        'contact.responseBox.description': 'I typically respond to messages within 24 hours. For urgent matters, please mention it in your message.',
+        // ================= LANGUAGE =================
+        'language.select': 'Select Language',
+        'language.english': 'English',
+        'language.spanish': 'Español',
+        'language.chinese': '中文',
+        // ================= COMMON =================
+        'common.loading': 'Loading...',
+        'common.error': 'Something went wrong',
+        'common.retry': 'Try Again',
+        // ================= FOOTER =================
+        'footer.rights': 'All rights reserved.',
+        'footer.built': 'Built with Vue.js, Laravel, and Tailwind CSS',
+        'footer.copyright': '© 2025 Portfolio. Built with Vue.js and Tailwind CSS.',
+        // ================= REVOLUTIONARY INTERFACE =================
+        'revolutionary.welcome': 'Welcome to the Future',
+        'revolutionary.subtitle': 'Experience Next-Generation Portfolio',
+        'revolutionary.chooseMode': 'Choose Your Experience Mode',
+        'revolutionary.holoDescription': 'Immersive holographic interface with 3D interactions',
+        'revolutionary.spaceDescription': 'Explore in a cosmic environment with floating modules',
+        'revolutionary.classicDescription': 'Elegant and professional traditional layout',
+        // ================= EXPERIENCE & EDUCATION =================
+        'experience.title': 'Professional Experience',
+        'experience.education': 'Education',
+        'experience.certifications': 'Certifications',
+        'experience.years': 'years',
+        'experience.current': 'Current',
+        'experience.present': 'Present',
+        // ================= ACHIEVEMENTS =================
+        'achievements.title': 'Achievements',
+        'achievements.projects': 'Projects Completed',
+        'achievements.clients': 'Happy Clients',
+        'achievements.technologies': 'Technologies Mastered',
+        'achievements.years': 'Years Experience',
+        // ================= EXPERIENCE SPECIFIC =================
+        'experience.senior.title': 'Senior Full Stack Developer',
+        'experience.senior.description': 'Lead development of enterprise web applications using modern technologies',
+        'experience.fullstack.title': 'Full Stack Developer',
+        'experience.fullstack.description': 'Developed custom web solutions for clients across various industries',
+        // ================= EDUCATION =================
+        'education.computer.degree': 'Computer Science Degree',
+        'education.computer.description': 'Specialized in software engineering and web technologies',
+        // ================= PERSONALITY =================
+        'personality.traits': 'Problem Solving',
+        'personality.problemSolving': 'Problem Solving',
+        'personality.teamCollaboration': 'Team Collaboration',
+        'personality.goalAchievement': 'Goal Achievement',
+        'personality.innovation': 'Innovation',
+        'personality.problemSolving.desc': 'Analytical thinking and creative solutions',
+        'personality.teamCollaboration.desc': 'Effective communication and leadership',
+        'personality.goalAchievement.desc': 'Focused execution and results delivery',
+        'personality.innovation.desc': 'Creative approaches and modern solutions',
+        // ================= QUANTUM PROFILE =================
+        'ui.quantumProjectsHeader': 'Quantum Projects',
+        'ui.quantumProjectsSubtitle': '{count} innovative projects showcasing modern web development and creative solutions',
+        'ui.quantumProfile.title': 'Developer Profile',
+        'ui.quantumProfile.statusOnline': 'STATUS: ONLINE',
+        'ui.quantumProfile.modeCreative': 'MODE: CREATIVE',
+        'ui.quantumProfile.traitsAnalysis': 'Quantum Traits Analysis',
+        'ui.quantumProfile.passion': 'Passion for innovation and technology',
+        'ui.quantumProfile.currentFocus': 'Currently focused on advanced web development',
         'ui.quantumProjectsStatusOnline': 'Online',
         'ui.quantumProjectsStatusActive': 'Active',
         'ui.quantumProjectsProjectLabel': 'PROJECT',
+        'stats.live': 'LIVE',
     },
 
     es: {
