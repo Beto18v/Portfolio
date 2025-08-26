@@ -181,6 +181,7 @@ export const portfolioTranslations: TranslationData = {
         'personal.title': 'Innovative Digital Solutions Creator',
         'personal.bio': 'Passionate developer with expertise in modern web technologies, creating efficient and scalable applications.',
         'personal.location': 'Location',
+        'ui.quantumProfile.availability': 'Available',
         'personal.email': 'Email',
         'personal.phone': 'Phone',
         'personal.website': 'Website',
@@ -252,6 +253,23 @@ export const portfolioTranslations: TranslationData = {
         'footer.copyright': '© 2025 Portfolio. Built with Vue.js and Tailwind CSS.',
 
         'about.stats.linesOfCode': 'Lines of Code',
+        'ui.quantumProfile.title': 'Developer Profile',
+        'ui.quantumProfile.statusOnline': 'STATUS: ONLINE',
+        'ui.quantumProfile.modeCreative': 'MODE: CREATIVE',
+        'ui.quantumProfile.traitsAnalysis': 'Quantum Traits Analysis',
+        'ui.quantumProfile.passion': 'Passion for innovation and technology',
+        'ui.quantumProfile.currentFocus': 'Currently focused on advanced web development',
+        'about.missionStatement': 'Mission Statement',
+        'stats.live': 'LIVE',
+        // Personality Traits
+        'personality.problemSolving': 'Problem Solving',
+        'personality.teamCollaboration': 'Team Collaboration',
+        'personality.goalAchievement': 'Goal Achievement',
+        'personality.innovation': 'Innovation',
+        'personality.problemSolving.desc': 'Analytical thinking and creative solutions',
+        'personality.teamCollaboration.desc': 'Effective communication and leadership',
+        'personality.goalAchievement.desc': 'Focused execution and results delivery',
+        'personality.innovation.desc': 'Creative approaches and modern solutions',
     },
 
     es: {
@@ -308,7 +326,7 @@ export const portfolioTranslations: TranslationData = {
         'nav.logo': 'Portafolio',
         'projects.viewMyWork': 'Ver Mi Trabajo',
         'contact.form.namePlaceholder': 'Tu nombre',
-        'contact.form.emailPlaceholder': 'tu.email@ejemplo.com',
+        'contact.form.emailPlaceholder': 'tu.correo@ejemplo.com',
         'contact.form.messagePlaceholder': 'Cuéntame sobre tu proyecto...',
         'contact.availableWorldwide': 'Disponible en todo el mundo',
         // Space Navigation
@@ -332,8 +350,8 @@ export const portfolioTranslations: TranslationData = {
         'contact.sectionTitle': 'Contacto',
         'contact.sectionDescription': '¿Listo para comenzar un proyecto o simplemente quieres conversar? Me encantaría saber de ti.',
         'contact.form.name': 'Nombre',
-        'contact.form.email': 'Email',
-        'contact.form.message': 'Mensaje',
+        'contact.form.email': 'Correo',
+        'contact.form.message': 'Asunto',
         'contact.form.send': 'Enviar Mensaje',
 
         // Hero section
@@ -450,6 +468,7 @@ export const portfolioTranslations: TranslationData = {
         'personal.title': 'Creador de Soluciones Digitales Innovadoras',
         'personal.bio': 'Desarrollador apasionado con experiencia en tecnologías web modernas, creando aplicaciones eficientes y escalables.',
         'personal.location': 'Ubicación',
+        'ui.quantumProfile.availability': 'Disponible',
         'personal.email': 'Email',
         'personal.phone': 'Teléfono',
         'personal.website': 'Sitio Web',
@@ -519,6 +538,23 @@ export const portfolioTranslations: TranslationData = {
         'education.computer.description': 'Especializado en ingeniería de software y tecnologías web',
 
         'about.stats.linesOfCode': 'Líneas de Código',
+        'ui.quantumProfile.title': 'Perfil del Desarrollador',
+        'ui.quantumProfile.statusOnline': 'ESTADO: EN LÍNEA',
+        'ui.quantumProfile.modeCreative': 'MODO: CREATIVO',
+        'ui.quantumProfile.traitsAnalysis': 'Análisis de Rasgos Cuánticos',
+        'ui.quantumProfile.passion': 'Pasión por la innovación y la tecnología',
+        'ui.quantumProfile.currentFocus': 'Actualmente enfocado en desarrollo web avanzado',
+        'about.missionStatement': 'Declaración de Misión',
+        'stats.live': 'EN VIVO',
+        // Rasgos de Personalidad
+        'personality.problemSolving': 'Resolución de Problemas',
+        'personality.teamCollaboration': 'Colaboración en Equipo',
+        'personality.goalAchievement': 'Logro de Objetivos',
+        'personality.innovation': 'Innovación',
+        'personality.problemSolving.desc': 'Pensamiento analítico y soluciones creativas',
+        'personality.teamCollaboration.desc': 'Comunicación efectiva y liderazgo',
+        'personality.goalAchievement.desc': 'Ejecución enfocada y entrega de resultados',
+        'personality.innovation.desc': 'Enfoques creativos y soluciones modernas',
     },
 
     zh: {
@@ -690,6 +726,7 @@ export const portfolioTranslations: TranslationData = {
         'personal.title': '创新数字解决方案创造者',
         'personal.bio': '热衷于现代网络技术的开发者，创建高效可扩展的应用程序。',
         'personal.location': '位置',
+        'ui.quantumProfile.availability': '可用',
         'personal.email': '邮箱',
         'personal.phone': '电话',
         'personal.website': '网站',
@@ -776,6 +813,23 @@ export const portfolioTranslations: TranslationData = {
         'space.nav.module.contact-module': '联系',
 
         'about.stats.linesOfCode': '代码行数',
+        'ui.quantumProfile.title': '开发者简介',
+        'ui.quantumProfile.statusOnline': '状态：在线',
+        'ui.quantumProfile.modeCreative': '模式：创意',
+        'ui.quantumProfile.traitsAnalysis': '量子特质分析',
+        'ui.quantumProfile.passion': '热衷于创新与科技',
+        'ui.quantumProfile.currentFocus': '当前专注于高级网页开发',
+        'about.missionStatement': '使命宣言',
+        'stats.live': '实时',
+        // 个性特质
+        'personality.problemSolving': '解决问题',
+        'personality.teamCollaboration': '团队协作',
+        'personality.goalAchievement': '目标达成',
+        'personality.innovation': '创新',
+        'personality.problemSolving.desc': '分析性思维与创新解决方案',
+        'personality.teamCollaboration.desc': '高效沟通与领导力',
+        'personality.goalAchievement.desc': '专注执行与成果交付',
+        'personality.innovation.desc': '创新方法与现代解决方案',
 
         // Footer
         'footer.copyright': '© 2025 Portfolio。使用 Vue.js 和 Tailwind CSS 建置。',

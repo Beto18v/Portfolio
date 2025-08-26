@@ -103,34 +103,35 @@ const statistics = computed(() => [
 ]);
 
 // Personality traits with quantum visualization
-const personalityTraits = ref([
+// Personality traits with quantum visualization
+const personalityTraits = computed(() => [
     {
-        trait: 'Problem Solving',
+        trait: t('personality.problemSolving'),
         level: 95,
         icon: Brain,
         color: '#00D4FF',
-        description: 'Analytical thinking and creative solutions',
+        description: t('personality.problemSolving.desc'),
     },
     {
-        trait: 'Team Collaboration',
+        trait: t('personality.teamCollaboration'),
         level: 90,
         icon: Heart,
         color: '#FF0080',
-        description: 'Effective communication and leadership',
+        description: t('personality.teamCollaboration.desc'),
     },
     {
-        trait: 'Goal Achievement',
+        trait: t('personality.goalAchievement'),
         level: 88,
         icon: Target,
         color: '#00FF88',
-        description: 'Focused execution and results delivery',
+        description: t('personality.goalAchievement.desc'),
     },
     {
-        trait: 'Innovation',
+        trait: t('personality.innovation'),
         level: 92,
         icon: Zap,
         color: '#FFAA00',
-        description: 'Creative approaches and modern solutions',
+        description: t('personality.innovation.desc'),
     },
 ]);
 
@@ -319,8 +320,8 @@ const getTraitVisualization = (trait: any, index: number) => {
                                 <div
                                     class="absolute -bottom-4 -left-4 rounded-lg border border-cyan-400/30 bg-black/80 p-2 font-mono text-xs text-cyan-400 backdrop-blur-sm"
                                 >
-                                    <div>STATUS: ONLINE</div>
-                                    <div>MODE: CREATIVE</div>
+                                    <div>{{ t('ui.quantumProfile.statusOnline') }}</div>
+                                    <div>{{ t('ui.quantumProfile.modeCreative') }}</div>
                                 </div>
                             </div>
                         </div>
@@ -328,12 +329,12 @@ const getTraitVisualization = (trait: any, index: number) => {
                         <!-- Profile information -->
                         <div class="space-y-4 text-center">
                             <h2 class="text-4xl font-bold text-white">{{ profileData.name }}</h2>
-                            <p class="text-xl text-cyan-400">{{ profileData.title }}</p>
+                            <p class="text-xl text-cyan-400">{{ t('ui.quantumProfile.title') }}</p>
                             <div class="flex items-center justify-center gap-6 text-sm text-gray-300">
                                 <span>📍 {{ profileData.location }}</span>
                                 <span class="flex items-center gap-2">
                                     <div class="h-2 w-2 animate-pulse rounded-full bg-green-400"></div>
-                                    {{ profileData.availability }}
+                                    {{ t('ui.quantumProfile.availability') }}
                                 </span>
                             </div>
                         </div>
@@ -367,7 +368,7 @@ const getTraitVisualization = (trait: any, index: number) => {
                                     <!-- Real-time indicator -->
                                     <div v-if="stat.animation === 'real-time'" class="mt-2 flex items-center gap-2">
                                         <div class="h-1 w-1 animate-pulse rounded-full bg-green-400"></div>
-                                        <span class="text-xs text-green-400">LIVE</span>
+                                        <span class="text-xs text-green-400">{{ t('stats.live') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -375,7 +376,7 @@ const getTraitVisualization = (trait: any, index: number) => {
 
                         <!-- Personality traits visualization -->
                         <div class="space-y-6">
-                            <h3 class="text-center text-2xl font-bold text-white">Quantum Traits Analysis</h3>
+                            <h3 class="text-center text-2xl font-bold text-white">{{ t('ui.quantumProfile.traitsAnalysis') }}</h3>
 
                             <div class="space-y-4">
                                 <div v-for="(trait, index) in personalityTraits" :key="trait.trait" class="trait-visualization">
@@ -395,7 +396,7 @@ const getTraitVisualization = (trait: any, index: number) => {
 
                                         <!-- Progress bar -->
                                         <div
-                                            class="quantum-progress h-full rounded-full transition-all duration-1000 ease-out"
+                                            class="quantum-progress h-full rounded-full !transition-all !duration-5000 ease-out"
                                             :style="getTraitVisualization(trait, index)"
                                         ></div>
 
@@ -424,13 +425,13 @@ const getTraitVisualization = (trait: any, index: number) => {
                         >
                             <div class="absolute inset-0 animate-pulse rounded-xl bg-gradient-to-r from-cyan-400/5 to-purple-600/5"></div>
                             <div class="relative z-10">
-                                <h4 class="mb-2 text-lg font-bold text-cyan-400">Mission Statement</h4>
+                                <h4 class="mb-2 text-lg font-bold text-cyan-400">{{ t('about.missionStatement') }}</h4>
                                 <p class="leading-relaxed text-gray-300">
-                                    {{ props.description || sectionTexts.about.sectionDescription }}
+                                    {{ props.description || t('about.sectionDescription') }}
                                 </p>
                                 <div class="mt-4 flex items-center gap-4 text-sm">
-                                    <span class="text-purple-400">💡 {{ profileData.passion }}</span>
-                                    <span class="text-cyan-400">🎯 {{ profileData.currentFocus }}</span>
+                                    <span class="text-purple-400">💡 {{ t('ui.quantumProfile.passion') }}</span>
+                                    <span class="text-cyan-400">🎯 {{ t('ui.quantumProfile.currentFocus') }}</span>
                                 </div>
                             </div>
                         </div>
