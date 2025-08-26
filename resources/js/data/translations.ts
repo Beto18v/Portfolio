@@ -8,6 +8,7 @@ export const portfolioTranslations: TranslationData = {
     en: {
         'ui.skillsMatrixHeader': 'Skills Matrix',
         'ui.skillsMatrixSubtitle': 'Explore {count} skills by category',
+        'ui.quantumProjectsSubtitle': '{count} innovative projects showcasing modern web development and creative solutions',
         // Space Projects Buttons
         'space.projects.view': 'View',
         'space.projects.code': 'Code',
@@ -78,6 +79,7 @@ export const portfolioTranslations: TranslationData = {
         'nav.contact': 'Contact',
 
         // Hero section
+        'ui.quantumProjectsHeader': 'Quantum Projects',
         'hero.greeting': "Hello, I'm",
         'hero.title': 'Full Stack Developer',
         // About section
@@ -130,6 +132,7 @@ export const portfolioTranslations: TranslationData = {
 
         // Projects
         'projects.adoptafacil.title': 'AdoptaFácil',
+
         'projects.adoptafacil.description':
             'AdoptaFácil is a complete digital ecosystem designed to revolutionize the pet adoption process in Colombia. The platform combines modern technologies with a focus on animal welfare, creating a comprehensive experience that connects adopters, pet owners, shelters, and business partners in one place.',
         'projects.vision4k.title': 'Vision4K',
@@ -296,12 +299,15 @@ export const portfolioTranslations: TranslationData = {
         'skills.description.vscode': 'Integrated development environment and extensions',
         'skills.description.npm': 'Package management and dependency handling',
         'skills.description.composer': 'PHP dependency manager and autoloading',
+        'ui.quantumProjectsStatusOnline': 'Online',
+        'ui.quantumProjectsStatusActive': 'Active',
+        'ui.quantumProjectsProjectLabel': 'PROJECT',
     },
 
     es: {
         'ui.skillsMatrixHeader': 'Matriz de Habilidades',
         'ui.skillsMatrixSubtitle': 'Explora {count} habilidades por categoría',
-        // Space Projects Buttons
+        'ui.quantumProjectsSubtitle': '{count} proyectos innovadores que muestran desarrollo web moderno y soluciones creativas',
         // Skills Descriptions
         'skills.description.vuejs': 'Vue 3 avanzado con Composition API y TypeScript',
         'skills.description.react': 'React moderno con hooks y context API',
@@ -606,9 +612,14 @@ export const portfolioTranslations: TranslationData = {
         'personality.teamCollaboration.desc': 'Comunicación efectiva y liderazgo',
         'personality.goalAchievement.desc': 'Ejecución enfocada y entrega de resultados',
         'personality.innovation.desc': 'Enfoques creativos y soluciones modernas',
+        'ui.quantumProjectsStatusOnline': 'En línea',
+        'ui.quantumProjectsStatusActive': 'Activo',
+        'ui.quantumProjectsProjectLabel': 'PROYECTO',
     },
 
     zh: {
+        'ui.quantumProjectsHeader': '量子项目',
+        'ui.quantumProjectsSubtitle': '{count} 个创新项目，展示现代网页开发与创意解决方案',
         'skills.description.vuejs': '高级 Vue 3，使用 Composition API 和 TypeScript',
         'skills.description.react': '现代 React，支持 hooks 和 context API',
         'skills.description.typescript': '强类型和高级 TypeScript 模式',
@@ -905,6 +916,9 @@ export const portfolioTranslations: TranslationData = {
         'personality.teamCollaboration.desc': '高效沟通与领导力',
         'personality.goalAchievement.desc': '专注执行与成果交付',
         'personality.innovation.desc': '创新方法与现代解决方案',
+        'ui.quantumProjectsStatusOnline': '在线',
+        'ui.quantumProjectsStatusActive': '活跃',
+        'ui.quantumProjectsProjectLabel': '项目',
 
         // Footer
         'footer.copyright': '© 2025 Portfolio。使用 Vue.js 和 Tailwind CSS 建置。',

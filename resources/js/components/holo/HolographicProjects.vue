@@ -23,24 +23,24 @@
 
                     <h2 class="relative mb-6 text-5xl font-bold text-white">
                         <span class="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                            {{ sectionTexts.ui.quantumProjectsHeader }}
+                            {{ t('ui.quantumProjectsHeader') }}
                         </span>
                     </h2>
                 </div>
 
                 <p class="mx-auto max-w-2xl text-lg leading-relaxed text-gray-300">
-                    {{ portfolioData.projects.length }} innovative projects showcasing modern web development and creative solutions
+                    {{ t('ui.quantumProjectsSubtitle').replace('{count}', portfolioData.projects.length) }}
                 </p>
 
                 <!-- Status indicator -->
                 <div class="mt-6 flex items-center justify-center gap-6 text-sm">
                     <div class="flex items-center gap-2">
                         <div class="h-2 w-2 animate-pulse rounded-full bg-green-400"></div>
-                        <span class="text-green-400">{{ sectionTexts.ui.quantumProjectsStatusOnline }}</span>
+                        <span class="text-green-400">{{ t('ui.quantumProjectsStatusOnline') }}</span>
                     </div>
                     <div class="flex items-center gap-2">
                         <div class="h-2 w-2 animate-pulse rounded-full bg-cyan-400"></div>
-                        <span class="text-cyan-400">{{ sectionTexts.ui.quantumProjectsStatusActive }}</span>
+                        <span class="text-cyan-400">{{ t('ui.quantumProjectsStatusActive') }}</span>
                     </div>
                 </div>
             </div>
@@ -68,7 +68,9 @@
                         <div class="mb-6 flex items-start justify-between">
                             <div class="flex items-center gap-3">
                                 <div class="h-3 w-3 rounded-full bg-gradient-to-r from-cyan-400 to-purple-400"></div>
-                                <span class="font-mono text-xs text-cyan-400/70">PROJECT {{ project.id.padStart(3, '0') }}</span>
+                                <span class="font-mono text-xs text-cyan-400/70"
+                                    >{{ t('ui.quantumProjectsProjectLabel') }} {{ project.id.padStart(3, '0') }}</span
+                                >
                             </div>
                             <div class="rounded-lg border border-gray-600 bg-gray-800/50 px-3 py-1 text-xs text-gray-400">
                                 {{ project.category }}
@@ -175,6 +177,8 @@
 </template>
 
 <script setup lang="ts">
+import { useTranslation } from '@/composables/useTranslation';
 import { defineProps } from 'vue';
 const props = defineProps<{ sectionTexts: any; portfolioData: any }>();
+const { t } = useTranslation();
 </script>
