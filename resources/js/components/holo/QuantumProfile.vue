@@ -67,7 +67,7 @@ const statistics = computed(() => [
     {
         icon: TrendingUp,
         value: props.experience,
-        label: sectionTexts.about.stats.yearsLabel,
+        label: t('about.stats.yearsLabel', sectionTexts.about.stats.yearsLabel),
         suffix: '+',
         color: 'text-blue-400',
         bgColor: 'bg-blue-500/20',
@@ -76,7 +76,7 @@ const statistics = computed(() => [
     {
         icon: Award,
         value: props.projectsCompleted,
-        label: sectionTexts.about.stats.projectsLabel,
+        label: t('about.stats.projectsLabel', sectionTexts.about.stats.projectsLabel),
         suffix: '+',
         color: 'text-green-400',
         bgColor: 'bg-green-500/20',
@@ -85,7 +85,7 @@ const statistics = computed(() => [
     {
         icon: Code,
         value: props.technologiesMastered,
-        label: sectionTexts.skills.sectionTitle,
+        label: t('skills.sectionTitle', sectionTexts.skills.sectionTitle),
         suffix: '+',
         color: 'text-purple-400',
         bgColor: 'bg-purple-500/20',
@@ -94,7 +94,7 @@ const statistics = computed(() => [
     {
         icon: Zap,
         value: realTimeStats.value.linesOfCode,
-        label: 'Lines of Code',
+        label: t('about.stats.linesOfCode', 'Lines of Code'),
         suffix: 'K+',
         color: 'text-yellow-400',
         bgColor: 'bg-yellow-500/20',
@@ -254,22 +254,11 @@ const startRealTimeSimulation = () => {
  * Start counter animations
  */
 const startCounterAnimations = () => {
-    // Initialize with zeros and animate to actual values
     setTimeout(() => {
         realTimeStats.value.linesOfCode = 847;
-        realTimeStats.value.coffeeConsumed = 1247;
-        realTimeStats.value.problemsSolved = 342;
-        realTimeStats.value.learningProgress = 87;
     }, 1000);
 };
 
-/**
- * Handle profile image error
- */
-
-/**
- * Get trait visualization
- */
 const getTraitVisualization = (trait: any, index: number) => {
     return {
         width: `${trait.level}%`,

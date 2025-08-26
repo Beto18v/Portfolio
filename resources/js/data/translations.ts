@@ -250,6 +250,8 @@ export const portfolioTranslations: TranslationData = {
         'education.computer.degree': 'Computer Science Degree',
         'education.computer.description': 'Specialized in software engineering and web technologies',
         'footer.copyright': '© 2025 Portfolio. Built with Vue.js and Tailwind CSS.',
+
+        'about.stats.linesOfCode': 'Lines of Code',
     },
 
     es: {
@@ -515,6 +517,8 @@ export const portfolioTranslations: TranslationData = {
         // Education
         'education.computer.degree': 'Licenciatura en Ciencias de la Computación',
         'education.computer.description': 'Especializado en ingeniería de software y tecnologías web',
+
+        'about.stats.linesOfCode': 'Líneas de Código',
     },
 
     zh: {
@@ -770,6 +774,8 @@ export const portfolioTranslations: TranslationData = {
         'space.nav.module.skills-module': '技能',
         'space.nav.module.projects-module': '项目',
         'space.nav.module.contact-module': '联系',
+
+        'about.stats.linesOfCode': '代码行数',
 
         // Footer
         'footer.copyright': '© 2025 Portfolio。使用 Vue.js 和 Tailwind CSS 建置。',

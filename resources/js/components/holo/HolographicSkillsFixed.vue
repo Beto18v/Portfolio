@@ -73,7 +73,7 @@ const skillCategories = {
                     <div
                         v-for="(category, key) in skillCategories"
                         :key="key"
-                        class="skill-category rounded-2xl border-2 bg-black/60 p-6 backdrop-blur-lg transition-all duration-300 hover:scale-105"
+                        class="skill-category rounded-2xl border-2 bg-black/60 p-6 backdrop-blur-lg !transition-all !duration-[1s] hover:scale-[1.05]"
                         :style="{ borderColor: category.color + '40' }"
                     >
                         <!-- Category header -->
@@ -94,7 +94,7 @@ const skillCategories = {
                             <div
                                 v-for="skill in category.skills"
                                 :key="skill.name"
-                                class="skill-item group cursor-pointer rounded-xl border bg-black/40 p-4 transition-all duration-300 hover:scale-105"
+                                class="skill-item group cursor-pointer rounded-xl border bg-black/40 p-4"
                                 :style="{
                                     borderColor: category.color + '30',
                                     boxShadow: `0 0 10px ${category.color}20`,
@@ -109,7 +109,7 @@ const skillCategories = {
                                         <div
                                             v-for="i in 5"
                                             :key="i"
-                                            class="h-3 w-3 rounded-full transition-all duration-300"
+                                            class="h-3 w-3 rounded-full"
                                             :style="{
                                                 backgroundColor: i <= skill.level ? category.color : '#374151',
                                                 boxShadow: i <= skill.level ? `0 0 6px ${category.color}60` : 'none',
