@@ -1,32 +1,41 @@
 <script setup lang="ts">
+import { translationInstance } from '@/composables/translationInstance';
 import { usePortfolioData } from '@/composables/usePortfolioData';
 import { Code2, Database, Server, Star, Wrench } from 'lucide-vue-next';
 import { ref } from 'vue';
 // ...existing code...
 const { skills, skillCategoryNames, sectionTexts } = usePortfolioData();
+const { t } = translationInstance;
 const selectedSkill = ref<any>(null);
+
+import { computed } from 'vue';
+
+const frontendName = computed(() => t('skills.category.frontend', skillCategoryNames.frontend));
+const backendName = computed(() => t('skills.category.backend', skillCategoryNames.backend));
+const databaseName = computed(() => t('skills.category.database', skillCategoryNames.database));
+const toolsName = computed(() => t('skills.category.tools', skillCategoryNames.tools));
 
 const skillCategories = {
     frontend: {
-        name: skillCategoryNames.frontend,
+        name: frontendName,
         icon: Code2,
         color: '#00D4FF',
         skills: skills.filter((s) => s.category === 'frontend'),
     },
     backend: {
-        name: skillCategoryNames.backend,
+        name: backendName,
         icon: Server,
         color: '#00FF88',
         skills: skills.filter((s) => s.category === 'backend'),
     },
     database: {
-        name: skillCategoryNames.database,
+        name: databaseName,
         icon: Database,
         color: '#FF0080',
         skills: skills.filter((s) => s.category === 'database'),
     },
     tools: {
-        name: skillCategoryNames.tools,
+        name: toolsName,
         icon: Wrench,
         color: '#FFAA00',
         skills: skills.filter((s) => s.category === 'tools'),
@@ -62,8 +71,10 @@ const skillCategories = {
         <div class="relative z-10 flex h-full flex-col">
             <!-- Header -->
             <div class="py-8 text-center">
-                <h1 class="mb-2 font-mono text-4xl font-bold text-cyan-400">{{ sectionTexts.ui.skillsMatrixHeader }}</h1>
-                <p class="text-lg text-cyan-300">{{ sectionTexts.ui.skillsMatrixSubtitle.replace('{count}', String(skills.length)) }}</p>
+                <h1 class="mb-2 font-mono text-4xl font-bold text-cyan-400">{{ t('ui.skillsMatrixHeader', sectionTexts.ui.skillsMatrixHeader) }}</h1>
+                <p class="text-lg text-cyan-300">
+                    {{ t('ui.skillsMatrixSubtitle', sectionTexts.ui.skillsMatrixSubtitle).replace('{count}', String(skills.length)) }}
+                </p>
                 <div class="mx-auto mt-4 h-1 w-24 bg-gradient-to-r from-cyan-400 to-blue-500"></div>
             </div>
 
@@ -119,7 +130,7 @@ const skillCategories = {
                                 </div>
 
                                 <p class="mb-3 text-sm leading-relaxed text-gray-300">
-                                    {{ skill.description }}
+                                    {{ t('skills.description.' + skill.name.replace(/\.|\s|\+/g, '').toLowerCase()) }}
                                 </p>
 
                                 <!-- Progress bar -->
@@ -185,7 +196,7 @@ const skillCategories = {
                         </div>
 
                         <p class="text-lg leading-relaxed text-gray-300">
-                            {{ selectedSkill.description }}
+                            {{ t('skills.description.' + selectedSkill.name.replace(/\.|\s|\+/g, '').toLowerCase()) }}
                         </p>
                     </div>
 
