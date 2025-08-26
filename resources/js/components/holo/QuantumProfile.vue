@@ -23,10 +23,9 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
     description: '',
-    image: '',
-    experience: 3,
-    projectsCompleted: 25,
-    technologiesMastered: 15,
+    experience: 1,
+    projectsCompleted: 3,
+    technologiesMastered: 22,
 });
 
 // Animation and particle system

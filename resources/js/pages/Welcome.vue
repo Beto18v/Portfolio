@@ -14,6 +14,8 @@ import LanguageSelector from '@/components/fixedcont/LanguageSelector.vue';
 import HolographicPortfolio from '@/components/holo/HolographicPortfolio.vue';
 import SpaceModulesStatic from '@/components/space/SpaceModulesStatic.vue';
 
+import HolograpichSwitcher from '@/components/holo/HolograpichSwitcher.vue';
+
 /**
  * Revolutionary Portfolio Layout
  * Multi-dimensional immersive experience with terminal interface,
@@ -159,68 +161,6 @@ const interfaceClasses = computed(() => ({
         </div>
 
         <!-- Quick section switcher for holo mode - Bottom Right -->
-        <div v-if="interfaceMode === 'holo'" class="quantum-menu fixed right-6 bottom-6 z-50">
-            <div class="section-selector rounded-2xl border border-cyan-400/40 bg-black/70 p-3 shadow-lg shadow-cyan-400/20 backdrop-blur-lg">
-                <div class="mb-3 px-2 font-mono text-xs tracking-wider text-cyan-400"><span class="animate-pulse">●</span> QUANTUM ACCESS</div>
-                <div class="flex flex-col gap-2">
-                    <button
-                        @click="switchSection('profile')"
-                        class="group relative overflow-hidden rounded-lg px-4 py-2 text-left font-mono text-sm transition-all"
-                        :class="
-                            currentSection === 'profile'
-                                ? 'bg-cyan-400 text-black shadow-lg shadow-cyan-400/30'
-                                : 'text-cyan-400 hover:scale-105 hover:bg-cyan-400/20'
-                        "
-                    >
-                        <span class="relative z-10">👤 Profile</span>
-                        <div
-                            class="absolute inset-0 -translate-x-full bg-gradient-to-r from-cyan-400/0 via-cyan-400/20 to-cyan-400/0 transition-transform duration-500 group-hover:translate-x-full"
-                        ></div>
-                    </button>
-                    <button
-                        @click="switchSection('skills')"
-                        class="group relative overflow-hidden rounded-lg px-4 py-2 text-left font-mono text-sm transition-all"
-                        :class="
-                            currentSection === 'skills'
-                                ? 'bg-cyan-400 text-black shadow-lg shadow-cyan-400/30'
-                                : 'text-cyan-400 hover:scale-105 hover:bg-cyan-400/20'
-                        "
-                    >
-                        <span class="relative z-10">🔮 Skills Matrix</span>
-                        <div
-                            class="absolute inset-0 -translate-x-full bg-gradient-to-r from-cyan-400/0 via-cyan-400/20 to-cyan-400/0 transition-transform duration-500 group-hover:translate-x-full"
-                        ></div>
-                    </button>
-                    <button
-                        @click="switchSection('projects')"
-                        class="group relative overflow-hidden rounded-lg px-4 py-2 text-left font-mono text-sm transition-all"
-                        :class="
-                            currentSection === 'projects'
-                                ? 'bg-cyan-400 text-black shadow-lg shadow-cyan-400/30'
-                                : 'text-cyan-400 hover:scale-105 hover:bg-cyan-400/20'
-                        "
-                    >
-                        <span class="relative z-10">� Projects</span>
-                        <div
-                            class="absolute inset-0 -translate-x-full bg-gradient-to-r from-cyan-400/0 via-cyan-400/20 to-cyan-400/0 transition-transform duration-500 group-hover:translate-x-full"
-                        ></div>
-                    </button>
-                    <button
-                        @click="switchSection('contact')"
-                        class="group relative overflow-hidden rounded-lg px-4 py-2 text-left font-mono text-sm transition-all"
-                        :class="
-                            currentSection === 'contact'
-                                ? 'bg-cyan-400 text-black shadow-lg shadow-cyan-400/30'
-                                : 'text-cyan-400 hover:scale-105 hover:bg-cyan-400/20'
-                        "
-                    >
-                        <span class="relative z-10">📡 Contact</span>
-                        <div
-                            class="absolute inset-0 -translate-x-full bg-gradient-to-r from-cyan-400/0 via-cyan-400/20 to-cyan-400/0 transition-transform duration-500 group-hover:translate-x-full"
-                        ></div>
-                    </button>
-                </div>
-            </div>
-        </div>
+        <HolograpichSwitcher v-if="interfaceMode === 'holo'" :current-section="currentSection" @switch="switchSection" />
     </div>
 </template>

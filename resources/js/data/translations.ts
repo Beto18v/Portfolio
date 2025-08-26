@@ -6,6 +6,13 @@ import type { TranslationData } from '@/composables/useTranslation';
  */
 export const portfolioTranslations: TranslationData = {
     en: {
+        // PORTFOLIO SUMMARY
+        'portfolio.summary.title': 'Portfolio Overview',
+        'portfolio.summary.description':
+            'Each project represents a unique challenge solved with modern web technologies. From full-stack applications to innovative frontend solutions, these projects showcase my commitment to quality code and exceptional user experiences.',
+        'portfolio.summary.projects': 'Projects',
+        'portfolio.summary.completion': 'Completion',
+        'portfolio.summary.status': 'Status',
         // ================= HEADER =================
         'nav.logo': 'Portfolio',
         'nav.home': 'Home',
@@ -89,11 +96,12 @@ export const portfolioTranslations: TranslationData = {
         'projects.featured': 'Featured Projects',
         'projects.all': 'All Projects',
         'projects.technology': 'Technology',
+        'projects.technologyStack': 'Technology Stack',
         'projects.technologies': 'Technologies',
         'projects.repository': 'Repository',
         'projects.demo': 'Live Demo',
         'projects.liveDemo': 'Live Demo',
-        'projects.source': 'Source',
+        'projects.source': 'Source Code',
         'projects.details': 'Project Details',
         'projects.description': 'Description',
         'projects.features': 'Key Features',
@@ -182,13 +190,9 @@ export const portfolioTranslations: TranslationData = {
         'space.nav.module.projects-module': 'Projects',
         'space.nav.module.contact-module': 'Contact',
         // ================= CONTACT =================
+        // CONTACT (Unified)
         'contact.sectionTitle': 'Get In Touch',
         'contact.sectionDescription': "Ready to start a project or just want to chat? I'd love to hear from you.",
-        'contact.title': 'Get In Touch',
-        'contact.subtitle': "Let's discuss your next project",
-        'contact.name': 'Your Name',
-        'contact.email': 'Your Email',
-        'contact.subject': 'Subject',
         'contact.form.name': 'Name',
         'contact.form.email': 'Email',
         'contact.form.message': 'Message',
@@ -196,6 +200,9 @@ export const portfolioTranslations: TranslationData = {
         'contact.form.namePlaceholder': 'Your name',
         'contact.form.emailPlaceholder': 'your.email@example.com',
         'contact.form.messagePlaceholder': 'Tell me about your project...',
+        'contact.success': 'Message sent successfully!',
+        'contact.error': 'Failed to send message. Please try again.',
+        'contact.loading': 'Sending...',
         'contact.availableWorldwide': 'Available worldwide',
         'contact.infoTitle': 'Contact Information',
         'contact.responseBox.title': 'Response Time',
@@ -265,6 +272,13 @@ export const portfolioTranslations: TranslationData = {
     },
 
     es: {
+        // RESUMEN DE PORTAFOLIO
+        'portfolio.summary.title': 'Resumen del Portafolio',
+        'portfolio.summary.description':
+            'Cada proyecto representa un desafío único resuelto con tecnologías web modernas. Desde aplicaciones full-stack hasta soluciones innovadoras de frontend, estos proyectos demuestran mi compromiso con código de calidad y experiencias de usuario excepcionales.',
+        'portfolio.summary.projects': 'Proyectos',
+        'portfolio.summary.completion': 'Finalización',
+        'portfolio.summary.status': 'Estado',
         // =============== HEADER ===============
         'nav.logo': 'Portafolio',
         'nav.home': 'Inicio',
@@ -355,6 +369,7 @@ export const portfolioTranslations: TranslationData = {
         'projects.featured': 'Proyectos Destacados',
         'projects.all': 'Todos los Proyectos',
         'projects.technology': 'Tecnología',
+        'projects.technologyStack': 'Stack Tecnológico',
         'projects.technologies': 'Tecnologías',
         'projects.repository': 'Repositorio',
         'projects.demo': 'Demo en Vivo',
@@ -451,25 +466,19 @@ export const portfolioTranslations: TranslationData = {
         'space.nav.module.projects-module': 'Proyectos',
         'space.nav.module.contact-module': 'Contacto',
         // =============== CONTACT ===============
+        // CONTACTO (Unificado)
         'contact.sectionTitle': 'Contacto',
         'contact.sectionDescription': '¿Listo para comenzar un proyecto o simplemente quieres conversar? Me encantaría saber de ti.',
-        'contact.title': 'Contacto',
-        'contact.subtitle': 'Hablemos sobre tu próximo proyecto',
-        'contact.name': 'Tu Nombre',
-        'contact.email': 'Tu Email',
-        'contact.subject': 'Asunto',
-        'contact.message': 'Tu Mensaje',
-        'contact.send': 'Enviar Mensaje',
-        'contact.sending': 'Enviando...',
-        'contact.success': '¡Mensaje enviado exitosamente!',
-        'contact.error': 'Error al enviar el mensaje. Por favor intenta de nuevo.',
         'contact.form.name': 'Nombre',
         'contact.form.email': 'Correo',
-        'contact.form.message': 'Asunto',
+        'contact.form.message': 'Mensaje',
         'contact.form.send': 'Enviar Mensaje',
         'contact.form.namePlaceholder': 'Tu nombre',
         'contact.form.emailPlaceholder': 'tu.correo@ejemplo.com',
         'contact.form.messagePlaceholder': 'Cuéntame sobre tu proyecto...',
+        'contact.success': '¡Mensaje enviado exitosamente!',
+        'contact.error': 'Error al enviar el mensaje. Por favor intenta de nuevo.',
+        'contact.loading': 'Enviando...',
         'contact.availableWorldwide': 'Disponible en todo el mundo',
         'contact.infoTitle': 'Información de Contacto',
         'contact.responseBox.title': 'Tiempo de Respuesta',
@@ -541,6 +550,13 @@ export const portfolioTranslations: TranslationData = {
     },
 
     zh: {
+        // 作品集摘要
+        'portfolio.summary.title': '作品集概览',
+        'portfolio.summary.description':
+            '每个项目都代表着用现代网络技术解决的独特挑战。从全栈应用到创新的前端解决方案，这些项目展示了我对高质量代码和卓越用户体验的承诺。',
+        'portfolio.summary.projects': '项目',
+        'portfolio.summary.completion': '完成度',
+        'portfolio.summary.status': '状态',
         // =============== HEADER ===============
         'nav.logo': '作品集',
         'nav.home': '首页',
@@ -627,6 +643,7 @@ export const portfolioTranslations: TranslationData = {
         'projects.featured': '精选项目',
         'projects.all': '所有项目',
         'projects.technology': '技术',
+        'projects.technologyStack': '技术栈',
         'projects.technologies': '技术栈',
         'projects.repository': '代码仓库',
         'projects.demo': '在线演示',
@@ -717,18 +734,9 @@ export const portfolioTranslations: TranslationData = {
         'space.profile.specialization': '专长',
         'space.profile.specializationText': 'Web应用与现代UI/UX',
         // =============== CONTACT ===============
+        // 联系 (统一)
         'contact.sectionTitle': '联系我',
         'contact.sectionDescription': '准备开始项目或想聊聊？欢迎联系我。',
-        'contact.title': '联系我',
-        'contact.subtitle': '让我们讨论您的下一个项目',
-        'contact.name': '您的姓名',
-        'contact.email': '您的邮箱',
-        'contact.subject': '主题',
-        'contact.message': '您的消息',
-        'contact.send': '发送消息',
-        'contact.sending': '发送中...',
-        'contact.success': '消息发送成功！',
-        'contact.error': '发送消息时出错。请重试。',
         'contact.form.name': '姓名',
         'contact.form.email': '邮箱',
         'contact.form.message': '信息',
@@ -736,6 +744,9 @@ export const portfolioTranslations: TranslationData = {
         'contact.form.namePlaceholder': '您的姓名',
         'contact.form.emailPlaceholder': '您的邮箱@example.com',
         'contact.form.messagePlaceholder': '请描述您的项目...',
+        'contact.success': '消息发送成功！',
+        'contact.error': '发送消息时出错。请重试。',
+        'contact.loading': '发送中...',
         'contact.availableWorldwide': '全球可用',
         'contact.infoTitle': '联系信息',
         'contact.responseBox.title': '响应时间',
