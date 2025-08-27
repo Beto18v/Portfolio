@@ -128,7 +128,7 @@ async function submitSpaceContactForm() {
                 (data.message || 'Error al enviar el mensaje.') + (data.errors ? ' ' + Object.values(data.errors).join(' ') : ''),
             );
         }
-    } catch (err) {
+    } catch {
         spaceContactError.value = t('contact.error', 'Error de red o servidor. Intenta más tarde.');
     } finally {
         spaceContactLoading.value = false;

@@ -151,7 +151,7 @@ const handleSubmit = async () => {
         let result: any = {};
         try {
             result = await response.json();
-        } catch (jsonErr) {
+        } catch {
             // Si no es JSON, muestra error genérico
             showError.value = true;
             errorMessage.value = 'Error inesperado en el servidor.';

@@ -205,7 +205,7 @@ async function submitContactForm() {
         } else {
             contactError.value = (data.message || 'Error al enviar el mensaje.') + (data.errors ? ' ' + Object.values(data.errors).join(' ') : '');
         }
-    } catch (err) {
+    } catch {
         contactError.value = 'Error de red o servidor. Intenta más tarde.';
     } finally {
         contactLoading.value = false;
