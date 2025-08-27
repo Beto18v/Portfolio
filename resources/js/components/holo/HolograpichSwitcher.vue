@@ -68,6 +68,6 @@
 import { useTranslation } from '@/composables/useTranslation';
 import { defineEmits, defineProps } from 'vue';
 const { t } = useTranslation();
-const props = defineProps<{ currentSection: 'profile' | 'skills' | 'projects' | 'contact' }>();
+defineProps<{ currentSection: 'profile' | 'skills' | 'projects' | 'contact' }>();
 defineEmits<{ (e: 'switch', section: 'profile' | 'skills' | 'projects' | 'contact'): void }>();
 </script>

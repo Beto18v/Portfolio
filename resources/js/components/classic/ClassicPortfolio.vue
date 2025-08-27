@@ -103,22 +103,6 @@ const contactInfo = computed(() => ({
  * Minimal design with focus on content and readability
  */
 
-// Define interfaces
-interface Project {
-    id: string;
-    title: string;
-    description: string;
-    image: string;
-    technologies: string[];
-    liveUrl?: string;
-    githubUrl?: string;
-    category: string;
-    featured?: boolean;
-    date: string;
-}
-
-// Eliminar props, todo viene del composable
-
 // Navigation state
 const activeSection = ref('hero');
 const isMenuOpen = ref(false);

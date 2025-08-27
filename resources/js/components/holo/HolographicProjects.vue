@@ -180,6 +180,6 @@
 <script setup lang="ts">
 import { useTranslation } from '@/composables/useTranslation';
 import { defineProps } from 'vue';
-const props = defineProps<{ sectionTexts: any; portfolioData: any }>();
+defineProps<{ sectionTexts: any; portfolioData: any }>();
 const { t } = useTranslation();
 </script>
