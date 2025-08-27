@@ -16,16 +16,16 @@ const { t } = translationInstance;
 interface ContactForm {
     name: string;
     email: string;
-    subject: string;
     message: string;
+    subject?: string; // Optional, to maintain interface compatibility
 }
 
 // Form state
 const form = reactive<ContactForm>({
     name: '',
     email: '',
-    subject: '',
     message: '',
+    subject: undefined, // Initialize as undefined to maintain interface compatibility
 });
 
 // Component state
@@ -38,8 +38,8 @@ const errorMessage = ref('');
 const errors = reactive({
     name: '',
     email: '',
-    subject: '',
     message: '',
+    subject: '', // Keep for validation purposes
 });
 
 /**
@@ -83,13 +83,6 @@ const validateForm = (): boolean => {
     }
 
     // Validate subject
-    if (!form.subject.trim()) {
-        errors.subject = 'Subject is required';
-        isValid = false;
-    } else if (form.subject.trim().length < 5) {
-        errors.subject = 'Subject must be at least 5 characters';
-        isValid = false;
-    }
 
     // Validate message
     if (!form.message.trim()) {
@@ -119,7 +112,15 @@ const resetForm = () => {
 };
 
 /**
- * Handle form submission
+ * Obtiene el token CSRF desde el meta tag
+ */
+const getCsrfToken = (): string => {
+    const meta = document.querySelector('meta[name="csrf-token"]');
+    return (meta && meta.getAttribute('content')) || '';
+};
+
+/**
+ * Handle form submission con CSRF
  */
 const handleSubmit = async () => {
     if (!validateForm()) {
@@ -131,24 +132,21 @@ const handleSubmit = async () => {
     errorMessage.value = '';
 
     try {
-        // Here you would typically make an API call to your backend
-        // For now, we'll simulate the request
         const response = await fetch('/api/contact', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': (document.querySelector('meta[name="csrf-token"]') as HTMLMetaElement)?.content || '',
+                'X-CSRF-TOKEN': getCsrfToken(),
             },
             body: JSON.stringify({
                 name: form.name.trim(),
                 email: form.email.trim(),
-                subject: form.subject.trim(),
                 message: form.message.trim(),
             }),
         });
 
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error('Error en la petición: ' + response.status);
         }
 
         const result = await response.json();
@@ -175,7 +173,7 @@ const handleSubmit = async () => {
 
 // Computed properties for form state
 const isFormValid = computed(() => {
-    return form.name.trim() && form.email.trim() && form.subject.trim() && form.message.trim() && isValidEmail(form.email);
+    return form.name.trim() && form.email.trim() && form.message.trim() && isValidEmail(form.email);
 });
 
 const buttonText = computed(() => {
