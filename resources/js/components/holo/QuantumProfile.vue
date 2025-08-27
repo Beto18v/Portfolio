@@ -11,7 +11,7 @@ import { computed, onMounted, ref } from 'vue';
  */
 
 const { sectionTexts } = usePortfolioData();
-const { t, language } = translationInstance;
+const { t } = translationInstance;
 
 interface Props {
     description?: string;

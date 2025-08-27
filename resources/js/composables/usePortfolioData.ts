@@ -6,7 +6,7 @@ import { translationInstance } from './translationInstance';
  * Provides reactive portfolio content that adapts to language changes
  */
 export function usePortfolioData() {
-    const { t, language } = translationInstance;
+    const { t } = translationInstance;
 
     // Personal information centralizada y traducible
     const personalInfo = computed(() => ({
@@ -155,8 +155,6 @@ export function usePortfolioData() {
 
     // Projects data
     const projects = computed(() => {
-        // Dependencia explícita de language para reactividad
-        const lang = language.value;
         return [
             {
                 id: '1',
