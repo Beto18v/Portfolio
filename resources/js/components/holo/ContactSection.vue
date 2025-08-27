@@ -124,15 +124,18 @@ const getCsrfToken = (): string => {
  */
 const handleSubmit = async () => {
     if (!validateForm()) {
+        showError.value = true;
+        errorMessage.value = 'Por favor corrige los errores del formulario.';
         return;
     }
 
     isLoading.value = true;
     showError.value = false;
     errorMessage.value = '';
+    showSuccess.value = false;
 
     try {
-        const response = await fetch('/api/contact', {
+        const response = await fetch('api/contact', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -145,25 +148,31 @@ const handleSubmit = async () => {
             }),
         });
 
-        if (!response.ok) {
-            throw new Error('Error en la petición: ' + response.status);
+        let result: any = {};
+        try {
+            result = await response.json();
+        } catch (jsonErr) {
+            // Si no es JSON, muestra error genérico
+            showError.value = true;
+            errorMessage.value = 'Error inesperado en el servidor.';
+            isLoading.value = false;
+            return;
         }
 
-        const result = await response.json();
-
-        if (result.success) {
+        if (response.ok && result.success) {
             showSuccess.value = true;
-            resetForm();
-
-            // Hide success message after 5 seconds
+            showError.value = false;
+            errorMessage.value = '';
+            // No limpiar el formulario antes de mostrar el mensaje
             setTimeout(() => {
                 showSuccess.value = false;
+                resetForm();
             }, 5000);
         } else {
-            throw new Error(result.message || 'Failed to send message');
+            showError.value = true;
+            errorMessage.value = result.message || 'No se pudo enviar el mensaje.';
         }
     } catch (error) {
-        console.error('Contact form error:', error);
         showError.value = true;
         errorMessage.value = error instanceof Error ? error.message : sectionTexts.ui.contactError;
     } finally {
@@ -254,7 +263,7 @@ const buttonText = computed(() => {
                                         id="name"
                                         v-model="form.name"
                                         type="text"
-                                        :placeholder="t('contact.form.name', sectionTexts.contact.form.name)"
+                                        :placeholder="t('contact.form.namePlaceholder', sectionTexts.contact.form.name)"
                                         class="w-full rounded-lg border border-cyan-400/30 bg-black/50 px-4 py-3 text-cyan-400 placeholder-cyan-400/50 backdrop-blur-sm transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none"
                                         :class="{ 'border-red-400 focus:border-red-400 focus:ring-red-400/20': errors.name }"
                                     />
@@ -271,7 +280,7 @@ const buttonText = computed(() => {
                                         id="email"
                                         v-model="form.email"
                                         type="email"
-                                        :placeholder="t('contact.form.email', sectionTexts.contact.form.email)"
+                                        :placeholder="t('contact.form.emailPlaceholder', sectionTexts.contact.form.email)"
                                         class="w-full rounded-lg border border-cyan-400/30 bg-black/50 px-4 py-3 text-cyan-400 placeholder-cyan-400/50 backdrop-blur-sm transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none"
                                         :class="{ 'border-red-400 focus:border-red-400 focus:ring-red-400/20': errors.email }"
                                     />
@@ -289,7 +298,7 @@ const buttonText = computed(() => {
                                     id="message"
                                     v-model="form.message"
                                     rows="6"
-                                    :placeholder="t('contact.form.message', sectionTexts.contact.form.message)"
+                                    :placeholder="t('contact.form.messagePlaceholder', sectionTexts.contact.form.message)"
                                     class="w-full resize-none rounded-lg border border-cyan-400/30 bg-black/50 px-4 py-3 text-cyan-400 placeholder-cyan-400/50 backdrop-blur-sm transition-all duration-300 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 focus:outline-none"
                                     :class="{ 'border-red-400 focus:border-red-400 focus:ring-red-400/20': errors.message }"
                                 ></textarea>

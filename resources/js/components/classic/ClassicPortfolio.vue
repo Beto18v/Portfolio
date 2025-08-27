@@ -72,6 +72,7 @@ const sectionTexts = computed(() => ({
             namePlaceholder: t('contact.form.namePlaceholder', 'Your name'),
             emailPlaceholder: t('contact.form.emailPlaceholder', 'your.email@example.com'),
             messagePlaceholder: t('contact.form.messagePlaceholder', 'Tell me about your project...'),
+            sending: t('contact.form.sending', 'Sending...'),
         },
         infoTitle: t('contact.infoTitle', 'Contact Information'),
         availableWorldwide: t('contact.availableWorldwide', 'Available worldwide'),
@@ -160,6 +161,56 @@ const handleScroll = () => {
 onMounted(() => {
     window.addEventListener('scroll', handleScroll);
 });
+
+// Contact form reactivity
+const contactForm = ref({
+    name: '',
+    email: '',
+    message: '',
+});
+const contactLoading = ref(false);
+const contactError = ref('');
+const contactSuccess = ref('');
+
+function getCsrfToken() {
+    const meta = document.querySelector('meta[name="csrf-token"]');
+    return meta ? meta.getAttribute('content') || '' : '';
+}
+
+async function submitContactForm() {
+    contactLoading.value = true;
+    contactError.value = '';
+    contactSuccess.value = '';
+    try {
+        const response = await fetch('api/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-TOKEN': getCsrfToken(),
+            },
+            body: JSON.stringify({
+                name: contactForm.value.name,
+                email: contactForm.value.email,
+                message: contactForm.value.message,
+            }),
+        });
+        const data = await response.json();
+        if (response.ok && data.success) {
+            contactSuccess.value = data.message || '¡Mensaje enviado correctamente!';
+            contactForm.value.name = '';
+            contactForm.value.email = '';
+            contactForm.value.message = '';
+        } else {
+            contactError.value = (data.message || 'Error al enviar el mensaje.') + (data.errors ? ' ' + Object.values(data.errors).join(' ') : '');
+        }
+    } catch (err) {
+        contactError.value = 'Error de red o servidor. Intenta más tarde.';
+    } finally {
+        contactLoading.value = false;
+    }
+}
 </script>
 
 <template>
@@ -372,37 +423,52 @@ onMounted(() => {
                 <div class="grid gap-12 md:grid-cols-2">
                     <div>
                         <h3 class="mb-6 text-xl font-semibold text-gray-900">{{ sectionTexts.contact.form.send }}</h3>
-                        <form class="space-y-6">
+                        <form class="space-y-6" @submit.prevent="submitContactForm">
                             <div>
-                                <label class="mb-2 block text-sm font-medium text-gray-700">{{ sectionTexts.contact.form.name }}</label>
+                                <label class="mb-2 block text-sm font-medium text-gray-700">{{
+                                    t('contact.form.name', sectionTexts.contact.form.name)
+                                }}</label>
                                 <input
                                     type="text"
                                     class="-gray-400 w-full rounded-lg border border-gray-300 px-4 py-3 text-black outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500"
-                                    :placeholder="sectionTexts.contact.form.namePlaceholder"
+                                    :placeholder="t('contact.form.namePlaceholder', sectionTexts.contact.form.namePlaceholder)"
+                                    v-model="contactForm.name"
                                 />
                             </div>
                             <div>
-                                <label class="mb-2 block text-sm font-medium text-gray-700">{{ sectionTexts.contact.form.email }}</label>
+                                <label class="mb-2 block text-sm font-medium text-gray-700">{{
+                                    t('contact.form.email', sectionTexts.contact.form.email)
+                                }}</label>
                                 <input
                                     type="email"
                                     class="-gray-400 w-full rounded-lg border border-gray-300 px-4 py-3 text-black outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500"
-                                    :placeholder="sectionTexts.contact.form.emailPlaceholder"
+                                    :placeholder="t('contact.form.emailPlaceholder', sectionTexts.contact.form.emailPlaceholder)"
+                                    v-model="contactForm.email"
                                 />
                             </div>
                             <div>
-                                <label class="mb-2 block text-sm font-medium text-gray-700">{{ sectionTexts.contact.form.message }}</label>
+                                <label class="mb-2 block text-sm font-medium text-gray-700">{{
+                                    t('contact.form.message', sectionTexts.contact.form.message)
+                                }}</label>
                                 <textarea
                                     rows="5"
                                     class="w-full resize-none rounded-lg border border-gray-300 px-4 py-3 text-black outline-none focus:border-transparent focus:ring-2 focus:ring-gray-500"
-                                    :placeholder="sectionTexts.contact.form.messagePlaceholder"
+                                    :placeholder="t('contact.form.messagePlaceholder', sectionTexts.contact.form.messagePlaceholder)"
+                                    v-model="contactForm.message"
                                 ></textarea>
                             </div>
                             <button
                                 type="submit"
                                 class="-gray-700 w-full rounded-lg bg-gray-900 py-3 font-medium text-white transition-colors hover:bg-gray-800"
+                                :disabled="contactLoading"
                             >
-                                {{ sectionTexts.contact.form.send }}
+                                <span v-if="contactLoading">{{ sectionTexts.contact.form.sending || 'Enviando...' }}</span>
+                                <span v-else>{{ sectionTexts.contact.form.send }}</span>
                             </button>
+                            <div v-if="contactSuccess" class="mt-4 text-sm text-green-600">
+                                {{ t('contact.success', 'sectionTexts.ui.contactSuccess!') }}
+                            </div>
+                            <div v-if="contactError" class="mt-4 text-sm text-red-600">{{ t('errorMessage', contactError) }}</div>
                         </form>
                     </div>
 

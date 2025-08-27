@@ -78,6 +78,62 @@ const scrollToModule = (moduleId: string) => {
         activeModule.value = moduleId;
     }
 };
+
+const spaceContactForm = ref({
+    name: '',
+    email: '',
+    message: '',
+});
+const spaceContactLoading = ref(false);
+const spaceContactError = ref('');
+const spaceContactSuccess = ref('');
+
+function getCsrfToken() {
+    const meta = document.querySelector('meta[name="csrf-token"]');
+    return meta ? meta.getAttribute('content') || '' : '';
+}
+
+async function submitSpaceContactForm() {
+    spaceContactLoading.value = true;
+    spaceContactError.value = '';
+    spaceContactSuccess.value = '';
+    try {
+        const response = await fetch('api/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-TOKEN': getCsrfToken(),
+            },
+            body: JSON.stringify({
+                name: spaceContactForm.value.name,
+                email: spaceContactForm.value.email,
+                message: spaceContactForm.value.message,
+            }),
+        });
+        const data = await response.json();
+        if (response.ok && data.success) {
+            spaceContactSuccess.value = t('contact.success', data.message || '¡Mensaje enviado correctamente!');
+            spaceContactError.value = '';
+            setTimeout(() => {
+                spaceContactSuccess.value = '';
+                spaceContactForm.value.name = '';
+                spaceContactForm.value.email = '';
+                spaceContactForm.value.message = '';
+            }, 5000);
+        } else {
+            spaceContactError.value = t(
+                'contact.error',
+                (data.message || 'Error al enviar el mensaje.') + (data.errors ? ' ' + Object.values(data.errors).join(' ') : ''),
+            );
+        }
+    } catch (err) {
+        spaceContactError.value = t('contact.error', 'Error de red o servidor. Intenta más tarde.');
+    } finally {
+        spaceContactLoading.value = false;
+    }
+}
 </script>
 
 <template>
@@ -296,27 +352,48 @@ const scrollToModule = (moduleId: string) => {
                             <div class="space-y-6">
                                 <div class="rounded-xl border border-yellow-400/20 bg-black/40 p-6">
                                     <h3 class="mb-4 text-xl font-semibold text-white">{{ t('space.contact.form.heading', 'Send Message') }}</h3>
-                                    <form class="space-y-4">
+                                    <form class="space-y-4" @submit.prevent="submitSpaceContactForm">
+                                        <!-- Success message -->
+                                        <div
+                                            v-if="spaceContactSuccess"
+                                            class="mb-4 flex items-center gap-2 rounded-lg border border-green-400/30 bg-green-400/10 p-3"
+                                        >
+                                            <span class="font-semibold text-green-400">{{
+                                                t('contact.success', 'sectionTexts.ui.contactSuccess!')
+                                            }}</span>
+                                        </div>
+                                        <!-- Error message -->
+                                        <div
+                                            v-if="spaceContactError"
+                                            class="mb-4 flex items-center gap-2 rounded-lg border border-red-400/30 bg-red-400/10 p-3"
+                                        >
+                                            <span class="font-semibold text-red-400">{{ t('errorMessage', spaceContactError) }}</span>
+                                        </div>
                                         <input
+                                            v-model="spaceContactForm.name"
                                             type="text"
-                                            :placeholder="t('space.contact.form.name', 'Your Name')"
+                                            :placeholder="t('contact.form.name', 'Your Name')"
                                             class="w-full rounded-lg border border-gray-600 bg-gray-800 px-4 py-3 text-white focus:border-yellow-400 focus:outline-none"
                                         />
                                         <input
+                                            v-model="spaceContactForm.email"
                                             type="email"
-                                            :placeholder="t('space.contact.form.email', 'Your Email')"
+                                            :placeholder="t('contact.form.email', 'Your Email')"
                                             class="w-full rounded-lg border border-gray-600 bg-gray-800 px-4 py-3 text-white focus:border-yellow-400 focus:outline-none"
                                         />
                                         <textarea
-                                            :placeholder="t('space.contact.form.message', 'Your Message')"
+                                            v-model="spaceContactForm.message"
+                                            :placeholder="t('contact.form.messagePlaceholder', 'Your Message')"
                                             rows="4"
                                             class="w-full resize-none rounded-lg border border-gray-600 bg-gray-800 px-4 py-3 text-white focus:border-yellow-400 focus:outline-none"
                                         ></textarea>
                                         <button
                                             type="submit"
                                             class="w-full rounded-lg bg-yellow-500 py-3 font-semibold text-black transition-colors hover:bg-yellow-400"
+                                            :disabled="spaceContactLoading"
                                         >
-                                            {{ t('space.contact.form.submit', 'Transmit Message') }}
+                                            <span v-if="spaceContactLoading">{{ t('space.contact.form.sending', 'Enviando...') }}</span>
+                                            <span v-else>{{ t('space.contact.form.submit', 'Transmit Message') }}</span>
                                         </button>
                                     </form>
                                 </div>
