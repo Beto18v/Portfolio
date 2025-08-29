@@ -45,9 +45,9 @@ const portfolioData = computed(() => ({
     // About section customization
     about: {
         description: '',
-        experience: 3,
-        projectsCompleted: 25,
-        technologiesMastered: 15,
+        // experience: 1,
+        // projectsCompleted: 3,
+        // technologiesMastered: 22,
     },
 
     // Skills data

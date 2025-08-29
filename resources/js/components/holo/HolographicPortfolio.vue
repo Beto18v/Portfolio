@@ -22,14 +22,7 @@ const showContact = computed(() => props.currentSection === 'contact');
         </div>
         <div v-else class="traditional-in-holo min-h-screen bg-black">
             <div class="holo-wrapper">
-                <QuantumProfile
-                    v-if="showProfile"
-                    :description="portfolioData.about.description"
-                    :image="portfolioData.profileImage"
-                    :experience="portfolioData.about.experience"
-                    :projects-completed="portfolioData.about.projectsCompleted"
-                    :technologies-mastered="portfolioData.about.technologiesMastered"
-                />
+                <QuantumProfile v-if="showProfile" :description="portfolioData.about.description" :image="portfolioData.profileImage" />
                 <section v-else-if="showProjects" class="quantum-projects relative min-h-screen overflow-hidden bg-black">
                     <HolographicProjects :sectionTexts="sectionTexts" :portfolioData="portfolioData" />
                 </section>

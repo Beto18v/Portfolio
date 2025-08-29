@@ -23,9 +23,9 @@ interface Props {
 
 const props = withDefaults(defineProps<Props>(), {
     description: '',
-    experience: 1,
-    projectsCompleted: 3,
-    technologiesMastered: 22,
+    experience: undefined,
+    projectsCompleted: undefined,
+    technologiesMastered: undefined,
 });
 
 // Animation and particle system
@@ -62,10 +62,24 @@ const particles = ref<
 >([]);
 
 // Dynamic statistics
+// Cálculo dinámico de experiencia, proyectos y tecnologías
+const getExperienceYears = () => {
+    const start = new Date('2024-06-01');
+    const now = new Date();
+    let years = now.getFullYear() - start.getFullYear();
+    const m = now.getMonth() - start.getMonth();
+    if (m < 0 || (m === 0 && now.getDate() < start.getDate())) {
+        years--;
+    }
+    return Math.max(1, years + 1); // Siempre al menos 1 año
+};
+
+const { projects, skills } = usePortfolioData();
+
 const statistics = computed(() => [
     {
         icon: TrendingUp,
-        value: props.experience,
+        value: getExperienceYears(),
         label: t('about.stats.yearsLabel', sectionTexts.about.stats.yearsLabel),
         suffix: '+',
         color: 'text-blue-400',
@@ -74,7 +88,7 @@ const statistics = computed(() => [
     },
     {
         icon: Award,
-        value: props.projectsCompleted,
+        value: projects.value.length,
         label: t('about.stats.projectsLabel', sectionTexts.about.stats.projectsLabel),
         suffix: '+',
         color: 'text-green-400',
@@ -83,7 +97,7 @@ const statistics = computed(() => [
     },
     {
         icon: Code,
-        value: props.technologiesMastered,
+        value: skills.length,
         label: t('skills.sectionTitle', sectionTexts.skills.sectionTitle),
         suffix: '+',
         color: 'text-purple-400',
