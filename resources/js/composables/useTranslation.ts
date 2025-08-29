@@ -22,11 +22,22 @@ const translations = ref<TranslationData>({
 /**
  * Composable for managing translations throughout the application
  * Provides reactive language switching and translation functions
+ *
+ * Features:
+ * - Reactive language state management
+ * - Persistent language preference in localStorage
+ * - Fallback text support for missing translations
+ * - Type-safe translation keys
+ *
+ * @author Portfolio Project
+ * @version 1.0
  */
 export function useTranslation() {
     /**
      * Change the current language
-     * @param lang - The language code to switch to
+     * Updates both reactive state and localStorage for persistence
+     *
+     * @param lang - The language code to switch to ('en', 'es', 'zh')
      */
     const setLanguage = (lang: Language) => {
         currentLanguage.value = lang;
@@ -36,8 +47,10 @@ export function useTranslation() {
 
     /**
      * Get translation for a given key
-     * @param key - The translation key
-     * @param fallback - Fallback text if translation not found
+     * Returns the translated text or fallback if translation not found
+     *
+     * @param key - The translation key (e.g., 'nav.home')
+     * @param fallback - Optional fallback text if translation not found
      * @returns Translated text or fallback
      */
     const t = (key: string, fallback?: string): string => {
@@ -46,8 +59,10 @@ export function useTranslation() {
     };
 
     /**
-     * Load translations data
-     * @param data - Translation data object
+     * Load translations data into the composable
+     * Should be called once with the complete translation object
+     *
+     * @param data - Translation data object containing all languages
      */
     const loadTranslations = (data: TranslationData) => {
         translations.value = data;
@@ -55,6 +70,7 @@ export function useTranslation() {
 
     /**
      * Initialize language from localStorage or default to English
+     * Should be called when the application starts
      */
     const initializeLanguage = () => {
         const savedLanguage = localStorage.getItem('preferred-language') as Language;

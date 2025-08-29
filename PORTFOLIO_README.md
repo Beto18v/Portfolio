@@ -39,7 +39,7 @@ Este es un sitio web portfolio moderno, elegante y profesional construido con te
 
 ### Backend
 
-- **Laravel 11** - Framework PHP robusto
+- **Laravel 12** - Framework PHP robusto
 - **PHP 8+** - Lenguaje de programación moderno
 - **MySQL/SQLite** - Base de datos relacional
 - **Mail System** - Sistema de envío de emails

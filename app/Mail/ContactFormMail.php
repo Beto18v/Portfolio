@@ -37,7 +37,7 @@ class ContactFormMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: '[Portfolio Contact] ' . $this->contactData['subject'],
+            subject: '[Portfolio Contact] '.$this->contactData['subject'],
             replyTo: [
                 $this->contactData['email'] => $this->contactData['name'],
             ],

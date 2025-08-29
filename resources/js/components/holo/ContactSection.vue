@@ -88,9 +88,6 @@ const validateForm = (): boolean => {
     if (!form.message.trim()) {
         errors.message = 'Message is required';
         isValid = false;
-    } else if (form.message.trim().length < 10) {
-        errors.message = 'Message must be at least 10 characters';
-        isValid = false;
     }
 
     return isValid;
