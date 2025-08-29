@@ -42,6 +42,9 @@ COPY . .
 # Copy environment file if not exists
 RUN cp .env.example .env || true
 
+# Limpiar la caché de configuración y aplicación de Laravel
+RUN php artisan config:clear && php artisan cache:clear && php artisan config:cache
+
 # Run composer scripts that require the app code
 RUN composer dump-autoload --optimize && php artisan package:discover --ansi
 
