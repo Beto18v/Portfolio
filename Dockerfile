@@ -64,4 +64,4 @@ RUN chown -R www-data:www-data /app \
 EXPOSE 8080
 
 # Start the Laravel development server
-CMD php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
+CMD (php artisan migrate --force --no-interaction || echo "Migration failed, continuing...") && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
