@@ -6,5 +6,3 @@ use App\Http\Controllers\ContactController;
 
 Route::post('/contact', [ContactController::class, 'store']);
 Route::get('/contact', [ContactController::class, 'show']);
-
-// ...existing code...

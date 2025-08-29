@@ -68,5 +68,5 @@ RUN chown -R www-data:www-data /app \
 # Expose port (Railway will set PORT env var)
 EXPOSE 8080
 
-# Limpiar caché de configuración y aplicación al iniciar el contenedor
-CMD php artisan cache:clear && php artisan config:cache && (php artisan migrate --force --no-interaction || echo "Migration failed, continuing...") && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
+# Limpiar caché de configuración, rutas y aplicación al iniciar el contenedor
+CMD php artisan cache:clear && php artisan config:clear && php artisan route:clear && php artisan config:cache && (php artisan migrate --force --no-interaction || echo "Migration failed, continuing...") && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
