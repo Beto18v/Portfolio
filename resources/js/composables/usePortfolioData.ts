@@ -197,7 +197,7 @@ export function usePortfolioData() {
                 technologies: ['Laravel', 'Vue', 'SQLite', 'Typescript', 'Tailwind CSS'],
                 liveUrl: 'https://portfolionv.up.railway.app/',
                 githubUrl: 'https://github.com/Beto18v/Portfolio.git',
-                category: 'Frontend',
+                category: 'Full Stack',
                 featured: true,
                 date: '2024-01-15',
             },

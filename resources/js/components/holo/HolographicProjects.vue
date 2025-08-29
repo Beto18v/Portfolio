@@ -21,7 +21,7 @@
                         class="absolute -inset-8 animate-pulse rounded-full bg-gradient-to-r from-cyan-400/20 via-purple-600/20 to-cyan-400/20 blur-xl"
                     ></div>
 
-                    <h2 class="relative mb-6 text-5xl font-bold text-white">
+                    <h2 class="relative mb-6 text-3xl font-bold text-white sm:text-4xl md:text-5xl">
                         <span class="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
                             {{ t('ui.quantumProjectsHeader') }}
                         </span>
@@ -63,7 +63,7 @@
                         class="absolute inset-0 rounded-xl bg-gradient-to-br from-cyan-400/10 via-transparent to-purple-600/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                     ></div>
 
-                    <div class="relative z-10 flex flex-1 flex-col p-8">
+                    <div class="relative z-10 flex flex-1 flex-col p-4 sm:p-6 md:p-8">
                         <!-- Project Header -->
                         <div class="mb-6 flex items-start justify-between">
                             <div class="flex items-center gap-3">
@@ -78,13 +78,15 @@
                         </div>
 
                         <!-- Project Title -->
-                        <h3 class="mb-4 text-2xl font-bold text-white transition-all duration-300 group-hover:text-cyan-400">
+                        <h3 class="mb-4 text-xl font-bold text-white transition-all duration-300 group-hover:text-cyan-400 sm:text-2xl">
                             {{ project.title }}
                         </h3>
 
                         <!-- Project Image -->
                         <div class="mb-6 flex justify-center">
-                            <div class="flex h-50 w-110 items-center justify-center rounded-2xl border-2 border-cyan-400/40">
+                            <div
+                                class="flex h-auto w-auto items-center justify-center rounded-2xl border-2 border-cyan-400/40 sm:h-40 sm:w-60 md:h-44 md:w-72 lg:h-50 lg:w-80"
+                            >
                                 <img
                                     :src="project.image"
                                     :alt="project.title"
@@ -114,7 +116,7 @@
                         </div>
 
                         <!-- Action Buttons -->
-                        <div class="mt-auto flex gap-3">
+                        <div class="mt-auto flex flex-col gap-3 sm:flex-row">
                             <a
                                 v-if="project.liveUrl"
                                 :href="project.liveUrl"
