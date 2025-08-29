@@ -38,8 +38,6 @@ RUN npm ci
 
 # Copy the rest of the application code
 COPY . .
-# Limpiar la caché de configuración de Laravel al iniciar el contenedor
-RUN php artisan config:clear && php artisan cache:clear && php artisan config:cache
 
 # Copy environment file if not exists
 RUN cp .env.example .env || true
