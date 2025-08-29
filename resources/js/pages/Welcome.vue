@@ -120,7 +120,7 @@ const interfaceClasses = computed(() => ({
 <template>
     <!-- Page head with SEO meta tags -->
     <Head>
-        <title>{{ portfolioData.name }}</title>
+        <title>{{ portfolioData.name }} - CV</title>
         <meta name="description" content="Immersive portfolio experience with holographic interface and 3D navigation" />
         <meta name="keywords" content="portfolio, developer, holographic, 3D, futuristic, immersive" />
         <meta name="author" :content="portfolioData.name" />
