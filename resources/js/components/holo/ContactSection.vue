@@ -109,6 +109,18 @@ const resetForm = () => {
 };
 
 /**
+ * Clear only form fields and errors (used after successful submission)
+ */
+const clearFormFields = () => {
+    Object.keys(form).forEach((key) => {
+        form[key as keyof ContactForm] = '';
+    });
+    Object.keys(errors).forEach((key) => {
+        errors[key as keyof typeof errors] = '';
+    });
+};
+
+/**
  * Obtiene el token CSRF desde el meta tag
  */
 const getCsrfToken = (): string => {
@@ -160,11 +172,10 @@ const handleSubmit = async () => {
             showSuccess.value = true;
             showError.value = false;
             errorMessage.value = '';
-            // No limpiar el formulario antes de mostrar el mensaje
+            clearFormFields(); // Limpiar solo los campos del formulario inmediatamente
             setTimeout(() => {
-                showSuccess.value = false;
-                resetForm();
-            }, 5000);
+                resetForm(); // Reset completo después de que desaparezca el mensaje
+            }, 3000); // Reducir el tiempo del mensaje de éxito
         } else {
             showError.value = true;
             errorMessage.value = result.message || 'No se pudo enviar el mensaje.';

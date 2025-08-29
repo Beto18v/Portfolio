@@ -177,6 +177,24 @@ function getCsrfToken() {
     return meta ? meta.getAttribute('content') || '' : '';
 }
 
+/**
+ * Clear only form fields (used after successful submission)
+ */
+function clearContactFormFields() {
+    contactForm.value.name = '';
+    contactForm.value.email = '';
+    contactForm.value.message = '';
+}
+
+/**
+ * Reset contact form completely
+ */
+function resetContactForm() {
+    clearContactFormFields();
+    contactError.value = '';
+    contactSuccess.value = '';
+}
+
 async function submitContactForm() {
     contactLoading.value = true;
     contactError.value = '';
@@ -199,9 +217,10 @@ async function submitContactForm() {
         const data = await response.json();
         if (response.ok && data.success) {
             contactSuccess.value = data.message || '¡Mensaje enviado correctamente!';
-            contactForm.value.name = '';
-            contactForm.value.email = '';
-            contactForm.value.message = '';
+            clearContactFormFields(); // Limpiar campos inmediatamente
+            setTimeout(() => {
+                resetContactForm(); // Reset completo después de mostrar el mensaje
+            }, 3000);
         } else {
             contactError.value = (data.message || 'Error al enviar el mensaje.') + (data.errors ? ' ' + Object.values(data.errors).join(' ') : '');
         }

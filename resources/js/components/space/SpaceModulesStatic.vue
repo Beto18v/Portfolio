@@ -93,6 +93,24 @@ function getCsrfToken() {
     return meta ? meta.getAttribute('content') || '' : '';
 }
 
+/**
+ * Clear only space contact form fields (used after successful submission)
+ */
+function clearSpaceContactFormFields() {
+    spaceContactForm.value.name = '';
+    spaceContactForm.value.email = '';
+    spaceContactForm.value.message = '';
+}
+
+/**
+ * Reset space contact form completely
+ */
+function resetSpaceContactForm() {
+    clearSpaceContactFormFields();
+    spaceContactError.value = '';
+    spaceContactSuccess.value = '';
+}
+
 async function submitSpaceContactForm() {
     spaceContactLoading.value = true;
     spaceContactError.value = '';
@@ -116,12 +134,10 @@ async function submitSpaceContactForm() {
         if (response.ok && data.success) {
             spaceContactSuccess.value = t('contact.success', data.message || '¡Mensaje enviado correctamente!');
             spaceContactError.value = '';
+            clearSpaceContactFormFields(); // Limpiar campos inmediatamente
             setTimeout(() => {
-                spaceContactSuccess.value = '';
-                spaceContactForm.value.name = '';
-                spaceContactForm.value.email = '';
-                spaceContactForm.value.message = '';
-            }, 5000);
+                resetSpaceContactForm(); // Reset completo después de mostrar el mensaje
+            }, 3000);
         } else {
             spaceContactError.value = t(
                 'contact.error',
@@ -424,8 +440,6 @@ async function submitSpaceContactForm() {
                                     <h3 class="mb-4 text-xl font-semibold text-white">{{ t('space.contact.response.heading', 'Response Time') }}</h3>
                                     <div class="text-gray-300">
                                         <div class="mb-2">🟢 {{ t('space.contact.response.online', 'Online: Usually responds within hours') }}</div>
-                                        <div class="mb-2">🟡 {{ t('space.contact.response.busy', 'Busy: Responds within 24 hours') }}</div>
-                                        <div>🔴 {{ t('space.contact.response.offline', 'Offline: Responds within 2-3 days') }}</div>
                                     </div>
                                 </div>
                             </div>
