@@ -45,6 +45,9 @@ RUN cp .env.example .env || true
 # Run composer scripts that require the app code
 RUN composer dump-autoload --optimize && php artisan package:discover --ansi
 
+# Run database migrations (with fallback if DB not ready)
+RUN php artisan migrate --force --no-interaction || true
+
 # Build the assets
 RUN npm run build
 
@@ -54,7 +57,8 @@ RUN php artisan key:generate || true
 # Set permissions
 RUN chown -R www-data:www-data /app \
     && chmod -R 755 /app/storage \
-    && chmod -R 755 /app/bootstrap/cache
+    && chmod -R 755 /app/bootstrap/cache \
+    && chmod -R 755 /app/database
 
 # Expose port (Railway will set PORT env var)
 EXPOSE 8080
