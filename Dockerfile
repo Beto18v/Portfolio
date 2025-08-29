@@ -42,8 +42,7 @@ COPY . .
 # Copy environment file if not exists
 RUN cp .env.example .env || true
 
-# Limpiar la caché de configuración y aplicación de Laravel
-RUN php artisan config:clear && php artisan cache:clear && php artisan config:cache
+RUN php artisan config:clear
 
 # Run composer scripts that require the app code
 RUN composer dump-autoload --optimize && php artisan package:discover --ansi
@@ -69,5 +68,5 @@ RUN chown -R www-data:www-data /app \
 # Expose port (Railway will set PORT env var)
 EXPOSE 8080
 
-# Start the Laravel development server
-CMD (php artisan migrate --force --no-interaction || echo "Migration failed, continuing...") && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
+# Limpiar caché de configuración y aplicación al iniciar el contenedor
+CMD php artisan cache:clear && php artisan config:cache && (php artisan migrate --force --no-interaction || echo "Migration failed, continuing...") && php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
