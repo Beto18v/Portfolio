@@ -53,6 +53,9 @@ RUN php artisan migrate --force --no-interaction || true
 # Build the assets
 RUN npm run build
 
+# Mostrar las extensiones PHP instaladas
+RUN php -m
+
 # Generate application key if not set
 RUN php artisan key:generate || true
 
