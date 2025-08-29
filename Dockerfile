@@ -25,10 +25,10 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /app
 
 # Copy composer files first for better caching
-COPY composer*.json ./
+COPY composer.json composer.lock ./
 
 # Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
 
 # Copy package files
 COPY package*.json ./
@@ -38,6 +38,12 @@ RUN npm ci
 
 # Copy the rest of the application code
 COPY . .
+
+# Copy environment file if not exists
+RUN cp .env.example .env || true
+
+# Run composer scripts that require the app code
+RUN composer dump-autoload --optimize && php artisan package:discover --ansi
 
 # Build the assets
 RUN npm run build
