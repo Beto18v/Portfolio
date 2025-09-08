@@ -322,7 +322,7 @@ async function submitContactForm() {
                     </div>
                     <div class="text-center">
                         <div class="mx-auto flex h-80 w-80 items-center justify-center rounded-2xl bg-gray-200">
-                            <img :src="personalInfo.profileImage" alt="Profile" class="h-full w-full rounded-full object-cover" />
+                            <img :src="personalInfo.profileImage" alt="Profile" class="h-full w-full rounded-2xl object-cover" />
                         </div>
                     </div>
                 </div>
